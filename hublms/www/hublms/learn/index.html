@@ -1,0 +1,1170 @@
+{% extends "lms/templates/lms_base.html" %}
+{% from "www/macros/livecode.html" import LiveCodeEditorJS, LiveCodeEditor with context %}
+
+
+{% block title %}
+Lesson Title - Course Title
+{% endblock %}
+
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/frappe/css/hljs-night-owl.css">
+
+{% for ext in page_extensions %}
+{{ ext.render_header() }}
+{% endfor %}
+{% endblock %}
+
+
+{% block page_content %}
+
+<div class="common-page-style">
+    <div class="container course-details-page">
+
+        <div class="course-content-parent">
+            <div>
+                <div class="bold-heading mb-4">
+                    Course 1
+                </div>
+
+                
+                <div class="">
+                    <div class="progress-percent m-0">100% Completed</div>
+                    <div class="progress" title="100% Completed">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="course-details-outline">
+                    
+                    
+
+
+
+<div class="course-home-outline">
+
+    
+
+    
+    <div>
+    
+    
+
+    <div class="chapter-parent" data-chapter="0003 Chapter 1">
+
+        <div class="chapter-title" data-toggle="collapse" aria-expanded="true" data-target="#chapter-1">
+
+            <img class="chapter-icon" src="/assets/lms/icons/chevron-right.svg" style="transform: rotate(90deg);">
+            <div class="chapter-title-main">
+                Chapter 1
+            </div>
+            <!-- <div class="small ml-auto">
+                1 lessons
+            </div> -->
+        </div>
+
+
+        <div class="chapter-content collapse navbar-collapse show" id="chapter-1">
+
+            
+            <div class="chapter-description">
+                Chapter 1 Description
+            </div>
+            
+
+            <div class="lessons">
+
+                
+
+                
+                
+                <div data-lesson="0004 Lesson 1" class="lesson-info active-lesson">
+
+                
+                <a class="lesson-links" href="/courses/course-1/learn/1.1">
+
+                    <svg class="icon icon-sm mr-2">
+                        <use class="" href="#icon-youtube">
+                    </use></svg>
+
+                    <span>Lesson 1</span>
+
+                    
+                    <svg class="icon icon-md lesson-progress-tick ml-auto False">
+                        <use class="" href="#icon-success">
+                    </use></svg>
+                    
+
+                </a>
+
+                
+
+                </div>
+                
+
+            
+            </div>
+
+        </div>
+    </div>
+    
+    </div>
+
+    
+
+</div>
+
+
+
+<!-- No Preview Modal -->
+<div class="modal fade no-preview-modal" id="no-preview-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div class="modal-title">Not Available for Preview</div>
+            </div>
+
+            <div class="modal-body">
+                
+                    <div class="">
+                        This lesson is not available for preview. Please join the course to access it.
+                    </div>
+                
+            </div>
+
+            
+            <div class="modal-footer">
+
+                <button class="btn btn-secondary btn-sm pull-right mr-2" data-dismiss="modal" aria-label="Close">
+                    Discard
+                </button>
+
+                
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                </div>
+            </div>
+            <div class="lesson-parent">
+                
+<div class="breadcrumb">
+    
+        <a class="dark-links" href="/">
+            All Items
+        </a>
+        <img class="ml-1 mr-1" src="/assets/lms/icons/chevron-right.svg">
+        <a class="dark-links" href="/hublms/course/course-1">
+            Course 1
+        </a>
+        <img class="ml-1 mr-1" src="/assets/lms/icons/chevron-right.svg">
+        <span class="breadcrumb-destination">
+            Topic 1
+        </span>
+    
+</div>
+
+                
+
+
+
+<div>
+    <div>
+        <div class="pull-right">
+            
+            <span id="status-indicator" class="indicator-pill green">COMPLETED</span>
+            
+
+            <!-- Edit Button -->
+            
+            <a class="btn btn-secondary btn-sm ml-2" href="/courses/course-1/learn/1.1/edit">
+                Edit
+            </a>
+            
+        </div>
+
+        <div class="course-home-headings title  is-member " id="title" data-index="1" data-course="course-1" data-chapter="0003 Chapter 1" data-lesson="0004 Lesson 1">Lesson 1</div>
+    </div>
+
+    <!-- Instructors -->
+    <div class="d-flex align-items-center">
+        
+        
+        
+        
+<span class="avatar avatar-small" title="Francis">
+    <a class="button-links" href="/users/francis">
+        
+        <span class="avatar-frame standard-image" title="Francis" style="background-color: var(--red-avatar-bg); color: var(--red-avatar-color);">
+            F
+        </span>
+        
+    </a>
+</span>
+
+        
+        
+        <a class="button-links ml-1" href="/users/francis">
+        <span class="course-meta">
+            
+                Francis
+            
+        </span>
+        </a>
+        <div class="ml-5 course-meta">
+            Dec 1, 2023
+        </div>
+    </div>
+
+    <!-- Lesson Content -->
+    <div class="markdown-source lesson-content-card">
+        
+
+            
+
+            
+            <div class="alert alert-secondary mb-4">
+                <div class="bold-heading collapse-section collapsed" data-toggle="collapse" data-target="#instructor-notes">
+                    <svg class="icon icon-sm mt-1 pull-right">
+                        <use href="#icon-up-line"></use>
+                    </svg>
+                    <div>
+                        Instructor Notes
+                    </div>
+                </div>
+                <div class="collapse" id="instructor-notes">
+                    <p>This is the instructors notes.</p>
+                </div>
+            </div>
+            
+
+            <p>This is the body of the lesson, text will show up here.</p>
+<p>
+</p><div class="lesson-video">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="400" src="https://www.youtube.com/embed/eCAMPcl7NKc?si=Lu4AwPa0piPXGSLm" style="border-radius: var(--border-radius-lg)" title="YouTube video player" width="100%">
+</iframe>
+</div>
+<div class="">
+<div class="mt-4">
+<ul class="alert alert-info pl-8">
+<li>
+			This quiz consists of 2 questions.
+		</li>
+<li>
+				You will have to get 50% correct answers in order to pass the quiz.
+			</li>
+<li>
+				You can attempt this quiz only 5 times
+			</li>
+</ul>
+<div class="common-card-style column-card align-items-center" id="start-banner">
+<div class="text-center my-10">
+<div class="bold-heading" data-max-attempts="5" data-name="quiz-2" data-show-answers="1" id="quiz-title">
+				Quiz 2
+			</div>
+<button class="btn btn-secondary btn-sm btn-start-quiz mt-4">
+				Start
+			</button>
+</div>
+</div>
+<form class="common-card-style column-card hide" id="quiz-form">
+<div class="questions">
+<div class="question hide" data-multi="0" data-name="QTS-2023-00001" data-qt-index="1" data-type="Choices">
+<div>
+<div class="pull-right font-weight-bold">
+					1 Marks
+				</div>
+<div class="question-number">
+					Question 1: Choose one answer
+				</div>
+<div class="question-text">
+<div class="ql-editor read-mode">
+<p>What is 1 + 1 = ?</p>
+</div>
+</div>
+</div>
+<div class="mb-2">
+<div class="custom-checkbox">
+<label class="option-row">
+<input class="option" name="%3Cdiv%20class%3D%22ql-editor%20read-mode%22%3E%3Cp%3EWhat%20is%201%20%2B%201%20%3D%20%3F%3C/p%3E%3C/div%3E" type="radio" value="2">
+<div class="option-text"><p>2</p>
+</div>
+</label>
+</div>
+</div>
+<div class="mb-2">
+<div class="custom-checkbox">
+<label class="option-row">
+<input class="option" name="%3Cdiv%20class%3D%22ql-editor%20read-mode%22%3E%3Cp%3EWhat%20is%201%20%2B%201%20%3D%20%3F%3C/p%3E%3C/div%3E" type="radio" value="3">
+<div class="option-text"><p>3</p>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="question hide" data-multi="0" data-name="QTS-2023-00002" data-qt-index="2" data-type="Choices">
+<div>
+<div class="pull-right font-weight-bold">
+					1 Marks
+				</div>
+<div class="question-number">
+					Question 2: Choose one answer
+				</div>
+<div class="question-text">
+<div class="ql-editor read-mode">
+<p>What is 2 + 2</p>
+</div>
+</div>
+</div>
+<div class="mb-2">
+<div class="custom-checkbox">
+<label class="option-row">
+<input class="option" name="%3Cdiv%20class%3D%22ql-editor%20read-mode%22%3E%3Cp%3EWhat%20is%202%20%2B%202%3C/p%3E%3C/div%3E" type="radio" value="2">
+<div class="option-text"><p>2</p>
+</div>
+</label>
+</div>
+</div>
+<div class="mb-2">
+<div class="custom-checkbox">
+<label class="option-row">
+<input class="option" name="%3Cdiv%20class%3D%22ql-editor%20read-mode%22%3E%3Cp%3EWhat%20is%202%20%2B%202%3C/p%3E%3C/div%3E" type="radio" value="4">
+<div class="option-text"><p>4</p>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="quiz-footer">
+<span>
+				Question
+				<span class="current-question">1</span>
+				of
+				2
+			</span>
+<button class="btn btn-secondary btn-sm pull-right" disabled="" id="check">
+				Check
+			</button>
+<button class="btn btn-secondary btn-sm hide" disabled="" id="next">
+				Next Question
+			</button>
+<button class="btn btn-secondary btn-sm hide" id="summary">
+				Submit
+			</button>
+<button class="btn btn-secondary btn-sm mx-auto hide" data-quiz="quiz-2" id="try-again">
+				Try Again
+			</button>
+</div>
+</form>
+</div>
+</div>
+<div class="">
+<div class="form-group">
+<div class="">
+<h2 class="mt-5 mb-8"> Assignment </h2>
+<div class="my-3"> Assignment 1, What is it that you want? </div>
+<div class="alert alert-info small">
+			Only files of type PDF will be accepted.
+		</div>
+<input accept=".pdf" class="btn btn-default btn-sm border attach-file" type="file">
+<div class="btn btn-secondary ml-2 submit-work">Submit</div>
+<div class="preview-work hide">
+<a target="_blank"></a>
+<div class="assignment-status indicator-pill ml-3"></div>
+<div class="btn btn-secondary btn-sm ml-2 clear-work">Change</div>
+</div>
+<div class="comments mt-3 hide">
+<span class="subheading">
+				Instructors Comments:
+			</span>
+<span class="comment"></span>
+</div>
+</div>
+</div>
+</div>
+<p></p>
+
+        
+    </div>
+
+    
+    
+    
+
+    
+
+</div>
+
+                
+                
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="pt-8">
+        
+
+
+<div class="discussions-parent " data-doctype="Course%20Lesson" data-docname="0004%20Lesson%201">
+
+	
+	<div class="modal fade discussion-modal" id="discussion-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="modal-headings font-weight-bold"> Ask a Question </div>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="discussion-form">
+
+	
+	<div class="form-group">
+		<div class="control-input-wrapper">
+			<div class="control-input">
+				<input type="text" autocomplete="off" class="input-with-feedback form-control topic-title" data-fieldtype="Data" data-fieldname="feedback_comments" placeholder="Type title" spellcheck="false">
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="form-group">
+		<div class="control-input-wrapper">
+			<div class="control-input">
+				<div class="discussions-comment"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="comment-footer">
+		<div class="small flex-grow-1">
+			Cmd+Enter to add comment
+		</div>
+
+		<div class="btn btn-sm btn-default submit-discussion pull-right mb-1">
+			Post
+		</div>
+	</div>
+</form>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+	<div class="discussions-header">
+		<span class="discussions-section-title"></span>
+		
+
+		
+	</div>
+
+	<div class="">
+		
+		<div class="empty-state">
+			<div>
+			  <img class="icon icon-xl" src="/assets/frappe/icons/timeless/message.svg">
+			</div>
+			<div class="empty-state-text">
+			  <div class="empty-state-heading">Have a doubt?</div>
+			  <div class="course-meta">Post it here, our mentors will help you out.</div>
+			</div>
+			<div>
+				
+				
+<span class="btn btn-sm btn-secondary reply">
+	Ask a Question
+</span>
+
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+
+	<script> frappe.ready(() => {
+	setup_socket_io();
+	add_color_to_avatars();
+
+	this.single_thread = $(".is-single-thread").length;
+	frappe.require("controls.bundle.js", () => {
+		if (this.single_thread) {
+			make_comment_editor($(".discussion-form .discussions-comment"));
+		}
+	});
+
+	$(".search-field").keyup((e) => {
+		search_topic(e);
+	});
+
+	$(".reply").click((e) => {
+		show_new_topic_modal(e);
+	});
+
+	$(".login-from-discussion").click((e) => {
+		login_from_discussion(e);
+	});
+
+	$("#discussion-modal .close").click((e) => {
+		$("#discussion-modal .discussions-comment").html("");
+	});
+
+	$(document).on("click", ".sidebar-parent", (e) => {
+		if ($(e.currentTarget).attr("aria-expanded") == "true") {
+			e.stopPropagation();
+		}
+		setTimeout(() => {
+			let element = $(".discussion-form:visible .discussions-comment");
+			if (!element.find(".ql-editor").length) make_comment_editor(element);
+		}, 0);
+	});
+
+	$(document).on("keydown", ".discussions-comment", (e) => {
+		if (
+			(e.ctrlKey || e.metaKey) &&
+			(e.keyCode == 13 || e.which == 13) &&
+			!$(".discussion-modal").hasClass("show")
+		) {
+			e.preventDefault();
+			submit_discussion(e);
+		}
+	});
+
+	$(document).on("click", ".submit-discussion", (e) => {
+		submit_discussion(e);
+	});
+
+	$(document).on("click", ".sidebar-parent", () => {
+		hide_sidebar();
+	});
+
+	$(document).on("click", ".back-button", (e) => {
+		back_to_sidebar(e);
+	});
+
+	$(document).on("click", ".dismiss-reply", (e) => {
+		dismiss_reply(e);
+	});
+
+	$(document).on("click", ".reply-card .dropdown-menu", (e) => {
+		perform_action(e);
+	});
+});
+
+const show_new_topic_modal = (e) => {
+	e.preventDefault();
+	$("#discussion-modal").modal("show");
+	make_comment_editor($("#discussion-modal .discussions-comment"));
+	let topic = $(e.currentTarget).attr("data-topic");
+	$("#submit-discussion").attr("data-topic", topic ? topic : "");
+};
+
+const setup_socket_io = () => {
+	frappe.realtime.init(window.socketio_port || "9000");
+
+	frappe.realtime.on("publish_message", (data) => {
+		publish_message(data);
+	});
+
+	frappe.realtime.on("update_message", (data) => {
+		update_message(data);
+	});
+
+	frappe.realtime.socket.on("delete_message", (data) => {
+		delete_message(data);
+	});
+};
+
+const publish_message = (data) => {
+	post_message_cleanup();
+	data = enhance_template(data);
+	insert_message(data);
+};
+
+const enhance_template = (data) => {
+	data.template = hide_actions_on_conditions(data.template, data.reply_owner);
+	data.template = style_avatar_frame(data.template);
+	data.sidebar = style_avatar_frame(data.sidebar);
+	data.new_topic_template = style_avatar_frame(data.new_topic_template);
+	return data;
+};
+
+const insert_message = (data) => {
+	const topic = data.topic_info;
+	const first_topic = !$(".reply-card").length;
+	const doctype = decodeURIComponent($(".discussions-parent").attr("data-doctype"));
+	const docname = decodeURIComponent($(".discussions-parent").attr("data-docname"));
+	const document_match_found =
+		doctype == topic.reference_doctype && docname == topic.reference_docname;
+
+	if ($(`.discussion-on-page[data-topic=${topic.name}]`).length) {
+		$(data.template).insertBefore(
+			`.discussion-on-page[data-topic=${topic.name}] .discussion-form`
+		);
+	} else if (!first_topic && !this.single_thread && document_match_found) {
+		$(data.sidebar).insertBefore($(`.discussions-sidebar .sidebar-parent`).first());
+		$(`#discussion-group`).prepend(data.new_topic_template);
+		if (topic.owner == frappe.session.user) {
+			$(".discussion-on-page") && $(".discussion-on-page").collapse();
+			$(".sidebar-parent").first().click();
+			setTimeout(() => {
+				make_comment_editor($(".discussion-form:visible .discussions-comment"));
+			}, 1000);
+		}
+	} else if (this.single_thread && document_match_found) {
+		$(data.template).insertBefore(`.discussion-form`);
+		$(".discussion-on-page").attr("data-topic", topic.name);
+	} else if (topic.owner == frappe.session.user && document_match_found) {
+		window.location.reload();
+	}
+
+	update_reply_count(topic.name);
+};
+
+const update_message = (data) => {
+	const reply_card = $(`[data-reply=${data.reply_name}]`);
+	reply_card.find(".reply-body").removeClass("hide");
+	reply_card.find(".reply-edit-card").addClass("hide");
+	reply_card.find(".reply-text").html(data.reply);
+	reply_card.find(".comment-content").html(data.reply);
+	reply_card.find(".reply-actions").addClass("hide");
+	reply_card.find(".dropdown").removeClass("hide");
+	reply_card.find(".discussions-comment").html("");
+};
+
+const post_message_cleanup = () => {
+	$(".topic-title").val("");
+	$("#discussion-modal .discussions-comment").html("");
+	$("#discussion-modal").modal("hide");
+	$("#no-discussions").addClass("hide");
+	this.comment_editor && this.comment_editor.set_value("comment_editor", "");
+};
+
+const update_reply_count = (topic) => {
+	let reply_count = $(`[data-target='#t${topic}']`).find(".reply-count").text();
+	reply_count = parseInt(reply_count) + 1;
+	$(`[data-target='#t${topic}']`).find(".reply-count").text(reply_count);
+};
+
+const search_topic = (e) => {
+	let input = $(e.currentTarget).val();
+
+	let topics = $(".discussions-parent .discussion-topic-title");
+	if (input.length < 3 || input.trim() == "") {
+		topics.closest(".sidebar-parent").removeClass("hide");
+		return;
+	}
+
+	topics.each((i, elem) => {
+		let topic_id = $(elem).closest(".sidebar-parent").attr("data-target");
+
+		/* Check match in replies */
+		let match_in_reply = false;
+		const replies = $(`${topic_id}`);
+		for (const reply of replies.find(".reply-text")) {
+			if (has_common_substring($(reply).text(), input)) {
+				match_in_reply = true;
+				break;
+			}
+		}
+
+		/* Match found in title or replies, then show */
+		if (has_common_substring($(elem).text(), input) || match_in_reply) {
+			$(elem).closest(".sidebar-parent").removeClass("hide");
+		} else {
+			$(elem).closest(".sidebar-parent").addClass("hide");
+		}
+	});
+};
+
+const has_common_substring = (str1, str2) => {
+	const str1_arr = str1.toLowerCase().split(" ");
+	const str2_arr = str2.toLowerCase().split(" ");
+
+	let substring_found = false;
+	for (const first_word of str1_arr) {
+		for (const second_word of str2_arr) {
+			if (first_word.indexOf(second_word) > -1) {
+				substring_found = true;
+				break;
+			}
+		}
+	}
+	return substring_found;
+};
+
+const submit_discussion = (e) => {
+	e.preventDefault();
+	e.stopImmediatePropagation();
+
+	const target = $(e.currentTarget);
+	const reply_name = target.closest(".reply-card").data("reply");
+	const title = $(".topic-title:visible").length ? $(".topic-title:visible").val().trim() : "";
+	let reply = this.comment_editor.get_value("comment_editor");
+
+	if (strip_html(reply).trim() != "" || reply.includes("img")) {
+		let doctype = target.closest(".discussions-parent").attr("data-doctype");
+		doctype = doctype ? decodeURIComponent(doctype) : doctype;
+
+		let docname = target.closest(".discussions-parent").attr("data-docname");
+		docname = docname ? decodeURIComponent(docname) : docname;
+
+		frappe.call({
+			method: "frappe.website.doctype.discussion_topic.discussion_topic.submit_discussion",
+			args: {
+				doctype: doctype ? doctype : "",
+				docname: docname ? docname : "",
+				reply: reply,
+				title: title,
+				topic_name: target.closest(".discussion-on-page").attr("data-topic"),
+				reply_name: reply_name,
+			},
+		});
+	}
+};
+
+const login_from_discussion = (e) => {
+	e.preventDefault();
+	const redirect = $(e.currentTarget).attr("data-redirect") || window.location.href;
+	window.location.href = `/login?redirect-to=${redirect}`;
+};
+
+const add_color_to_avatars = () => {
+	const avatars = $(".avatar-frame");
+	avatars.each((i, avatar) => {
+		if (!$(avatar).attr("style")) {
+			$(avatar).css(get_color_from_palette($(avatar)));
+		}
+	});
+};
+
+const get_color_from_palette = (element) => {
+	const palette = frappe.get_palette(element.attr("title"));
+	return { "background-color": `var(${palette[0]})`, color: `var(${palette[1]})` };
+};
+
+const style_avatar_frame = (template) => {
+	const $template = $(template);
+	$template.find(".avatar-frame").length &&
+		$template
+			.find(".avatar-frame")
+			.css(get_color_from_palette($template.find(".avatar-frame")));
+	return $template.prop("outerHTML");
+};
+
+const hide_sidebar = () => {
+	$(".discussions-sidebar").addClass("hide");
+	$("#discussion-group").removeClass("hide");
+	$(".search-field").addClass("hide");
+	$(".reply").addClass("hide");
+};
+
+const back_to_sidebar = () => {
+	$(".discussions-sidebar").removeClass("hide");
+	$("#discussion-group").addClass("hide");
+	$(".discussion-on-page").collapse("hide");
+	$(".search-field").removeClass("hide");
+	$(".reply").removeClass("hide");
+};
+
+const perform_action = (e) => {
+	const action = $(e.target).data().action;
+
+	if (action === "edit") {
+		edit_reply(e);
+	} else if (action === "delete") {
+		delete_reply(e);
+	}
+};
+
+const edit_reply = (e) => {
+	const reply_card = $(e.target).closest(".reply-card");
+	reply_card.find(".reply-edit-card").removeClass("hide");
+	reply_card.find(".reply-body").addClass("hide	");
+	reply_card.find(".reply-actions").removeClass("hide");
+	reply_card.find(".dropdown").addClass("hide");
+	make_comment_editor(reply_card.find(".discussions-comment"));
+};
+
+const delete_reply = (e) => {
+	frappe.call({
+		method: "frappe.website.doctype.discussion_reply.discussion_reply.delete_message",
+		args: {
+			reply_name: $(e.target).closest(".reply-card").data("reply"),
+		},
+	});
+};
+
+const dismiss_reply = (e) => {
+	const reply_card = $(e.currentTarget).closest(".reply-card");
+	reply_card.find(".reply-edit-card").addClass("hide");
+	reply_card.find(".reply-body").removeClass("hide");
+	reply_card.find(".reply-actions").addClass("hide");
+	reply_card.find(".dropdown").removeClass("hide");
+	reply_card.find(".discussions-comment").html("");
+};
+
+const hide_actions_on_conditions = (template, owner) => {
+	let $template = $(template);
+	frappe.session.user != owner && $template.find(".dropdown").remove();
+	return $template.prop("outerHTML");
+};
+
+const delete_message = (data) => {
+	$(`[data-reply=${data.reply_name}]`).addClass("hide");
+};
+
+const make_comment_editor = (element) => {
+	this.comment_editor = new frappe.ui.FieldGroup({
+		fields: [
+			{
+				fieldname: "comment_editor",
+				fieldtype: "Text Editor",
+				enable_mentions: true,
+				theme: "bubble",
+				placeholder: __("Type your reply here..."),
+				default: element.siblings(".comment-content").html(),
+				get_toolbar_options() {
+					return [
+						["bold", "italic", "underline", "strike"],
+						["blockquote", "code-block"],
+						[{ direction: "rtl" }],
+						["link", "image"],
+						[{ list: "ordered" }, { list: "bullet" }],
+						[{ align: [] }],
+						["clean"],
+					];
+				},
+			},
+		],
+		body: element,
+	});
+	this.comment_editor.make();
+	element.find(".form-section:last").removeClass("empty-section");
+	element.find(".frappe-control").removeClass("hide-control");
+	element.find(".form-column").addClass("p-0");
+}; </script>
+
+
+
+	<style> .modal .comment-footer div:first-child {
+	display: none;
+}
+
+.discussions-header {
+	display: flex;
+	align-items: center;
+}
+
+@media (max-width: 500px) {
+	.discussions-header {
+		flex-direction: column;
+		align-items: inherit;
+	}
+}
+
+.discussions-header .button {
+	float: right;
+}
+
+.search-field {
+	background-image: url(/assets/frappe/icons/timeless/search.svg);
+	background-repeat: no-repeat;
+	text-indent: 1.5rem;
+	background-position: 1rem 0.45rem;
+	font-size: var(--text-md);
+	padding: 0.3rem 1rem;
+	border: 1px solid var(--dark-border-color);
+	border-radius: var(--border-radius-md);
+	margin-right: 0.5rem;
+}
+
+@media (max-width: 500px) {
+	.search-field {
+		margin: 0.75rem 0;
+	}
+}
+
+.sidebar-topic {
+	display: flex;
+	align-items: center;
+}
+
+.comment-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.reply-card {
+	padding: 1.25rem 0;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.reply-card:last-of-type {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.reply-card .dropdown {
+	float: right;
+}
+
+.discussion-topic-title {
+	color: var(--text-color);
+	font-size: var(--text-lg);
+	font-weight: 600;
+}
+
+.discussion-on-page .topic-title {
+	display: none;
+}
+
+.discussion-on-page {
+	flex-direction: column;
+}
+
+.submit-discussion {
+	cursor: pointer;
+}
+
+.reply-actions {
+	display: flex;
+	align-items: center;
+	font-size: var(--text-sm);
+	margin-left: auto;
+}
+
+.reply-text h1 {
+	font-size: 1.3rem;
+}
+
+.reply-text h2 {
+	font-size: 1.2rem;
+}
+
+.reply-text h3 {
+	font-size: 1.1rem;
+}
+
+.reply-text h4 {
+	font-size: 1rem;
+}
+
+.reply-text p {
+	margin-bottom: 0;
+}
+
+.sidebar-info {
+	margin-top: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.discussions-section-title {
+	font-size: var(--text-2xl);
+	font-weight: var(--weight-semibold);
+	letter-spacing: 0.01em;
+	color: var(--text-color);
+	flex-grow: 1;
+}
+
+.discussion-heading {
+	font-weight: 600;
+	font-size: var(--text-lg);
+	line-height: 146%;
+	letter-spacing: -0.0175em;
+	color: var(--text-color);
+	flex-grow: 1;
+}
+
+.card-style {
+	display: flex;
+	background: white;
+	border-radius: 8px;
+	position: relative;
+	box-shadow: var(--shadow-sm);
+}
+
+.discussions-card {
+	display: grid;
+	grid-gap: 2rem;
+	grid-template-columns: 2fr minmax(600px, 5fr);
+}
+
+@media (max-width: 1024px) {
+	.discussions-card {
+		grid-template-columns: 3fr minmax(400px, 5fr);
+	}
+}
+
+@media (max-width: 768px) {
+	.discussions-card {
+		grid-template-columns: 4fr minmax(400px, 5fr);
+	}
+}
+
+@media (max-width: 550px) {
+	.discussions-card {
+		display: flex;
+	}
+}
+
+.back-button {
+	display: flex;
+	margin-right: 1rem;
+	cursor: pointer;
+}
+
+.reply-author {
+	display: flex;
+	align-items: center;
+	margin: 0px 8px;
+	font-size: var(--text-sm);
+	line-height: 135%;
+	color: var(--text-color);
+}
+
+.discussions-header .btn {
+	float: right;
+}
+
+.empty-state {
+	border: 1px solid var(--gray-300);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.empty-state-text {
+	flex: 1;
+	margin-left: 1.25rem;
+}
+
+.empty-state-heading {
+	font-size: var(--text-xl);
+	color: var(--text-color);
+	font-weight: 600;
+}
+
+.sidebar-parent {
+	display: flex;
+	align-items: center;
+	padding: 1.25rem 0;
+	cursor: pointer;
+}
+
+@media (max-width: 500px) {
+	.sidebar-parent {
+		padding: 0.5rem;
+	}
+}
+
+@media (max-width: 400px) {
+	.sidebar-parent {
+		font-size: var(--text-sm);
+	}
+}
+
+.topic-author {
+	color: var(--text-light);
+	font-weight: 500;
+}
+
+.reply-section-header {
+	display: flex;
+	align-items: center;
+	margin-top: 1.5rem;
+}
+
+.reply-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.dismiss-reply {
+	cursor: pointer;
+}
+
+.discussions-sidebar {
+	flex-direction: column;
+}
+
+.card-divider {
+	border-top: 1px solid var(--dark-border-color);
+	margin-bottom: 0;
+}
+
+.reply-header .dropdown-menu {
+	min-width: 7rem;
+}
+
+.discussions-parent .ql-editor {
+	border-radius: var(--border-radius-md);
+}
+
+.mention {
+	display: inline-block;
+	height: auto;
+	width: auto;
+	border-radius: var(--border-radius-lg);
+	border: 1px solid var(--border-color);
+	padding: 2px 5px;
+	font-size: var(--text-sm);
+	background-color: var(--fg-color);
+}
+
+.mention a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.ql-editor.read-mode .mention {
+	background-color: var(--control-bg);
+}
+
+.ql-editor.read-mode .mention a {
+	color: inherit;
+	background-color: inherit;
+}
+
+.discussion-form .form-group {
+	margin-bottom: 0;
+}
+
+.discussions-parent .ql-editor.ql-blank::before {
+	color: var(--gray-600);
+	font-style: normal;
+} </style>
+
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -16,6 +16,10 @@ app_license = "mit"
 # include js, css files in header of web template
 # web_include_css = "/assets/hublms/css/hublms.css"
 # web_include_js = "/assets/hublms/js/hublms.js"
+# include js, css files in header of web template
+web_include_css = "lms.bundle.css"
+# web_include_css = "/assets/lms/css/lms.css"
+web_include_js = ["website.bundle.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "hublms/public/scss/website"
@@ -226,68 +230,14 @@ update_website_context = [
 
 # Add all simple route rules here
 website_route_rules = [
-	{"from_route": "/sketches/<sketch>", "to_route": "sketches/sketch"},
-	{"from_route": "/hublms/<course>", "to_route": "courses/course"},
-	{"from_route": "/hublms/<course>/edit", "to_route": "courses/create"},
-	{"from_route": "/hublms/<course>/outline", "to_route": "courses/outline"},
-	{"from_route": "/hublms/<course>/<certificate>", "to_route": "courses/certificate"},
-	{"from_route": "/hublms/<course>/learn", "to_route": "batch/learn"},
+	{"from_route": "/hublms/programs/<program>", "to_route": "hublms/programs"},
+	{"from_route": "/hublms/course/<course>", "to_route": "hublms/course"},
+	{"from_route": "/hublms/topics/<topics>", "to_route": "hublms/topics"},
+ 
+ 	{	"from_route": "/hublms/course/<course>/learn", "to_route": "hublms/learn"},
 	{
-		"from_route": "/hublms/<course>/learn/<int:chapter>.<int:lesson>",
-		"to_route": "batch/learn",
+		"from_route": "/hublms/course/<course>/learn/<int:chapter>.<int:lesson>",
+		"to_route": "hublms/learn",
 	},
-	{
-		"from_route": "/hublms/<course>/learn/<int:chapter>.<int:lesson>/edit",
-		"to_route": "batch/edit",
-	},
-	{"from_route": "/quizzes", "to_route": "batch/quiz_list"},
-	{"from_route": "/quizzes/<quizname>", "to_route": "batch/quiz"},
-	{"from_route": "/batches/<batchname>", "to_route": "batches/batch"},
-	{"from_route": "/hublms/<course>/progress", "to_route": "batch/progress"},
-	{"from_route": "/hublms/<course>/join", "to_route": "batch/join"},
-	{"from_route": "/hublms/<course>/manage", "to_route": "cohorts"},
-	{"from_route": "/hublms/<course>/cohorts/<cohort>", "to_route": "cohorts/cohort"},
-	{
-		"from_route": "/hublms/<course>/cohorts/<cohort>/<page>",
-		"to_route": "cohorts/cohort",
-	},
-	{
-		"from_route": "/hublms/<course>/subgroups/<cohort>/<subgroup>",
-		"to_route": "cohorts/subgroup",
-	},
-	{
-		"from_route": "/hublms/<course>/subgroups/<cohort>/<subgroup>/<page>",
-		"to_route": "cohorts/subgroup",
-	},
-	{
-		"from_route": "/hublms/<course>/join/<cohort>/<subgroup>/<invite_code>",
-		"to_route": "cohorts/join",
-	},
-	{"from_route": "/users", "to_route": "profiles/profile"},
-	{"from_route": "/jobs/<job>", "to_route": "jobs/job"},
-	{
-		"from_route": "/batches/<batchname>/students/<username>",
-		"to_route": "/batches/progress",
-	},
-	{"from_route": "/assignments/<assignment>", "to_route": "assignments/assignment"},
-	{
-		"from_route": "/assignment-submission/<assignment>/<submission>",
-		"to_route": "assignment_submission/assignment_submission",
-	},
-	{
-		"from_route": "/quiz-submission/<quiz>/<submission>",
-		"to_route": "quiz_submission/quiz_submission",
-	},
-	{
-		"from_route": "/billing/<module>/<modulename>",
-		"to_route": "billing/billing",
-	},
-	{
-		"from_route": "/batches/details/<batchname>",
-		"to_route": "batches/batch_details",
-	},
-	{
-		"from_route": "/certified-participants",
-		"to_route": "certified_participants/certified_participants",
-	},
+	
 ]

@@ -11,6 +11,7 @@
   "title",
   "department",
   "hero_image",
+  "link_bbke",
   "section_break_mvge",
   "courses"
  ],
@@ -42,11 +43,16 @@
    "label": "Title",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "link_bbke",
+   "fieldtype": "Link",
+   "options": "Hublms Category"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-24 08:17:28.350792",
+ "modified": "2023-11-30 13:28:58.355606",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Program",

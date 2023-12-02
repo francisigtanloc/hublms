@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:title",
  "creation": "2023-11-23 00:34:15.977956",
@@ -74,7 +75,7 @@
   },
   {
    "fieldname": "option_1",
-   "fieldtype": "Small Text",
+   "fieldtype": "Text Editor",
    "label": "Option 1",
    "mandatory_depends_on": "eval: doc.type == 'Choices'"
   },
@@ -100,7 +101,7 @@
   },
   {
    "fieldname": "option_2",
-   "fieldtype": "Small Text",
+   "fieldtype": "Text Editor",
    "label": "Option 2",
    "mandatory_depends_on": "eval: doc.type == 'Choices'"
   },
@@ -126,7 +127,7 @@
   },
   {
    "fieldname": "option_3",
-   "fieldtype": "Small Text",
+   "fieldtype": "Text Editor",
    "label": "Option 3"
   },
   {
@@ -151,7 +152,7 @@
   },
   {
    "fieldname": "option_4",
-   "fieldtype": "Small Text",
+   "fieldtype": "Text Editor",
    "label": "Option 4"
   },
   {
@@ -202,10 +203,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:22:41.209342",
+ "modified": "2023-11-29 10:05:25.991830",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Question",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

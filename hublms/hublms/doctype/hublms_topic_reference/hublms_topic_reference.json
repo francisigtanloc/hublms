@@ -1,30 +1,29 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-11-23 08:57:50.798113",
- "default_view": "List",
+ "creation": "2023-11-28 08:18:21.732551",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "courses"
+  "topics"
  ],
  "fields": [
   {
-   "fieldname": "courses",
+   "fieldname": "topics",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Courses",
-   "options": "Hublms Course"
+   "label": "Topics",
+   "options": "Hublms Topic"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-11-30 13:32:06.681176",
+ "modified": "2023-11-30 13:34:16.657503",
  "modified_by": "Administrator",
  "module": "Hublms",
- "name": "Hublms Course Reference",
+ "name": "Hublms Topic Reference",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

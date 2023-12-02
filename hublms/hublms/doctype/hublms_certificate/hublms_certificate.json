@@ -6,8 +6,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "course",
-  "member",
+  "title",
   "member_name",
   "template",
   "column_break_3",
@@ -18,24 +17,6 @@
  ],
  "fields": [
   {
-   "fieldname": "course",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Course",
-   "options": "LMS Course",
-   "reqd": 1
-  },
-  {
-   "fieldname": "member",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Member",
-   "options": "User",
-   "reqd": 1
-  },
-  {
    "fetch_from": "member.full_name",
    "fieldname": "member_name",
    "fieldtype": "Data",
@@ -45,6 +26,7 @@
   {
    "fieldname": "template",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Template",
    "options": "Print Format",
    "reqd": 1
@@ -56,6 +38,7 @@
   {
    "fieldname": "issue_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Issue Date",
    "reqd": 1
   },
@@ -76,11 +59,16 @@
    "fieldname": "published",
    "fieldtype": "Check",
    "label": "Publish on Participant Page"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:16:02.874660",
+ "modified": "2023-11-28 10:57:35.194069",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Certificate",
@@ -111,9 +99,10 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "member_name",
+ "title_field": "title",
  "track_changes": 1
 }

@@ -1,19 +1,21 @@
 {
  "actions": [],
+ "autoname": "autoincrement",
  "creation": "2023-11-23 00:39:38.173967",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "enrolment_type",
-  "select_enrolment",
-  "member_type",
-  "payment",
+  "group_name",
+  "program",
+  "course",
+  "topic",
   "column_break_3",
-  "member",
-  "member_name",
-  "member_username",
+  "member_type",
+  "lms_users",
+  "add_multiple",
+  "payment",
   "section_break_8",
   "cohort",
   "subgroup",
@@ -42,30 +44,6 @@
   {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "member",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Member",
-   "options": "User",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "member.full_name",
-   "fieldname": "member_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Member Name",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "member.username",
-   "fieldname": "member_username",
-   "fieldtype": "Data",
-   "label": "Memeber Username",
-   "read_only": 1
   },
   {
    "fieldname": "section_break_8",
@@ -114,27 +92,49 @@
   },
   {
    "fetch_from": "batch.course",
-   "fieldname": "enrolment_type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Enrolment Type",
-   "options": "\nHublms Program\nHublms Course\nHublms Topic",
-   "reqd": 1
+   "fieldname": "program",
+   "fieldtype": "Table MultiSelect",
+   "label": "Program/s",
+   "options": "Hublms Program Reference"
   },
   {
-   "fieldname": "select_enrolment",
-   "fieldtype": "Dynamic Link",
-   "label": "Select Enrolment",
-   "options": "enrolment_type"
+   "fieldname": "course",
+   "fieldtype": "Table MultiSelect",
+   "label": "Course/s",
+   "options": "Hublms Course Reference"
+  },
+  {
+   "fieldname": "topic",
+   "fieldtype": "Table MultiSelect",
+   "label": "Topic/s",
+   "options": "Hublms Topic Reference"
+  },
+  {
+   "fieldname": "group_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Group Name",
+   "options": "Hublms Group"
+  },
+  {
+   "fieldname": "lms_users",
+   "fieldtype": "Table",
+   "label": "Users",
+   "options": "Hublms User Reference"
+  },
+  {
+   "fieldname": "add_multiple",
+   "fieldtype": "Button",
+   "label": "Add Multiple"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-27 09:28:30.118969",
+ "modified": "2023-12-01 08:20:48.936516",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Enrollment",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [
   {
@@ -180,5 +180,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "member_name"
+ "title_field": "group_name"
 }
