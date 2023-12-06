@@ -10,8 +10,8 @@
   "member_name",
   "status",
   "column_break_3",
-  "lesson",
-  "chapter",
+  "topic",
+  "content",
   "course"
  ],
  "fields": [
@@ -41,34 +41,32 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "lesson",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Lesson",
-   "options": "Course Lesson"
-  },
-  {
-   "fetch_from": "lesson.chapter",
-   "fieldname": "chapter",
-   "fieldtype": "Link",
-   "label": "Chapter",
-   "options": "Course Chapter",
-   "read_only": 1
-  },
-  {
    "fetch_from": "chapter.course",
    "fieldname": "course",
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Course",
-   "options": "LMS Course",
+   "options": "Hublms Course",
+   "read_only": 1
+  },
+  {
+   "fieldname": "topic",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Topic"
+  },
+  {
+   "fetch_from": ".",
+   "fieldname": "content",
+   "fieldtype": "Data",
+   "label": "Content",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:15:57.838885",
+ "modified": "2023-12-07 02:43:36.752167",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Course Progress",
@@ -90,6 +88,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "member_name",
+ "title_field": "member",
  "track_changes": 1
 }

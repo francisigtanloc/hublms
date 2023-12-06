@@ -6,44 +6,7 @@ frappe.ready(() => {
 		enroll_in_hublms_course(e);
 	});
 
-	$(".notify-me").click((e) => {
-		notify_user(e);
-	});
-
-	$(".nav-link").click((e) => {
-		change_hash(e);
-	});
-
-	if (window.location.hash) {
-		open_tab();
-	}
-
-	if (window.location.pathname == "/statistics") {
-		generate_graph("New Signups", "#new-signups");
-		generate_graph("Course Enrollments", "#course-enrollments");
-		generate_graph("Lesson Completion", "#lesson-completion");
-		generate_course_completion_graph();
-	}
-
-	expand_the_active_chapter();
-
-	$(".chapter-title")
-		.unbind()
-		.click((e) => {
-			rotate_chapter_icon(e);
-		});
-
-	$(".no-preview").click((e) => {
-		show_no_preview_dialog(e);
-	});
-
-	$("#create-batch").click((e) => {
-		open_batch_dialog(e);
-	});
-
-	$("#course-filter").change((e) => {
-		filter_courses(e);
-	});
+	
 });
 
 const pin_header = () => {
@@ -75,6 +38,7 @@ const file_size = (value) => {
 const enroll_in_hublms_course = (e) => {
 	e.preventDefault();
 	let course = $(e.currentTarget).attr("data-hublms-course");
+	
 	if (frappe.session.user != "Guest") {
 		// window.location.href = `/login?redirect-to=/hublms/${course}`;
 		window.location.href = `/hublms/course/${course}/learn/1.1`;
@@ -82,37 +46,37 @@ const enroll_in_hublms_course = (e) => {
 		return;
 	}
 
-	let batch = $(e.currentTarget).attr("data-batch");
-	batch = batch ? decodeURIComponent(batch) : "";
-	frappe.call({
-		method: "lms.lms.doctype.lms_enrollment.lms_enrollment.create_membership",
-		args: {
-			batch: batch ? batch : "",
-			course: course,
-		},
-		callback: (data) => {
-			if (data.message == "OK") {
-				$(".no-preview-modal").modal("hide");
-				frappe.show_alert(
-					{
-						message: __("Enrolled successfully"),
-						indicator: "green",
-					},
-					3
-				);
-				setTimeout(function () {
-					window.location.href = `/courses/${course}/learn/1.1`;
-				}, 1000);
-			}
-		},
-	});
+	// let batch = $(e.currentTarget).attr("data-batch");
+	// batch = batch ? decodeURIComponent(batch) : "";
+	// frappe.call({
+	// 	method: "lms.lms.doctype.lms_enrollment.lms_enrollment.create_membership",
+	// 	args: {
+	// 		batch: batch ? batch : "",
+	// 		course: course,
+	// 	},
+	// 	callback: (data) => {
+	// 		if (data.message == "OK") {
+	// 			$(".no-preview-modal").modal("hide");
+	// 			frappe.show_alert(
+	// 				{
+	// 					message: __("Enrolled successfully"),
+	// 					indicator: "green",
+	// 				},
+	// 				3
+	// 			);
+	// 			setTimeout(function () {
+	// 				window.location.href = `/courses/${course}/learn/1.1`;
+	// 			}, 1000);
+	// 		}
+	// 	},
+	// });
 };
 
 const notify_user = (e) => {
 	e.preventDefault();
 	var course = decodeURIComponent($("#outline-heading").attr("data-course"));
 	if (frappe.session.user == "Guest") {
-		window.location.href = `/login?redirect-to=/courses/${course}`;
+		// window.location.href = `/login?redirect-to=/courses/${course}`;
 		return;
 	}
 

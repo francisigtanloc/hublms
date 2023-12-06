@@ -29,16 +29,16 @@ def submit_solution(exercise, code):
 
 
 @frappe.whitelist()
-def save_current_lesson(course_name, lesson_name):
+def save_current_content(course_name, lesson_name):
 	"""Saves the current lesson for a student/mentor."""
 	name = frappe.get_value(
-		doctype="LMS Enrollment",
+		doctype="HUblms Enrollment",
 		filters={"course": course_name, "member": frappe.session.user},
 		fieldname="name",
 	)
 	if not name:
 		return
-	doc = frappe.get_doc("LMS Enrollment", name)
+	doc = frappe.get_doc("HUblms Enrollment", name)
 	doc.current_lesson = lesson_name
 	doc.save()
 	return {"current_lesson": doc.current_lesson}

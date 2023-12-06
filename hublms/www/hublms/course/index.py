@@ -1,26 +1,26 @@
 import frappe
 from frappe import _
 
-from lms.lms.utils import (
-	can_create_courses,
-	get_evaluation_details,
-	get_membership,
-	has_course_moderator_role,
-	is_certified,
-	is_instructor,
-	redirect_to_courses_list,
-	get_average_rating,
-	check_multicurrency,
-)
+# from lms.lms.utils import (
+# 	can_create_courses,
+# 	get_evaluation_details,
+# 	get_membership,
+# 	has_course_moderator_role,
+# 	is_certified,
+# 	is_instructor,
+# 	redirect_to_courses_list,
+# 	get_average_rating,
+# 	check_multicurrency,
+# )
 
 
 def get_context(context):
 	context.no_cache = 1
 
-	try:
-		course_name = frappe.form_dict["course"]
-	except KeyError:
-		redirect_to_courses_list()
+	# try:
+	course_name = frappe.form_dict["course"]
+	# except KeyError:
+		# redirect_to_courses_list()
 
 	if course_name == "new-course":
 		if not can_create_courses(course_name):
@@ -35,7 +35,7 @@ def get_context(context):
 		context.membership = None
 	else:
 		set_course_context(context, course_name)
-	context.avg_rating = get_average_rating(context.course.name)
+	# context.avg_rating = get_average_rating(context.course.name)
 
 
 def set_course_context(context, course_name):
@@ -62,10 +62,7 @@ def set_course_context(context, course_name):
 		as_dict=True,
 	)
 
-	if course.course_price:
-		course.course_price, course.currency = check_multicurrency(
-			course.course_price, course.currency
-		)
+	
 
 	if frappe.form_dict.get("edit"):
 		if not is_instructor(course.name) and not has_course_moderator_role():
@@ -90,18 +87,18 @@ def set_course_context(context, course_name):
 	course.related_courses = related_courses
 
 	context.course = course
-	membership = get_membership(course.name, frappe.session.user)
-	context.course.query_parameter = (
-		"?batch=" + membership.batch_old if membership and membership.batch_old else ""
-	)
-	context.membership = membership
-	context.is_instructor = is_instructor(course.name)
-	context.certificate = is_certified(course.name)
-	eval_details = get_evaluation_details(course.name)
-	context.eligible_for_evaluation = eval_details.eligible
-	context.no_of_attempts = eval_details.no_of_attempts
-	if context.course.upcoming:
-		context.is_user_interested = get_user_interest(context.course.name)
+	# membership = get_membership(course.name, frappe.session.user)
+	# context.course.query_parameter = (
+	# 	"?batch=" + membership.batch_old if membership and membership.batch_old else ""
+	# )
+	# context.membership = membership
+	# context.is_instructor = is_instructor(course.name)
+	# context.certificate = is_certified(course.name)
+	# eval_details = get_evaluation_details(course.name)
+	# context.eligible_for_evaluation = eval_details.eligible
+	# context.no_of_attempts = eval_details.no_of_attempts
+	# if context.course.upcoming:
+	# 	context.is_user_interested = get_user_interest(context.course.name)
 
 	context.metatags = {
 		"title": course.title,

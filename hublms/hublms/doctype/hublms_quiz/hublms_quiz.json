@@ -2,6 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
+ "autoname": "field:title",
  "creation": "2023-11-23 00:30:23.356804",
  "default_view": "List",
  "doctype": "DocType",
@@ -17,9 +18,12 @@
   "passing_percentage",
   "column_break_rocd",
   "total_marks",
+  "section_break_dupm",
+  "description",
   "section_break_sbjx",
   "questions",
   "add_multiple",
+  "column_break_cdkm",
   "section_break_3",
   "lesson",
   "column_break_5",
@@ -81,7 +85,6 @@
    "fieldtype": "Int",
    "label": "Total Marks",
    "non_negative": 1,
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -144,14 +147,28 @@
    "fieldname": "subset",
    "fieldtype": "Data",
    "label": "Subset"
+  },
+  {
+   "fieldname": "section_break_dupm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_cdkm",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:23:13.076715",
+ "modified": "2023-12-07 00:18:54.787614",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

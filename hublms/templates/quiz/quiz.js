@@ -6,7 +6,7 @@ frappe.ready(() => {
 	this.show_answers = $("#quiz-title").data("show-answers");
 	localStorage.removeItem($("#quiz-title").data("name"));
 
-	$(".btn-start-quiz").click((e) => {
+	$(".btn-start-hublms-quiz").click((e) => {
 		$("#start-banner").addClass("hide");
 		$("#quiz-form").removeClass("hide");
 		mark_active_question();
@@ -123,7 +123,7 @@ const quiz_summary = (e = undefined) => {
 	let self = this;
 
 	frappe.call({
-		method: "lms.lms.doctype.lms_quiz.lms_quiz.quiz_summary",
+		method: "hublms.hublms.doctype.hublms_quiz.hublms_quiz.quiz_summary",
 		args: {
 			quiz: quiz_name,
 			results: localStorage.getItem(quiz_name),
@@ -210,7 +210,7 @@ const parse_options = () => {
 const is_answer_correct = (type, user_answers, element) => {
 	frappe.call({
 		async: false,
-		method: "lms.lms.doctype.lms_quiz.lms_quiz.check_answer",
+		method: "hublms.hublms.doctype.hublms_quiz.hublms_quiz.check_answer",
 		args: {
 			question: $(".active-question").data("name"),
 			type: type,

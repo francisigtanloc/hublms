@@ -27,7 +27,7 @@ from frappe.utils import (
 	ceil,
 )
 from frappe.utils.dateutils import get_period
-from lms.lms.md import find_macros, markdown_to_html
+from hublms.hublms.md import find_macros, markdown_to_html
 
 RE_SLUG_NOTALLOWED = re.compile("[^a-z0-9]+")
 
@@ -73,120 +73,79 @@ def get_membership(course, member=None, batch=None):
 		member = frappe.session.user
 
 	filters = {"member": member, "course": course}
-	if batch:
-		filters["batch_old"] = batch
-
-	is_member = frappe.db.exists("LMS Enrollment", filters)
+	
+	is_member = frappe.db.exists("Hublms User Enrollment", filters)
+	
 	if is_member:
 		membership = frappe.db.get_value(
-			"LMS Enrollment",
+			"Hublms User Enrollment",
 			filters,
-			["name", "batch_old", "current_lesson", "member_type", "progress"],
+			["name",  "current_content", "member_type", "progress"],
 			as_dict=True,
 		)
-
-		if membership and membership.batch_old:
-			membership.batch_title = frappe.db.get_value(
-				"LMS Batch Old", membership.batch_old, "title"
-			)
+		
 		return membership
 
 	return False
 
 
-def get_chapters(course):
+def get_topics(course):
 	"""Returns all chapters of this course."""
 	if not course:
 		return []
-	chapters = frappe.get_all(
-		"Chapter Reference", {"parent": course}, ["idx", "chapter"], order_by="idx"
+	topics = frappe.get_all(
+		"Hublms Topic Reference", {"parent": course}, ["idx", "topics"], order_by="idx"
 	)
-	for chapter in chapters:
-		chapter_details = frappe.db.get_value(
-			"Course Chapter",
-			{"name": chapter.chapter},
-			["name", "title", "description"],
+	
+	for topic in topics:
+		topic_details = frappe.db.get_value(
+			"Hublms Topic",
+			{"name": topic.topics},
+			["name", "name", "description"],
 			as_dict=True,
 		)
-		chapter.update(chapter_details)
-	return chapters
+		topic.update(topic_details)
+
+	
+	return topics
 
 
-def get_lessons(course, chapter=None, get_details=True):
+def get_topic_contents(course, topic=None, get_details=True):
 	"""If chapter is passed, returns lessons of only that chapter.
 	Else returns lessons of all chapters of the course"""
-	lessons = []
-	lesson_count = 0
-	if chapter:
-		if get_details:
-			return get_lesson_details(chapter)
-		else:
-			return frappe.db.count("Lesson Reference", {"parent": chapter.name})
+	data = []
+	
+	doc_topic = frappe.get_doc("Hublms Topic", topic.name)
+	for tc in doc_topic.topic_content:
+		tc_details = frappe.get_doc("Hublms Topic Content",  {"parent": topic.name, "content": tc.content})
+  
+		if tc_details.content_type == "Hublms Video":
+			tc_details.icon = "icon-youtube"
+		elif tc_details.content_type == "Hublms Quiz":
+			tc_details.icon = "icon-quiz"
+		else :
+			tc_details.icon = "icon-list"
+		
+		data.append(tc_details)
+	
+	return data
 
-	for chapter in get_chapters(course):
-		if get_details:
-			lessons += get_lesson_details(chapter)
-		else:
-			lesson_count += frappe.db.count("Lesson Reference", {"parent": chapter.name})
-
-	return lessons if get_details else lesson_count
-
-
-def get_lesson_details(chapter):
-	lessons = []
-	lesson_list = frappe.get_all(
-		"Lesson Reference", {"parent": chapter.name}, ["lesson", "idx"], order_by="idx"
-	)
-
-	for row in lesson_list:
-		lesson_details = frappe.db.get_value(
-			"Course Lesson",
-			row.lesson,
-			[
-				"name",
-				"title",
-				"include_in_preview",
-				"body",
-				"creation",
-				"youtube",
-				"quiz_id",
-				"question",
-				"file_type",
-				"instructor_notes",
-			],
-			as_dict=True,
-		)
-		lesson_details.number = f"{chapter.idx}.{row.idx}"
-		lesson_details.icon = get_lesson_icon(lesson_details.body)
-		lessons.append(lesson_details)
-	return lessons
-
-
-def get_lesson_icon(content):
-	icon = None
-	macros = find_macros(content)
-
-	for macro in macros:
-		if macro[0] == "YouTubeVideo" or macro[0] == "Video":
-			icon = "icon-youtube"
-		elif macro[0] == "Quiz":
-			icon = "icon-quiz"
-
-	if not icon:
-		icon = "icon-list"
-
-	return icon
+def get_topic_details(topic=None,content_index=None):
+	
+	tc_details = frappe.get_doc("Hublms Topic Content",  {"parent": topic, "idx": content_index})
+	
+	return tc_details
 
 
 def get_tags(course):
-	tags = frappe.db.get_value("LMS Course", course, "tags")
+	tags = frappe.db.get_value("Hublms Course", course, "tags")
 	return tags.split(",") if tags else []
 
 
 def get_instructors(course):
 	instructor_details = []
 	instructors = frappe.get_all(
-		"Course Instructor", {"parent": course}, order_by="idx", pluck="instructor"
+		"Hublms Course Instructor", {"parent": course}, order_by="idx", pluck="instructor"
 	)
 	if not instructors:
 		instructors = frappe.db.get_value("LMS Course", course, "owner").split(" ")
@@ -284,7 +243,7 @@ def get_lesson_index(lesson_name):
 def get_lesson_url(course, lesson_number):
 	if not lesson_number:
 		return
-	return f"/courses/{course}/learn/{lesson_number}"
+	return f"/hublms/course/{course}/learn/{lesson_number}"
 
 
 def get_batch(course, batch_name):
@@ -295,34 +254,45 @@ def get_slugified_chapter_title(chapter):
 	return slugify(chapter)
 
 
-def get_progress(course, lesson, member=None):
+def get_progress(course, content, member=None):
 	if not member:
 		member = frappe.session.user
 
 	return frappe.db.get_value(
-		"LMS Course Progress",
-		{"course": course, "owner": member, "lesson": lesson},
+		"Hublms Course Progress",
+		{"course": course, "owner": member, "content": content},
 		["status"],
 	)
 
 
-def render_html(lesson):
-	youtube = lesson.youtube
-	quiz_id = lesson.quiz_id
-	body = lesson.body
+def render_html(topic,content_index):
+	topic_details = frappe.get_doc("Hublms Topic Content",  {"parent": topic, "idx": content_index})
+	# for content in contents:
+	content_details = frappe.get_doc(topic_details.content_type,  {"name": topic_details.content})
+	
+	youtube = ""
+	quiz_id = ""
+	article = ""
+	body = ""
+	if topic_details.content_type == "Hublms Video":
+		
+		youtube = content_details.url
+		if youtube and "/" in youtube:
+			youtube = youtube.split("/")[-1]
+		content = "{{ YouTubeVideo('" + youtube + "') }}" if youtube != "" else ""
+		body = content_details.description
+  
+	if topic_details.content_type == "Hublms Quiz":
+		quiz_id = content_details.name
+		content = "{{ Quiz('" + quiz_id + "') }}" if quiz_id != "" else ""
+		body = content_details.description
+  
+	if topic_details.content_type == "Hublms Article":
+		content = ""
+		body = content_details.content
 
-	if youtube and "/" in youtube:
-		youtube = youtube.split("/")[-1]
-
-	quiz_id = "{{ Quiz('" + quiz_id + "') }}" if quiz_id else ""
-	youtube = "{{ YouTubeVideo('" + youtube + "') }}" if youtube else ""
-	text = youtube + body + quiz_id
-
-	if lesson.question:
-		assignment = "{{ Assignment('" + lesson.question + "-" + lesson.file_type + "') }}"
-		text = text + assignment
-
-	return markdown_to_html(text)
+	render = body + content
+	return markdown_to_html(render)
 
 
 def is_mentor(course, email):
@@ -369,15 +339,26 @@ def is_eligible_to_review(course, membership):
 
 def get_course_progress(course, member=None):
 	"""Returns the course progress of the session user"""
-	lesson_count = get_lessons(course, get_details=False)
-	if not lesson_count:
+	count = 0
+	topics = frappe.db.get_all(
+		"Hublms Topic Reference", {"parent": course}, "topics"
+	)
+	for topic_content in topics:
+		count += frappe.db.count(
+			"Hublms Topic Content",	{"parent": topic_content.topics}
+		)
+	print("-------------------")
+	print(topics)
+	print("-------------------")
+	if not count:
 		return 0
 	completed_lessons = frappe.db.count(
-		"LMS Course Progress",
-		{"course": course, "owner": member or frappe.session.user, "status": "Complete"},
+		"Hublms Course Progress",
+		{"course": course, "member": member or frappe.session.user, "status": "Complete"},
 	)
+	
 	precision = cint(frappe.db.get_default("float_precision")) or 3
-	return flt(((completed_lessons / lesson_count) * 100), precision)
+	return flt(((completed_lessons / count) * 100), precision)
 
 
 def get_initial_members(course):
@@ -694,13 +675,13 @@ def notify_mentions(doc, topic):
 		)
 
 
-def get_lesson_count(course):
-	lesson_count = 0
-	chapters = frappe.get_all("Chapter Reference", {"parent": course}, ["chapter"])
-	for chapter in chapters:
-		lesson_count += frappe.db.count("Lesson Reference", {"parent": chapter.chapter})
+def get_topic_count(course):
+	topic = 0
+	topic = frappe.db.count("Hublms Topic Reference", {"parent": course}, ["topics"])
+	# for chapter in chapters:
+	# 	topic += frappe.db.count("Lesson Reference", {"parent": chapter.chapter})
 
-	return lesson_count
+	return topic
 
 
 def check_profile_restriction():
@@ -720,7 +701,7 @@ def get_restriction_details():
 
 def get_all_memberships(member):
 	return frappe.get_all(
-		"LMS Enrollment",
+		"Hublms User Enrollment",
 		{"member": member},
 		["name", "course", "batch_old", "current_lesson", "member_type", "progress"],
 	)
@@ -797,7 +778,7 @@ def get_chart_data(chart_name, timespan, timegrain, from_date, to_date):
 @frappe.whitelist(allow_guest=True)
 def get_course_completion_data():
 	all_membership = frappe.db.count("LMS Enrollment")
-	completed = frappe.db.count("LMS Enrollment", {"progress": ["like", "%100%"]})
+	completed = frappe.db.count("Hublms User Enrollment", {"progress": ["like", "%100%"]})
 
 	return {
 		"labels": ["Completed", "In Progress"],

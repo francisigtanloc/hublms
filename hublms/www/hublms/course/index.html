@@ -7,7 +7,7 @@
 {% block page_content %}
 <div class="course-home-top-container">
 
-    <div class="course-head-container">
+    <!-- <div class="course-head-container">
         <div class="container">
             <div class="course-card-wide">
 
@@ -86,6 +86,70 @@
 
             </div>
         </div>
+    </div> -->
+    <div class="course-head-container">
+        <div class="container">
+            <div class="course-card-wide">
+                <div class="breadcrumb">
+                    <a class="dark-links" href="/hublms">{{ _("All Items") }}</a>
+                    <img class="" src="/assets/lms/icons/chevron-right.svg">
+                    <span class="breadcrumb-destination">{{ course.title if course.title else _("New Course") }}</span>
+                </div>
+                <div class="d-flex align-items-center mt-8">
+                    {% for tag in get_tags(course.name) %}
+                    <div class="course-card-pills">
+                        {{ tag }}
+                    </div>
+                    {% endfor %}
+                </div>
+            
+                <div id="title" class="page-title">
+                    {{ course.title }}
+                </div>
+            
+                <div id="intro">
+                    {% if course.short_introduction %}
+                    {{ course.short_introduction }}
+                    {% endif %}
+                </div>
+            
+                {% if not course.upcoming %}
+                <div class="avg-rating-stars">
+                    <div class="rating">
+                        {% for i in [1, 2, 3, 4, 5] %}
+                        <svg class="icon icon-lg {% if i <= frappe.utils.ceil(avg_rating) %} star-click {% endif %}" data-rating="{{ i }}">
+                            <use href="#icon-star"></use>
+                        </svg>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            
+                <div class="mt-2">
+                    <div class="bold-heading">{{ _("Instructors") }}:</div>
+                    {% for instructor in get_instructors(course.name) %}
+                    <div class="mt-1">
+                        {{ widgets.Avatar(member=instructor, avatar_class="avatar-small") }}
+                        <a class="button-links" href="{{ get_profile_url(instructor.username) }}">
+                            <span class="course-instructor"> {{ instructor.full_name }} </span>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            
+                {% if membership %}
+                {% set progress = frappe.utils.cint(membership.progress) %}
+                <div class="mt-8">
+                    <div class="progress-percent m-0">{{ progress }}% {{ _("Completed") }}</div>
+                    <div class="progress" title="{{ progress }}% Completed">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}"
+                        aria-valuemin="0" aria-valuemax="100" style="width:{{ progress }}%">
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
     <div class="course-home-page">
@@ -93,63 +157,57 @@
 
             <div class="course-overlay-card">
 
-
-                <iframe class="preview-video" frameborder="0" allowfullscreen=""
-                    src="https://www.youtube.com/embed/eCAMPcl7NKc?si=Ll_l2isTrPv-HqsQ"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-
-
+                {% if course.video_link %}
+                <iframe class="preview-video" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/{{ course.video_link }}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                {% endif %}
+        
                 <div class="course-overlay-content">
+        
+                    <div class="all-cta">
 
-                    <div class="cta-parent">
-
-
-
-                        <div class="all-cta">
-
-                            <div class="btn btn-primary wide-button enroll-in-hublms-course" data-hublms-course="course-1">
-                                Start Learning
-                            </div>
-
-
-
-
-
-
-
+                        <div class="btn btn-primary wide-button enroll-in-hublms-course" data-hublms-course="{{course.title}}">
+                            Start Learning
                         </div>
 
-
                     </div>
-
-
-                    <div id="interest-alert" class=" hide ">
-                        You have opted to be notified for this course. You will receive an email when the course becomes
-                        available.
+        
+                    <div id="interest-alert" class="{% if not is_user_interested %} hide {% endif %}">
+                        {{ _("You have opted to be notified for this course. You will receive an email when the course becomes available.") }}
                     </div>
-
-
-
-
-
-
-
-
+                
+                    {% if course.status == "Under Review" and is_instructor %}
+                    <div class="mb-4">
+                        {{ _("This course is currently under review. Once the review is complete, the System Admins will publish it on the website.") }}
+                    </div>
+                    {% endif %}
+                
+                    {% if no_of_attempts and no_of_attempts >= course.max_attempts %}
+                    <p>
+                        {{ _("You have exceeded the maximum number of attempts allowed to appear for evaluations of this course.") }}
+                    </p>
+                    {% endif %}
+        
+                    {% if course.paid_course %}
+                    <div class="vertically-center mb-3 bold-heading">
+                        {{ frappe.utils.fmt_money(course.course_price, 0, course.currency)  }}
+                    </div>
+                    {% endif %}
+        
                     <div class="vertically-center mb-3">
                         <svg class="icon icon-md mr-1">
                             <use class="" href="#icon-users">
-                            </use>
                         </svg>
-                        0 Enrolled
+                        {{ format_number(get_students(course.name) | length) }} {{ _("Enrolled") }}
                     </div>
-
+        
                     <div class="vertically-center mb-3">
                         <svg class="icon icon-md mr-1">
                             <use href="#icon-education"></use>
                         </svg>
-                        1 Lessons
+                        {{ get_lessons(course.name, None, False) }} {{ _("Lessons") }}
                     </div>
-
+        
                 </div>
             </div>
 
@@ -157,87 +215,17 @@
             <div class="course-body-container">
 
                 <div class="course-description-section">
-                    <div class="ql-editor read-mode">
-                        <p>Description to course 1</p>
-                    </div>
+                    {{ course.description }}
                 </div>
 
 
 
 
-
-                <div class="course-home-outline">
-
-
-                    <div class="page-title mb-8" id="outline-heading" data-course="course-1">
-                        Course Content
-                    </div>
-
-
-                    <div>
-
-
-
-                        <div class="chapter-parent" data-chapter="0003 Chapter 1">
-
-                            <div class="chapter-title" data-toggle="collapse" aria-expanded="true"
-                                data-target="#chapter-1">
-
-                                <img class="chapter-icon" src="/assets/lms/icons/chevron-right.svg"
-                                    style="transform: rotate(90deg);">
-                                <div class="chapter-title-main">
-                                    Chapter 1
-                                </div>
-                                
-                            </div>
-
-
-                            <div class="chapter-content collapse navbar-collapse show" id="chapter-1">
-
-
-                                <div class="chapter-description">
-                                    Chapter 1 Description
-                                </div>
-
-
-                                <div class="lessons">
-
-
-
-
-
-                                    <div data-lesson="0004 Lesson 1" class="lesson-info ">
-
-
-                                        <a class="lesson-links" href="/courses/course-1/learn/1.1">
-
-                                            <svg class="icon icon-sm mr-2">
-                                                <use class="" href="#icon-youtube">
-                                                </use>
-                                            </svg>
-
-                                            <span>Lesson 1</span>
-
-
-
-                                        </a>
-
-
-
-                                    </div>
-
-
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
+                
+                {{ widgets.CourseOutline(course=course, membership=membership, is_user_interested=is_user_interested) }}
+                    {% if course.status == "Approved" and not frappe.utils.cint(course.upcoming) %}
+                        {% include "lms/templates/reviews.html" %}
+                    {% endif %}
 
 
 

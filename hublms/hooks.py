@@ -234,10 +234,33 @@ website_route_rules = [
 	{"from_route": "/hublms/course/<course>", "to_route": "hublms/course"},
 	{"from_route": "/hublms/topics/<topics>", "to_route": "hublms/topics"},
  
- 	{	"from_route": "/hublms/course/<course>/learn", "to_route": "hublms/learn"},
+ 	# {	"from_route": "/hublms/course/<course>/learn", "to_route": "hublms/learn"},
 	{
-		"from_route": "/hublms/course/<course>/learn/<int:chapter>.<int:lesson>",
+		"from_route": "/hublms/course/<course>/learn/<int:topic>.<int:content>",
 		"to_route": "hublms/learn",
 	},
 	
 ]
+jinja = {
+	"methods": [
+		"hublms.hublms.utils.get_instructors",
+		"hublms.hublms.utils.get_topic_count",
+		"hublms.hublms.utils.get_topics",
+		"hublms.hublms.utils.get_topic_contents",
+		"hublms.hublms.utils.render_html",
+		"hublms.hublms.utils.get_lesson_url",
+		"hublms.hublms.utils.get_progress",
+  
+	]
+}
+hublms_markdown_macro_renderers = {
+	"Exercise": "hublms.plugins.exercise_renderer",
+	"Quiz": "hublms.plugins.quiz_renderer",
+	"YouTubeVideo": "hublms.plugins.youtube_video_renderer",
+	"Video": "hublms.plugins.video_renderer",
+	"Assignment": "hublms.plugins.assignment_renderer",
+	"Embed": "hublms.plugins.embed_renderer",
+	"Audio": "hublms.plugins.audio_renderer",
+	"PDF": "hublms.plugins.pdf_renderer",
+	"Article": "hublms.plugins.article_renderer",
+}

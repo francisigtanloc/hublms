@@ -110,7 +110,7 @@ def quiz_renderer(quiz_name):
 		+"</div>"
 
 	quiz = frappe.db.get_value(
-		"LMS Quiz",
+		"Hublms Quiz",
 		quiz_name,
 		[
 			"name",
@@ -131,24 +131,24 @@ def quiz_renderer(quiz_name):
 		fields.append(f"possibility_{num}")
 
 	questions = frappe.get_all(
-		"LMS Quiz Question",
+		"Hublms Quiz Question",
 		filters={"parent": quiz.name},
 		fields=["question", "marks"],
 		order_by="idx",
 	)
 
 	for question in questions:
-		details = frappe.db.get_value("LMS Question", question.question, fields, as_dict=1)
+		details = frappe.db.get_value("Hublms Question", question.question, fields, as_dict=1)
 		details["marks"] = question.marks
 		quiz.questions.append(details)
 
 	no_of_attempts = frappe.db.count(
-		"LMS Quiz Submission", {"owner": frappe.session.user, "quiz": quiz_name}
+		"Hublms Quiz Submission", {"owner": frappe.session.user, "quiz": quiz_name}
 	)
 
 	if quiz.show_submission_history:
 		all_submissions = frappe.get_all(
-			"LMS Quiz Submission",
+			"Hublms Quiz Submission",
 			{
 				"quiz": quiz.name,
 				"member": frappe.session.user,
@@ -169,7 +169,7 @@ def quiz_renderer(quiz_name):
 
 
 def exercise_renderer(argument):
-	exercise = frappe.get_doc("LMS Exercise", argument)
+	exercise = frappe.get_doc("HUblms Exercise", argument)
 	context = dict(exercise=exercise)
 	return frappe.render_template("templates/exercise.html", context)
 
@@ -219,7 +219,8 @@ def audio_renderer(src):
 
 def pdf_renderer(src):
 	return f"<iframe src='{quote(src)}#toolbar=0' width='100%' height='700px'></iframe>"
-
+def article_renderer(src):
+	return f"<div> Test Render {src} </div>"
 
 def assignment_renderer(detail):
 	supported_types = {

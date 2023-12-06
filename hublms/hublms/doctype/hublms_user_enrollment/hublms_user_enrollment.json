@@ -10,7 +10,9 @@
   "program",
   "course",
   "topic",
-  "user",
+  "member",
+  "current_content",
+  "member_type",
   "section_break_8",
   "column_break_12",
   "progress"
@@ -40,15 +42,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "user",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "User",
-   "options": "User",
-   "reqd": 1
-  },
-  {
    "fieldname": "program",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -63,11 +56,31 @@
    "in_standard_filter": 1,
    "label": "Topic",
    "options": "Hublms Topic"
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "member_type",
+   "fieldtype": "Select",
+   "label": "Member Type",
+   "options": "\nStudent\nMentor\nStaff"
+  },
+  {
+   "fieldname": "current_content",
+   "fieldtype": "Data",
+   "label": "Current Content"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-01 08:26:47.507567",
+ "modified": "2023-12-07 01:26:29.314247",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms User Enrollment",
@@ -117,5 +130,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "user"
+ "title_field": "member"
 }

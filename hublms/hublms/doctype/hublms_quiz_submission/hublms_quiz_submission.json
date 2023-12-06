@@ -27,7 +27,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Quiz",
-   "options": "LMS Quiz"
+   "options": "Hublms Quiz"
   },
   {
    "fetch_from": "quiz.course",
@@ -105,13 +105,13 @@
    "fieldname": "result",
    "fieldtype": "Table",
    "label": "Result",
-   "options": "LMS Quiz Result"
+   "options": "Hublms Quiz Result"
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:16:02.626232",
+ "modified": "2023-12-06 14:58:25.345984",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz Submission",
