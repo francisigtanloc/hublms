@@ -39,7 +39,7 @@ class CustomUser(User):
 				frappe.throw(_("Skills must be unique"))
 
 	def validate_completion(self):
-		if frappe.db.get_single_value("LMS Settings", "force_profile_completion"):
+		if frappe.db.get_single_value("Hublms Settings", "force_profile_completion"):
 			all_fields_have_value = True
 			profile_mandatory_fields = frappe.get_hooks("profile_mandatory_fields")
 			docfields = frappe.get_meta(self.doctype).fields
@@ -54,18 +54,18 @@ class CustomUser(User):
 	def get_batch_count(self) -> int:
 		"""Returns the number of batches authored by this user."""
 		return frappe.db.count(
-			"LMS Enrollment", {"member": self.name, "member_type": "Mentor"}
+			"Hublms Enrollment", {"member": self.name, "member_type": "Mentor"}
 		)
 
 	def get_user_reviews(self):
 		"""Returns the reviews created by user"""
-		return frappe.get_all("LMS Course Review", {"owner": self.name})
+		return frappe.get_all("Hublms Course Review", {"owner": self.name})
 
 	def get_mentored_courses(self):
 		"""Returns all courses mentored by this user"""
 		mentored_courses = []
 		mapping = frappe.get_all(
-			"LMS Course Mentor Mapping",
+			"Hublms Course Mentor Mapping",
 			{
 				"mentor": self.name,
 			},
@@ -73,9 +73,9 @@ class CustomUser(User):
 		)
 
 		for map in mapping:
-			if frappe.db.get_value("LMS Course", map.course, "published"):
+			if frappe.db.get_value("Hublms Course", map.course, "published"):
 				course = frappe.db.get_value(
-					"LMS Course",
+					"Hublms Course",
 					map.course,
 					["name", "upcoming", "title", "image", "enable_certification"],
 					as_dict=True,
@@ -92,7 +92,7 @@ def get_enrolled_courses():
 
 	for membership in memberships:
 		course = frappe.db.get_value(
-			"LMS Course",
+			"Hublms Course",
 			membership.course,
 			[
 				"name",
@@ -112,7 +112,7 @@ def get_enrolled_courses():
 		if not course.published:
 			continue
 		course.enrollment_count = frappe.db.count(
-			"LMS Enrollment", {"course": course.name, "member_type": "Student"}
+			"Hublms Enrollment", {"course": course.name, "member_type": "Student"}
 		)
 		course.avg_rating = get_average_rating(course.name) or 0
 		progress = cint(membership.progress)
@@ -134,7 +134,7 @@ def get_course_membership(member=None, member_type=None):
 	if member_type:
 		filters["member_type"] = member_type
 
-	return frappe.get_all("LMS Enrollment", filters, ["name", "course", "progress"])
+	return frappe.get_all("Hublms Enrollment", filters, ["name", "course", "progress"])
 
 
 def get_authored_courses(member=None, only_published=True):
@@ -146,7 +146,7 @@ def get_authored_courses(member=None, only_published=True):
 
 	for course in courses:
 		detail = frappe.db.get_value(
-			"LMS Course",
+			"Hublms Course",
 			course.parent,
 			[
 				"name",
@@ -167,7 +167,7 @@ def get_authored_courses(member=None, only_published=True):
 		if only_published and detail and not detail.published:
 			continue
 		detail.enrollment_count = frappe.db.count(
-			"LMS Enrollment", {"course": detail.name, "member_type": "Student"}
+			"Hublms Enrollment", {"course": detail.name, "member_type": "Student"}
 		)
 		detail.avg_rating = get_average_rating(detail.name) or 0
 		course_details.append(detail)
@@ -241,7 +241,7 @@ def sign_up(email, full_name, verify_terms, user_category):
 	if default_role:
 		user.add_roles(default_role)
 
-	user.add_roles("LMS Student")
+	user.add_roles("Hublms Student")
 	set_country_from_ip(None, user.name)
 
 	if user.flags.email_sent:
@@ -276,7 +276,7 @@ def get_country_code():
 def on_session_creation(login_manager):
 	if frappe.db.get_single_value(
 		"System Settings", "setup_complete"
-	) and frappe.db.get_single_value("LMS Settings", "default_home"):
+	) and frappe.db.get_single_value("Hublms Settings", "default_home"):
 		frappe.local.response["home_page"] = "/courses"
 
 
