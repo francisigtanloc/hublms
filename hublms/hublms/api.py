@@ -1,4 +1,4 @@
-"""API methods for the LMS.
+"""API methods for the Hublms.
 """
 
 import frappe
@@ -21,7 +21,7 @@ def submit_solution(exercise, code):
 	@exerecise: name of the exercise to submit
 	@code: solution to the exercise
 	"""
-	ex = frappe.get_doc("LMS Exercise", exercise)
+	ex = frappe.get_doc("Hublms Exercise", exercise)
 	if not ex:
 		return
 	doc = ex.submit(code)
@@ -47,7 +47,7 @@ def save_current_content(course_name, lesson_name):
 @frappe.whitelist()
 def join_cohort(course, cohort, subgroup, invite_code):
 	"""Creates a Cohort Join Request for given user."""
-	course_doc = frappe.get_doc("LMS Course", course)
+	course_doc = frappe.get_doc("Hublms Course", course)
 	cohort_doc = course_doc and course_doc.get_cohort(cohort)
 	subgroup_doc = cohort_doc and cohort_doc.get_subgroup(subgroup)
 

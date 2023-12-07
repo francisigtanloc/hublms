@@ -82,12 +82,12 @@ class ProfileTab:
 
 class LiveCodeExtension(PageExtension):
 	def render_header(self):
-		livecode_url = frappe.get_value("LMS Settings", None, "livecode_url")
+		livecode_url = frappe.get_value("Hublms Settings", None, "livecode_url")
 		context = {"livecode_url": livecode_url}
 		return frappe.render_template("templates/livecode/extension_header.html", context)
 
 	def render_footer(self):
-		livecode_url = frappe.get_value("LMS Settings", None, "livecode_url")
+		livecode_url = frappe.get_value("Hublms Settings", None, "livecode_url")
 		context = {"livecode_url": livecode_url}
 		return frappe.render_template("templates/livecode/extension_footer.html", context)
 
@@ -247,7 +247,7 @@ def assignment_renderer(detail):
 
 def show_custom_signup():
 	if frappe.db.get_single_value(
-		"LMS Settings", "terms_of_use"
-	) or frappe.db.get_single_value("LMS Settings", "privacy_policy"):
+		"Hublms Settings", "terms_of_use"
+	) or frappe.db.get_single_value("Hublms Settings", "privacy_policy"):
 		return "hublms/templates/signup-form.html"
 	return "frappe/templates/signup.html"
