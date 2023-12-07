@@ -16,7 +16,6 @@ def get_common_context(context):
 	)
 
 	context.course = course
-	context.lessons = get_lessons(course.name)
 	# membership = get_membership(course.name, frappe.session.user, batch_name)
 	# context.membership = membership
 	# context.progress = frappe.utils.cint(membership.progress) if membership else 0
