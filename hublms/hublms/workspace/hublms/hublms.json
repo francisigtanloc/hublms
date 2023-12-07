@@ -1,15 +1,15 @@
 {
  "charts": [
   {
-   "chart_name": "New Signups",
-   "label": "Signups"
-  },
-  {
    "chart_name": "Top Customers",
    "label": "Enrollments"
+  },
+  {
+   "chart_name": "Top Suppliers",
+   "label": "Signups"
   }
  ],
- "content": "[{\"id\":\"jNO4sdKxHu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Get Started</b></span>\",\"col\":12}},{\"id\":\"5s0qRBc4rY\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"/hublms\\\">Visit Hublms Portal</a>\",\"col\":4}},{\"id\":\"lGMuNLpmv-\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"/courses/new-course/edit\\\">Create a Course</a>\",\"col\":4}},{\"id\":\"3TVyc9AkPy\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"/app/web-page/new-web-page-1\\\">Setup a Home Page</a>\",\"col\":4}},{\"id\":\"9zcbqpu2gm\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"/app/lms-settings/LMS%20Settings\\\">Hublms Setting</a>\",\"col\":4}},{\"id\":\"0ATmnKmXjc\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"https://docs.frappelms.com\\\">Documentation</a>\",\"col\":4}},{\"id\":\"7tGB2TYPmn\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"https://frappe.school/courses/introducing-frappe-lms\\\">Video Tutorials</a>\",\"col\":4}},{\"id\":\"C128a4abjX\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"5q4sPiv2ci\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Signups\",\"col\":6}},{\"id\":\"8NSaRaEV5u\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Enrollments\",\"col\":6}},{\"id\":\"kMuzko0uAU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"iuvIOHmztI\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px;\\\"><b>Statistics</b></span>\",\"col\":12}},{\"id\":\"l0VTd66Uy2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Users\",\"col\":4}},{\"id\":\"wAWZin1KKk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course\",\"col\":4}},{\"id\":\"RLrIlFx0Hd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Enrollments\",\"col\":4}},{\"id\":\"OuhWkhCQmq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course Completed\",\"col\":4}},{\"id\":\"3g8QmNqUXG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Certificate\",\"col\":4}},{\"id\":\"EZsdsujs8N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluation\",\"col\":4}},{\"id\":\"s-nfsFQbGV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jeOBWBzHEa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Master</b></span>\",\"col\":12}},{\"id\":\"sVhgfS5GIh\",\"type\":\"card\",\"data\":{\"card_name\":\"Course Data\",\"col\":4}},{\"id\":\"Iea0snm4Fg\",\"type\":\"card\",\"data\":{\"card_name\":\"Course Stats\",\"col\":4}},{\"id\":\"bZB7RqOl6a\",\"type\":\"card\",\"data\":{\"card_name\":\"Certification\",\"col\":4}}]",
+ "content": "[{\"id\":\"jNO4sdKxHu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Get Started</b></span>\",\"col\":12}},{\"id\":\"5s0qRBc4rY\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"/hublms\\\">Visit Hublms Portal</a>\",\"col\":4}},{\"id\":\"lGMuNLpmv-\",\"type\":\"paragraph\",\"data\":{\"text\":\"Create a Course\",\"col\":4}},{\"id\":\"3TVyc9AkPy\",\"type\":\"paragraph\",\"data\":{\"text\":\"Setup a Home Page\",\"col\":4}},{\"id\":\"9zcbqpu2gm\",\"type\":\"paragraph\",\"data\":{\"text\":\"Hublms Setting\",\"col\":4}},{\"id\":\"0ATmnKmXjc\",\"type\":\"paragraph\",\"data\":{\"text\":\"Documentation\",\"col\":4}},{\"id\":\"7tGB2TYPmn\",\"type\":\"paragraph\",\"data\":{\"text\":\"Video Tutorials\",\"col\":4}},{\"id\":\"C128a4abjX\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"5q4sPiv2ci\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Signups\",\"col\":6}},{\"id\":\"8NSaRaEV5u\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Enrollments\",\"col\":6}},{\"id\":\"kMuzko0uAU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"iuvIOHmztI\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px;\\\"><b>Statistics</b></span>\",\"col\":12}},{\"id\":\"l0VTd66Uy2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Users\",\"col\":4}},{\"id\":\"wAWZin1KKk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course\",\"col\":4}},{\"id\":\"RLrIlFx0Hd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Enrollments\",\"col\":4}},{\"id\":\"OuhWkhCQmq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course Completed\",\"col\":4}},{\"id\":\"3g8QmNqUXG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Certificate\",\"col\":4}},{\"id\":\"EZsdsujs8N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluation\",\"col\":4}},{\"id\":\"s-nfsFQbGV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jeOBWBzHEa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Master</b></span>\",\"col\":12}},{\"id\":\"sVhgfS5GIh\",\"type\":\"card\",\"data\":{\"card_name\":\"Course Data\",\"col\":4}},{\"id\":\"Iea0snm4Fg\",\"type\":\"card\",\"data\":{\"card_name\":\"Course Stats\",\"col\":4}},{\"id\":\"bZB7RqOl6a\",\"type\":\"card\",\"data\":{\"card_name\":\"Certification\",\"col\":4}}]",
  "creation": "2023-11-28 10:19:57.931522",
  "custom_blocks": [],
  "docstatus": 0,
@@ -196,7 +196,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-12-07 13:55:22.379952",
+ "modified": "2023-12-07 23:06:21.084272",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms",
@@ -236,6 +236,15 @@
    "type": "DocType"
   },
   {
+   "color": "Red",
+   "doc_view": "List",
+   "format": "{} Active",
+   "label": "Users",
+   "link_to": "Hublms Program",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
    "color": "Blue",
    "doc_view": "List",
    "format": "{} Completed",
@@ -251,15 +260,6 @@
    "label": "Evaluation",
    "link_to": "Hublms Certificate Evaluation",
    "stats_filter": "[]",
-   "type": "DocType"
-  },
-  {
-   "color": "Red",
-   "doc_view": "List",
-   "format": "{} Active",
-   "label": "Users",
-   "link_to": "User",
-   "stats_filter": "{\"enabled\":[\"=\",1]}",
    "type": "DocType"
   }
  ],
