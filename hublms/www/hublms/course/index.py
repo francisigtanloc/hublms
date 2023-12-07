@@ -73,7 +73,7 @@ def set_course_context(context, course_name):
 		raise frappe.PermissionError(_("This is not a valid course URL."))
 
 	related_courses = frappe.get_all(
-		"Related Courses", {"parent": course.name}, ["course"]
+		"Hublms Related Courses", {"parent": course.name}, ["course"]
 	)
 	for csr in related_courses:
 		csr.update(
@@ -111,5 +111,5 @@ def set_course_context(context, course_name):
 
 def get_user_interest(course):
 	return frappe.db.count(
-		"LMS Course Interest", {"course": course, "user": frappe.session.user}
+		"Hublms Course Interest", {"course": course, "user": frappe.session.user}
 	)
