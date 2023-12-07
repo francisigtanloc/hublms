@@ -205,7 +205,7 @@
                         <svg class="icon icon-md mr-1">
                             <use href="#icon-education"></use>
                         </svg>
-                        {{ get_topics(course.name) }} {{ _("Lessons") }}
+                        {{ get_topics(course.name) | count }} {{ _("Lessons") }}
                     </div>
         
                 </div>
