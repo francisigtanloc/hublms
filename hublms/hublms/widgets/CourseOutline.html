@@ -26,9 +26,7 @@
             <div class="chapter-title-main">
                 {{ topic.name }}
             </div>
-            <!-- <div class="small ml-auto">
-                {{ lessons | length }} lessons
-            </div> -->
+            
         </div>
 
 
@@ -51,10 +49,7 @@
                 <div data-lesson="{{ content.content }}" class="lesson-info {% if active %} active-lesson {% endif %}">
 
                     <a class="lesson-links"
-                    href="{{ get_lesson_url(course.name, url_index) }}"
-                    {% if is_instructor and not lesson.include_in_preview %}
-                    title="{{ _('This lesson is not available for preview. As you are the Instructor of the course only you can see it.') }}"
-                    {% endif %}>
+                    href="{{ get_lesson_url(course.name, url_index) }}">
 
                         <svg class="icon icon-sm mr-2">
                             <use class="" href="#{{ content.icon }}">
