@@ -1,12 +1,5 @@
 {
- "actions": [
-  {
-   "action": "lms.lms.doctype.lms_course.lms_course.reindex_exercises",
-   "action_type": "Server Action",
-   "group": "Reindex",
-   "label": "Reindex Exercises"
-  }
- ],
+ "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:title",
@@ -233,30 +226,9 @@
   }
  ],
  "is_published_field": "published",
- "links": [
-  {
-   "group": "Chapters",
-   "link_doctype": "Course Chapter",
-   "link_fieldname": "course"
-  },
-  {
-   "group": "Batches",
-   "link_doctype": "LMS Batch Old",
-   "link_fieldname": "course"
-  },
-  {
-   "group": "Mentors",
-   "link_doctype": "LMS Course Mentor Mapping",
-   "link_fieldname": "course"
-  },
-  {
-   "group": "Interests",
-   "link_doctype": "LMS Course Interest",
-   "link_fieldname": "course"
-  }
- ],
+ "links": [],
  "make_attachments_public": 1,
- "modified": "2023-12-07 13:22:50.571904",
+ "modified": "2023-12-07 13:51:13.135238",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Course",

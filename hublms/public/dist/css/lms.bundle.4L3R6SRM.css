@@ -1,4 +1,4 @@
-/* ../../../../../../../var/folders/rk/7916mt8n5yz0m2hl4l57p3r00000gn/T/tmp-90126-QN1MywN2D1l2/18c42b6d5776/style.css */
+/* ../../../../../../../var/folders/rk/7916mt8n5yz0m2hl4l57p3r00000gn/T/tmp-90958-vhZ6IXN3IWUx/18c42d065ad6/style.css */
 :root {
   --text-3-5xl: 24px;
   --text-3-8xl: 34px;
@@ -133,7 +133,7 @@ textarea.field-input {
   position: unset;
 }
 .codex-editor--narrow .ce-toolbar__actions {
-  left: 100%;
+  right: 100%;
 }
 .lesson-editor {
   border: 1px solid var(--gray-300);
@@ -196,7 +196,7 @@ textarea.field-input {
   font-size: var(--text-sm);
 }
 .lessons {
-  margin-right: 1.5rem;
+  margin-left: 1.5rem;
 }
 input[type=checkbox] {
   -webkit-appearance: auto;
@@ -205,7 +205,7 @@ input[type=checkbox] {
   position: relative;
   width: var(--checkbox-size) !important;
   height: var(--checkbox-size);
-  margin-left: var(--checkbox-right-margin) !important;
+  margin-right: var(--checkbox-right-margin) !important;
   background-repeat: no-repeat;
   background-position: center;
   border: 1px solid var(--gray-400);
@@ -240,7 +240,7 @@ input[type=checkbox] {
   display: flex;
   position: relative;
   top: 1rem;
-  right: 1rem;
+  left: 1rem;
 }
 .course-image .course-tags {
   width: -moz-fit-content;
@@ -248,8 +248,8 @@ input[type=checkbox] {
 }
 .course-card-pills {
   background: #ffffff;
-  margin-right: 0;
-  margin-left: 0.5rem;
+  margin-left: 0;
+  margin-right: 0.5rem;
   border-radius: var(--border-radius);
   padding: 3.5px 8px;
   font-size: 11px;
@@ -339,18 +339,18 @@ input[type=checkbox] {
   margin-bottom: 16px;
 }
 .course-instructor {
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   font-size: var(--text-base);
 }
 @media (max-width: 400px) {
   .course-instructor {
-    margin-right: 0;
+    margin-left: 0;
   }
 }
 .course-student-count {
   display: flex;
   font-size: var(--text-base);
-  float: left;
+  float: right;
   color: var(--gray-900);
 }
 .course-card-footer {
@@ -394,8 +394,8 @@ input[type=checkbox] {
 }
 @media (min-width: 576px) and (max-width: 992px) {
   .container {
-    padding-right: 1rem;
     padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 .button-links {
@@ -417,7 +417,7 @@ input[type=checkbox] {
   height: 100%;
 }
 .review-content {
-  margin: 1rem 3.5rem 0 0;
+  margin: 1rem 0 0 3.5rem;
   color: var(--gray-700);
 }
 .custom-checkbox > label > .empty-checkbox {
@@ -427,7 +427,7 @@ input[type=checkbox] {
   border-radius: var(--border-radius-md);
 }
 .empty-checkbox {
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .custom-checkbox > label > input:checked + .empty-checkbox {
   background: url(/assets/lms/icons/tick.svg);
@@ -510,7 +510,7 @@ input[type=checkbox] {
   display: flex;
   align-items: center;
   padding-bottom: 0.25rem;
-  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   font-size: var(--text-lg);
 }
 .chapter-title:last-child {
@@ -519,14 +519,14 @@ input[type=checkbox] {
 .chapter-description {
   color: var(--gray-900);
   font-size: var(--text-sm);
-  margin-right: 2rem;
+  margin-left: 2rem;
   margin-bottom: 0.5rem;
 }
 .course-content-parent .chapter-description {
   font-size: 0.75rem;
 }
 .chapter-icon {
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .reviews-parent {
   color: var(--gray-900);
@@ -724,34 +724,34 @@ input[type=checkbox] {
   display: flex;
   flex-direction: column;
   margin-bottom: 2.5rem;
-  padding-right: 200px;
-  padding-left: 1rem;
+  padding-left: 200px;
+  padding-right: 1rem;
   border: 1px solid var(--gray-300);
 }
 @media (max-width: 550px) {
   .profile-info {
     align-items: flex-end;
-    padding-right: 0;
+    padding-left: 0;
     height: 150px;
   }
 }
 .profile-avatar {
   position: relative;
   top: 188px;
-  right: 40px;
+  left: 40px;
   width: -moz-fit-content;
   width: fit-content;
 }
 @media (max-width: 500px) {
   .profile-avatar {
     top: 95px;
-    right: 10px;
+    left: 10px;
   }
 }
 @media (max-width: 375px) {
   .profile-avatar {
     top: 120px;
-    right: 10px;
+    left: 10px;
   }
 }
 .profile-name {
@@ -792,7 +792,7 @@ input[type=checkbox] {
   height: fit-content;
   box-shadow: 0px 1px 1px rgb(0 0 0 / 16%);
   border-radius: var(--border-radius-sm);
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 @media (max-width: 375px) {
   .creator-badge {
@@ -802,7 +802,7 @@ input[type=checkbox] {
 @media (max-width: 550px) {
   .creator-badge {
     margin-top: 0.25rem;
-    margin-right: 0;
+    margin-left: 0;
   }
 }
 .profile-grid-card {
@@ -912,7 +912,7 @@ pre {
   margin: 0.5rem 0;
 }
 .certificate-expiry {
-  margin-right: 2rem;
+  margin-left: 2rem;
 }
 .column-card {
   flex-direction: column;
@@ -928,7 +928,7 @@ pre {
   align-items: center;
 }
 .empty-state-text {
-  margin-right: 1rem;
+  margin-left: 1rem;
 }
 .empty-state-heading {
   font-size: var(--text-xl);
@@ -948,12 +948,12 @@ pre {
   height: 36px;
   background-repeat: no-repeat;
   text-indent: 1.5rem;
-  background-position: right 1rem top 0.7rem;
+  background-position: 1rem 0.7rem;
   width: 30%;
   box-shadow: var(--shadow-sm);
 }
 .search-course {
-  background-position: right 1rem top 50%;
+  background-position: 1rem;
   text-indent: 1rem;
   font-size: var(--text-base);
   padding: 1.5rem;
@@ -964,7 +964,7 @@ pre {
   outline: none;
 }
 .course-search-header {
-  float: left;
+  float: right;
   width: 80%;
   display: flex;
   justify-content: flex-end;
@@ -1089,9 +1089,9 @@ pre {
 .close-search-empty-state {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   padding: 0.75rem 1.25rem;
-  float: left;
+  float: right;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
@@ -1148,7 +1148,7 @@ pre {
   border-radius: var(--border-radius-sm);
   width: 50px;
   height: 50px;
-  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .job-card-parent {
   display: grid;
@@ -1190,7 +1190,7 @@ pre {
   width: fit-content;
   position: absolute;
   top: 10%;
-  left: 7%;
+  right: 7%;
   width: 350px;
   z-index: 4;
 }
@@ -1281,7 +1281,7 @@ pre {
 }
 .star-click {
   --star-fill: var(--yellow-500);
-  margin-left: 0;
+  margin-right: 0;
 }
 .rating {
   --star-fill: var(--gray-400);
@@ -1339,13 +1339,13 @@ pre {
 }
 @media (min-width: 500px) {
   .lms-nav .nav-item:first-child .nav-link {
-    margin-right: 0;
+    margin-left: 0;
   }
 }
 .dashboard-button {
   position: relative;
   top: -50px;
-  margin-right: auto;
+  margin-left: auto;
 }
 .course-card-wide .breadcrumb {
   margin-bottom: 0;
@@ -1357,7 +1357,7 @@ pre {
   border: 1px solid var(--primary-color);
 }
 .show-attachments {
-  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   display: flex;
   align-items: center;
 }
@@ -1406,7 +1406,7 @@ li {
 .job-actions {
   display: flex;
   align-items: flex-start;
-  margin-right: auto;
+  margin-left: auto;
   margin-bottom: 1rem;
 }
 .job-detail-header {
@@ -1453,7 +1453,7 @@ li {
   margin-bottom: 1rem;
 }
 .chapter-edit .lessons {
-  margin-right: 0;
+  margin-left: 0;
 }
 .chapter-parent {
   margin-bottom: 1rem;
@@ -1474,7 +1474,7 @@ li {
 }
 .option-input {
   width: 45%;
-  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .option-checkbox {
   width: 15%;
@@ -1487,7 +1487,7 @@ li {
 .preview-info {
   position: absolute;
   top: 0;
-  left: -30px;
+  right: -30px;
 }
 .tool-tip {
   position: relative;
@@ -1521,7 +1521,7 @@ li {
   cursor: pointer;
 }
 .course-creation-link {
-  float: left;
+  float: right;
 }
 @media (max-width: 500px) {
   .course-creation-link {
@@ -1532,7 +1532,7 @@ li {
 .indicator-pill::before {
   width: 0 !important;
   height: 0 !important;
-  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 .role {
   display: flex;
@@ -1542,7 +1542,7 @@ li {
 }
 @media (min-width: 500px) {
   .role:last-child {
-    margin-right: 5rem;
+    margin-left: 5rem;
   }
 }
 .icon-xl {
@@ -1588,7 +1588,7 @@ li {
   height: 0;
   width: 0;
   border-radius: 0;
-  margin-left: 0;
+  margin-right: 0;
 }
 .modal-header {
   padding: 1rem 1rem 0 !important;
@@ -1611,7 +1611,7 @@ li {
   justify-content: flex-end !important;
 }
 .modal-footer .btn-primary {
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 .modal-header .modal-title {
   color: var(--gray-900);
@@ -1707,10 +1707,10 @@ select {
   padding: 0.15rem 0.5rem;
   box-shadow: var(--btn-shadow);
   background-image: url(/assets/lms/icons/down-arrow.svg);
-  background-position: left 0.5rem center;
+  background-position: right 0.5rem center;
   background-repeat: no-repeat;
   background-size: 0.75rem;
-  padding-left: 2rem;
+  padding-right: 2rem;
   -webkit-print-color-adjust: exact;
 }
 .lms-menu:focus-visible {
@@ -1741,9 +1741,9 @@ select {
 }
 .onboarding-skip {
   font-size: var(--text-sm);
-  float: left;
+  float: right;
   cursor: pointer;
-  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .result-row {
   display: block;
@@ -1862,7 +1862,7 @@ select {
   border: 6px solid #eee;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
 }
 .class-dashboard .progress > span {
   width: 50%;
@@ -1873,7 +1873,7 @@ select {
   z-index: 1;
 }
 .class-dashboard .progress .progress-left {
-  right: 0;
+  left: 0;
 }
 .class-dashboard .progress .progress-bar {
   width: 100%;
@@ -1885,26 +1885,26 @@ select {
   top: 0;
 }
 .class-dashboard .progress .progress-left .progress-bar {
-  right: 100%;
-  border-top-left-radius: 80px;
-  border-bottom-left-radius: 80px;
-  border-right: 0;
-  transform-origin: center right;
-}
-.class-dashboard .progress .progress-right {
-  left: 0;
-}
-.class-dashboard .progress .progress-right .progress-bar {
-  right: -100%;
+  left: 100%;
   border-top-right-radius: 80px;
   border-bottom-right-radius: 80px;
   border-left: 0;
   transform-origin: center left;
 }
+.class-dashboard .progress .progress-right {
+  right: 0;
+}
+.class-dashboard .progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  transform-origin: center right;
+}
 .class-dashboard .progress .progress-value {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
 }
 .form-section .section-head {
   margin-bottom: var(--margin-sm);
@@ -1912,7 +1912,7 @@ select {
   color: var(--heading-color);
 }
 .form-column:first-child {
-  padding-left: 1rem !important;
+  padding-right: 1rem !important;
 }
 .class-overlay {
   top: 30%;
@@ -1920,13 +1920,13 @@ select {
 .course-list-menu {
   display: flex;
   align-items: center;
-  float: left;
+  float: right;
 }
 .course-list-buttons {
   display: flex;
 }
 .course-list-buttons .btn {
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 @media (max-width: 767px) {
   .course-list-menu {
@@ -1944,7 +1944,7 @@ select {
     justify-content: space-between;
   }
   .course-list-buttons .btn {
-    margin-right: 0;
+    margin-left: 0;
   }
 }
 .slots-parent {
@@ -1963,7 +1963,7 @@ select {
   display: flex;
   position: relative;
   top: 10%;
-  right: 80%;
+  left: 80%;
   z-index: 10;
   width: -moz-fit-content;
   width: fit-content;
@@ -2024,7 +2024,7 @@ select {
   width: 50px;
   height: 20px;
   border-radius: var(--border-radius-sm);
-  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 .legend-item {
   display: flex;
@@ -2056,7 +2056,7 @@ select {
 }
 .collapse-section.collapsed .icon {
   transition: all 0.5s;
-  transform: rotate(-180deg);
+  transform: rotate(180deg);
 }
 .modal-body .ql-container {
   max-height: unset !important;
@@ -2068,5 +2068,5 @@ select {
   color: var(--text-color);
 }
 
-/* ../../../../../../../var/folders/rk/7916mt8n5yz0m2hl4l57p3r00000gn/T/tmp-90126-QN1MywN2D1l2/hublms/hublms/public/css/lms.bundle.css */
-/*# sourceMappingURL=lms.bundle.NGBEOOGY.css.map */
+/* ../../../../../../../var/folders/rk/7916mt8n5yz0m2hl4l57p3r00000gn/T/tmp-90958-vhZ6IXN3IWUx/hublms/hublms/public/css/lms.bundle.css */
+/*# sourceMappingURL=lms.bundle.4L3R6SRM.css.map */
