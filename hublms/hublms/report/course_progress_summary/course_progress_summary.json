@@ -11,11 +11,11 @@
  "is_standard": "Yes",
  "modified": "2021-09-28 17:09:40.761810",
  "modified_by": "Administrator",
- "module": "LMS",
+ "module": "Hublms",
  "name": "Course Progress Summary",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "LMS Enrollment",
+ "ref_doctype": "Hublms Enrollment",
  "report_name": "Course Progress Summary",
  "report_type": "Script Report",
  "roles": [

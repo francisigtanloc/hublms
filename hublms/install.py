@@ -104,11 +104,11 @@ def create_evaluator_role():
 
 
 def create_lms_student_role():
-	if not frappe.db.exists("Role", "LMS Student"):
+	if not frappe.db.exists("Role", "Hublms Student"):
 		role = frappe.new_doc("Role")
 		role.update(
 			{
-				"role_name": "LMS Student",
+				"role_name": "Hublms Student",
 				"home_page": "",
 				"desk_access": 0,
 			}
@@ -118,7 +118,7 @@ def create_lms_student_role():
 
 def set_default_certificate_print_format():
 	filters = {
-		"doc_type": "LMS Certificate",
+		"doc_type": "Hublms Certificate",
 		"property": "default_print_format",
 	}
 	if not frappe.db.exists("Property Setter", filters):
@@ -191,7 +191,7 @@ def create_batch_source():
 	]
 
 	for source in sources:
-		if not frappe.db.exists("LMS Source", source):
-			doc = frappe.new_doc("LMS Source")
+		if not frappe.db.exists("Hublms Source", source):
+			doc = frappe.new_doc("Hublms Source")
 			doc.source = source
 			doc.save()

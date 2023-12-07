@@ -55,7 +55,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Course",
-   "options": "LMS Course"
+   "options": "Hublms Course"
   },
   {
    "columns": 4,

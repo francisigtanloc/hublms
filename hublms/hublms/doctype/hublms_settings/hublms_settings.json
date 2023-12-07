@@ -62,7 +62,7 @@
    "default": "0",
    "fieldname": "default_home",
    "fieldtype": "Check",
-   "label": "Make LMS the default home"
+   "label": "Make Hublms the default home"
   },
   {
    "default": "0",

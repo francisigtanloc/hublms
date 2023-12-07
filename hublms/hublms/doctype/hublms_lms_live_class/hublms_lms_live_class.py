@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class HublmsLMSLiveClass(Document):
+class HublmsHublmsLiveClass(Document):
 	pass

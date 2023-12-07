@@ -8,7 +8,7 @@ frappe.query_reports["Course Progress Summary"] = {
 			fieldname: "course",
 			label: __("Course"),
 			fieldtype: "Link",
-			options: "LMS Course",
+			options: "Hublms Course",
 			reqd: 1,
 		},
 	],

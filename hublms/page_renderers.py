@@ -1,4 +1,4 @@
-"""Custom page renderers for LMS app.
+"""Custom page renderers for Hublms app.
 
 Handles rendering of profile pages.
 """

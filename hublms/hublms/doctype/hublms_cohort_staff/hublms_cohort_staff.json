@@ -27,7 +27,7 @@
    "fieldname": "course",
    "fieldtype": "Link",
    "label": "Course",
-   "options": "LMS Course",
+   "options": "Hublms Course",
    "read_only": 1
   },
   {

@@ -52,7 +52,7 @@
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Batch",
-   "options": "LMS Batch"
+   "options": "Hublms Batch"
   },
   {
    "default": "0",

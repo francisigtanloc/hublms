@@ -29,7 +29,7 @@ def get_common_context(context):
 
 
 def get_livecode_url():
-	return frappe.db.get_single_value("LMS Settings", "livecode_url")
+	return frappe.db.get_single_value("Hublms Settings", "livecode_url")
 
 
 def redirect_to_lesson(course, index_="1.1"):
@@ -58,16 +58,16 @@ def get_assessments(batch, member=None):
 		member = frappe.session.user
 
 	assessments = frappe.get_all(
-		"LMS Assessment",
+		"Hublms Assessment",
 		{"parent": batch},
 		["name", "assessment_type", "assessment_name"],
 	)
 
 	for assessment in assessments:
-		if assessment.assessment_type == "LMS Assignment":
+		if assessment.assessment_type == "Hublms Assignment":
 			assessment = get_assignment_details(assessment, member)
 
-		elif assessment.assessment_type == "LMS Quiz":
+		elif assessment.assessment_type == "Hublms Quiz":
 			assessment = get_quiz_details(assessment, member)
 
 	return assessments
@@ -75,12 +75,12 @@ def get_assessments(batch, member=None):
 
 def get_assignment_details(assessment, member):
 	assessment.title = frappe.db.get_value(
-		"LMS Assignment", assessment.assessment_name, "title"
+		"Hublms Assignment", assessment.assessment_name, "title"
 	)
 
 	existing_submission = frappe.db.exists(
 		{
-			"doctype": "LMS Assignment Submission",
+			"doctype": "Hublms Assignment Submission",
 			"member": member,
 			"assignment": assessment.assessment_name,
 		}
@@ -88,7 +88,7 @@ def get_assignment_details(assessment, member):
 	assessment.completed = False
 	if existing_submission:
 		assessment.submission = frappe.db.get_value(
-			"LMS Assignment Submission",
+			"Hublms Assignment Submission",
 			existing_submission,
 			["name", "status", "comments"],
 			as_dict=True,
@@ -106,12 +106,12 @@ def get_assignment_details(assessment, member):
 
 def get_quiz_details(assessment, member):
 	assessment_details = frappe.db.get_value(
-		"LMS Quiz", assessment.assessment_name, ["title", "passing_percentage"], as_dict=1
+		"Hublms Quiz", assessment.assessment_name, ["title", "passing_percentage"], as_dict=1
 	)
 	assessment.title = assessment_details.title
 
 	existing_submission = frappe.get_all(
-		"LMS Quiz Submission",
+		"Hublms Quiz Submission",
 		{
 			"member": member,
 			"quiz": assessment.assessment_name,

@@ -33,7 +33,7 @@
    "fieldname": "payment_for_document_type",
    "fieldtype": "Select",
    "label": "Payment for Document Type",
-   "options": "\nLMS Course\nLMS Batch"
+   "options": "\nHublms Course\nHublms Batch"
   },
   {
    "fieldname": "member",
@@ -48,7 +48,7 @@
    "fieldname": "source",
    "fieldtype": "Link",
    "label": "Source",
-   "options": "LMS Source"
+   "options": "Hublms Source"
   },
   {
    "fieldname": "column_break_rqkd",

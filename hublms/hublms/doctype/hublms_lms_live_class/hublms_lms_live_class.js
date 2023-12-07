@@ -1,7 +1,7 @@
 // Copyright (c) 2023, Hublms and contributors
 // For license information, please see license.txt
 
-// frappe.ui.form.on("Hublms LMS Live Class", {
+// frappe.ui.form.on("Hublms Hublms Live Class", {
 // 	refresh(frm) {
 
 // 	},

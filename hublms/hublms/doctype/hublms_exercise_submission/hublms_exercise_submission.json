@@ -26,7 +26,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Exercise",
-   "options": "LMS Exercise"
+   "options": "Hublms Exercise"
   },
   {
    "fieldname": "status",
@@ -38,7 +38,7 @@
    "fieldname": "batch_old",
    "fieldtype": "Link",
    "label": "Batch Old",
-   "options": "LMS Batch Old"
+   "options": "Hublms Batch Old"
   },
   {
    "fieldname": "column_break_4",
@@ -57,7 +57,7 @@
    "fieldname": "course",
    "fieldtype": "Link",
    "label": "Course",
-   "options": "LMS Course",
+   "options": "Hublms Course",
    "read_only": 1
   },
   {
@@ -97,7 +97,7 @@
    "fieldname": "member",
    "fieldtype": "Link",
    "label": "Member",
-   "options": "LMS Enrollment"
+   "options": "Hublms Enrollment"
   }
  ],
  "index_web_pages_for_search": 1,

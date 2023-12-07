@@ -39,7 +39,7 @@
    "fieldname": "payment",
    "fieldtype": "Link",
    "label": "Payment",
-   "options": "LMS Payment"
+   "options": "Hublms Payment"
   },
   {
    "fieldname": "column_break_3",
@@ -65,7 +65,7 @@
    "fieldname": "batch_old",
    "fieldtype": "Link",
    "label": "Batch Old",
-   "options": "LMS Batch Old"
+   "options": "Hublms Batch Old"
   },
   {
    "fieldname": "column_break_12",
@@ -156,7 +156,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "LMS Student",
+   "role": "Hublms Student",
    "select": 1,
    "share": 1,
    "write": 1

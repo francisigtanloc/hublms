@@ -46,7 +46,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Course",
-   "options": "LMS Course",
+   "options": "Hublms Course",
    "read_only": 1
   },
   {
@@ -171,7 +171,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "LMS Student",
+   "role": "Hublms Student",
    "select": 1,
    "share": 1,
    "write": 1

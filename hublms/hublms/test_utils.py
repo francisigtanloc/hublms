@@ -54,15 +54,15 @@ class TestUtils(unittest.TestCase):
 		details = get_evaluation_details(course.name, user.name)
 		self.assertFalse(details.eligible)
 
-		frappe.db.delete("LMS Certificate Evaluation", {"course": course.name})
-		frappe.db.delete("LMS Course", course.name)
+		frappe.db.delete("Hublms Certificate Evaluation", {"course": course.name})
+		frappe.db.delete("Hublms Course", course.name)
 		frappe.db.delete("User", user.name)
 
 
 def create_evaluation(user, course, date, rating, status):
 	evaluation = frappe.get_doc(
 		{
-			"doctype": "LMS Certificate Evaluation",
+			"doctype": "Hublms Certificate Evaluation",
 			"member": user,
 			"course": course,
 			"date": date,

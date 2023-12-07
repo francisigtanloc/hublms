@@ -45,7 +45,7 @@
    "fieldname": "batch_name",
    "fieldtype": "Link",
    "label": "Batch",
-   "options": "LMS Batch"
+   "options": "Hublms Batch"
   },
   {
    "fieldname": "column_break_astv",
@@ -129,7 +129,7 @@
  "modified": "2023-11-23 09:15:59.402248",
  "modified_by": "Administrator",
  "module": "Hublms",
- "name": "Hublms LMS Live Class",
+ "name": "Hublms Hublms Live Class",
  "owner": "Administrator",
  "permissions": [
   {

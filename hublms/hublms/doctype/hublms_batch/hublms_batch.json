@@ -110,7 +110,7 @@
    "fieldname": "category",
    "fieldtype": "Link",
    "label": "Category",
-   "options": "LMS Category"
+   "options": "Hublms Category"
   },
   {
    "fieldname": "column_break_flwy",
@@ -176,7 +176,7 @@
    "fieldname": "assessment",
    "fieldtype": "Table",
    "label": "Assessment",
-   "options": "LMS Assessment"
+   "options": "Hublms Assessment"
   },
   {
    "fieldname": "schedule_tab",
@@ -187,7 +187,7 @@
    "fieldname": "timetable_template",
    "fieldtype": "Link",
    "label": "Timetable Template",
-   "options": "LMS Timetable Template"
+   "options": "Hublms Timetable Template"
   },
   {
    "fieldname": "column_break_anya",
@@ -213,13 +213,13 @@
    "fieldname": "timetable",
    "fieldtype": "Table",
    "label": "Timetable",
-   "options": "LMS Batch Timetable"
+   "options": "Hublms Batch Timetable"
   },
   {
    "fieldname": "timetable_legends",
    "fieldtype": "Table",
    "label": "Timetable Legends",
-   "options": "LMS Timetable Legend"
+   "options": "Hublms Timetable Legend"
   },
   {
    "fieldname": "pricing_tab",

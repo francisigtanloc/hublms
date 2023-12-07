@@ -5,12 +5,12 @@ def execute():
 	frappe.reload_doc("lms", "doctype", "lms_certification")
 	frappe.reload_doc("lms", "doctype", "lms_certificate")
 	old = frappe.get_all(
-		"LMS Certification", fields=["name", "course", "student", "issue_date", "expiry_date"]
+		"Hublms Certification", fields=["name", "course", "student", "issue_date", "expiry_date"]
 	)
 	for data in old:
 		frappe.get_doc(
 			{
-				"doctype": "LMS Certificate",
+				"doctype": "Hublms Certificate",
 				"course": data.course,
 				"member": data.student,
 				"issue_date": data.issue_date,

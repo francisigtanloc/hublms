@@ -22,13 +22,13 @@
    "fieldname": "timetable",
    "fieldtype": "Table",
    "label": "Timetable",
-   "options": "LMS Batch Timetable"
+   "options": "Hublms Batch Timetable"
   },
   {
    "fieldname": "timetable_legends",
    "fieldtype": "Table",
    "label": "Timetable Legends",
-   "options": "LMS Timetable Legend"
+   "options": "Hublms Timetable Legend"
   }
  ],
  "index_web_pages_for_search": 1,

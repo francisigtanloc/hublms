@@ -287,7 +287,7 @@ const open_batch_dialog = () => {
 				fieldtype: "Link",
 				label: __("Category"),
 				fieldname: "category",
-				options: "LMS Category",
+				options: "Hublms Category",
 				only_select: 1,
 				default: batch_info && batch_info.category,
 			},

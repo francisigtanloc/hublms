@@ -6,7 +6,7 @@
  "idx": 0,
  "modified": "2022-12-15 13:45:06.602567",
  "modified_by": "Administrator",
- "module": "LMS",
+ "module": "Hublms",
  "name": "lms-home",
  "owner": "Administrator",
  "page_name": "lms-home",
@@ -15,5 +15,5 @@
  "standard": "Yes",
  "style": null,
  "system_page": 1,
- "title": "LMS"
+ "title": "Hublms"
 }

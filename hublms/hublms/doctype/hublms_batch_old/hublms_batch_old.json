@@ -30,7 +30,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Course",
-   "options": "LMS Course",
+   "options": "Hublms Course",
    "reqd": 1
   },
   {
@@ -119,7 +119,7 @@
  "links": [
   {
    "group": "Members",
-   "link_doctype": "LMS Enrollment",
+   "link_doctype": "Hublms Enrollment",
    "link_fieldname": "batch_old"
   }
  ],
