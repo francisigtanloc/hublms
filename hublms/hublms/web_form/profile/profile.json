@@ -242,7 +242,7 @@
    "label": "Education",
    "max_length": 0,
    "max_value": 0,
-   "options": "Education Detail",
+   "options": "Hublms Education Detail",
    "read_only": 0,
    "reqd": 0,
    "show_in_filter": 0

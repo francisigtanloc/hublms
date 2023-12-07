@@ -343,7 +343,7 @@ def get_users(or_filters, start, page_length):
 		"""
         SELECT DISTINCT u.name
         FROM `tabUser` u
-        LEFT JOIN `tabEducation Detail` ed
+        LEFT JOIN `tabHublms Education Detail` ed
         ON u.name = ed.parent
         LEFT JOIN `tabWork Experience` we
         ON u.name = we.parent
