@@ -148,7 +148,7 @@ def get_instructors(course):
 		"Hublms Course Instructor", {"parent": course}, order_by="idx", pluck="instructor"
 	)
 	if not instructors:
-		instructors = frappe.db.get_value("LMS Course", course, "owner").split(" ")
+		instructors = frappe.db.get_value("Hublms Course", course, "owner").split(" ")
 	for instructor in instructors:
 		instructor_details.append(
 			frappe.db.get_value(
@@ -168,7 +168,7 @@ def get_students(course, batch=None):
 	if batch:
 		filters["batch_old"] = batch
 
-	return frappe.get_all("LMS Enrollment", filters, ["member"])
+	return frappe.get_all("Hublms Enrollment", filters, ["member"])
 
 
 def get_average_rating(course):
@@ -180,13 +180,13 @@ def get_average_rating(course):
 
 def get_reviews(course):
 	reviews = frappe.get_all(
-		"LMS Course Review",
+		"Hublms Course Review",
 		{"course": course},
 		["review", "rating", "owner", "creation"],
 		order_by="creation desc",
 	)
 	out_of_ratings = frappe.db.get_all(
-		"DocField", {"parent": "LMS Course Review", "fieldtype": "Rating"}, ["options"]
+		"DocField", {"parent": "Hublms Course Review", "fieldtype": "Rating"}, ["options"]
 	)
 	out_of_ratings = (len(out_of_ratings) and out_of_ratings[0].options) or 5
 	for review in reviews:
@@ -216,7 +216,7 @@ def get_sorted_reviews(course):
 
 def is_certified(course):
 	certificate = frappe.get_all(
-		"LMS Certificate", {"member": frappe.session.user, "course": course}
+		"Hublms Certificate", {"member": frappe.session.user, "course": course}
 	)
 	if len(certificate):
 		return certificate[0].name
@@ -247,7 +247,7 @@ def get_lesson_url(course, lesson_number):
 
 
 def get_batch(course, batch_name):
-	return frappe.get_all("LMS Batch Old", {"name": batch_name, "course": course})
+	return frappe.get_all("Hublms Batch Old", {"name": batch_name, "course": course})
 
 
 def get_slugified_chapter_title(chapter):
@@ -300,7 +300,7 @@ def is_mentor(course, email):
 	if not email:
 		return False
 	return frappe.db.count(
-		"LMS Course Mentor Mapping", {"course": course, "mentor": email}
+		"Hublms Course Mentor Mapping", {"course": course, "mentor": email}
 	)
 
 
@@ -314,13 +314,13 @@ def is_cohort_staff(course, user_email):
 def get_mentors(course):
 	"""Returns the list of all mentors for this course."""
 	course_mentors = []
-	mentors = frappe.get_all("LMS Course Mentor Mapping", {"course": course}, ["mentor"])
+	mentors = frappe.get_all("Hublms Course Mentor Mapping", {"course": course}, ["mentor"])
 	for mentor in mentors:
 		member = frappe.db.get_value(
 			"User", mentor.mentor, ["name", "username", "full_name", "user_image"]
 		)
 		member.batch_count = frappe.db.count(
-			"LMS Enrollment", {"member": member.name, "member_type": "Mentor"}
+			"Hublms Enrollment", {"member": member.name, "member_type": "Mentor"}
 		)
 		course_mentors.append(member)
 	return course_mentors
@@ -331,7 +331,7 @@ def is_eligible_to_review(course, membership):
 	if not membership:
 		return False
 	if frappe.db.count(
-		"LMS Course Review", {"course": course, "owner": frappe.session.user}
+		"Hublms Course Review", {"course": course, "owner": frappe.session.user}
 	):
 		return False
 	return True
@@ -362,7 +362,7 @@ def get_course_progress(course, member=None):
 
 
 def get_initial_members(course):
-	members = frappe.get_all("LMS Enrollment", {"course": course}, ["member"], limit=3)
+	members = frappe.get_all("Hublms Enrollment", {"course": course}, ["member"], limit=3)
 
 	member_details = []
 	for member in members:
@@ -399,8 +399,8 @@ def get_signup_optin_checks():
 	links = []
 
 	for check in checks:
-		if frappe.db.get_single_value("LMS Settings", check):
-			page = frappe.db.get_single_value("LMS Settings", mapper[check].get("page_name"))
+		if frappe.db.get_single_value("Hublms Settings", check):
+			page = frappe.db.get_single_value("Hublms Settings", mapper[check].get("page_name"))
 			route = frappe.db.get_value("Web Page", page, "route")
 			links.append("<a href='/" + route + "'>" + mapper[check].get("title") + "</a>")
 
@@ -408,14 +408,14 @@ def get_signup_optin_checks():
 
 
 def get_popular_courses():
-	courses = frappe.get_all("LMS Course", {"published": 1, "upcoming": 0})
+	courses = frappe.get_all("Hublms Course", {"published": 1, "upcoming": 0})
 	course_membership = []
 
 	for course in courses:
 		course_membership.append(
 			{
 				"course": course.name,
-				"members": cint(frappe.db.count("LMS Enrollment", {"course": course.name})),
+				"members": cint(frappe.db.count("Hublms Enrollment", {"course": course.name})),
 			}
 		)
 
@@ -427,13 +427,13 @@ def get_popular_courses():
 
 def get_evaluation_details(course, member=None):
 	info = frappe.db.get_value(
-		"LMS Course",
+		"Hublms Course",
 		course,
 		["grant_certificate_after", "max_attempts", "duration"],
 		as_dict=True,
 	)
 	request = frappe.db.get_value(
-		"LMS Certificate Request",
+		"Hublms Certificate Request",
 		{
 			"course": course,
 			"member": member or frappe.session.user,
@@ -444,7 +444,7 @@ def get_evaluation_details(course, member=None):
 	)
 
 	no_of_attempts = frappe.db.count(
-		"LMS Certificate Evaluation",
+		"Hublms Certificate Evaluation",
 		{
 			"course": course,
 			"member": member or frappe.session.user,
@@ -530,7 +530,7 @@ def can_create_courses(course, member=None):
 		return True
 
 	portal_course_creation = frappe.db.get_single_value(
-		"LMS Settings", "portal_course_creation"
+		"Hublms Settings", "portal_course_creation"
 	)
 
 	if portal_course_creation == "Anyone" and member in instructors:
@@ -560,7 +560,7 @@ def has_course_evaluator_role(member=None):
 
 def get_courses_under_review():
 	return frappe.get_all(
-		"LMS Course",
+		"Hublms Course",
 		{"status": "Under Review"},
 		[
 			"name",
@@ -579,7 +579,7 @@ def get_courses_under_review():
 
 def get_certificates(member=None):
 	return frappe.get_all(
-		"LMS Certificate",
+		"Hublms Certificate",
 		{"member": member or frappe.session.user},
 		["course", "member", "issue_date", "expiry_date", "name"],
 	)
@@ -601,7 +601,7 @@ def handle_notifications(doc, method):
 		["reference_doctype", "reference_docname", "owner", "title"],
 		as_dict=1,
 	)
-	if topic.reference_doctype not in ["Course Lesson", "LMS Batch"]:
+	if topic.reference_doctype not in ["Course Lesson", "Hublms Batch"]:
 		return
 	create_notification_log(doc, topic)
 	notify_mentions(doc, topic)
@@ -651,7 +651,7 @@ def notify_mentions(doc, topic):
 	subject = _("{0} mentioned you in a comment").format(sender_fullname)
 	template = "mention_template"
 
-	if topic.reference_doctype == "LMS Batch":
+	if topic.reference_doctype == "Hublms Batch":
 		link = f"/batches/{topic.reference_docname}#discussions"
 	if topic.reference_doctype == "Course Lesson":
 		course = frappe.db.get_value("Course Lesson", topic.reference_docname, "course")
@@ -685,7 +685,7 @@ def get_topic_count(course):
 
 
 def check_profile_restriction():
-	return frappe.db.get_single_value("LMS Settings", "force_profile_completion")
+	return frappe.db.get_single_value("Hublms Settings", "force_profile_completion")
 
 
 def get_restriction_details():
@@ -777,7 +777,7 @@ def get_chart_data(chart_name, timespan, timegrain, from_date, to_date):
 
 @frappe.whitelist(allow_guest=True)
 def get_course_completion_data():
-	all_membership = frappe.db.count("LMS Enrollment")
+	all_membership = frappe.db.count("Hublms Enrollment")
 	completed = frappe.db.count("Hublms User Enrollment", {"progress": ["like", "%100%"]})
 
 	return {
@@ -808,19 +808,19 @@ def get_telemetry_boot_info():
 
 
 def is_onboarding_complete():
-	course_created = frappe.db.a_row_exists("LMS Course")
+	course_created = frappe.db.a_row_exists("Hublms Course")
 	chapter_created = frappe.db.a_row_exists("Course Chapter")
 	lesson_created = frappe.db.a_row_exists("Course Lesson")
 
 	if course_created and chapter_created and lesson_created:
-		frappe.db.set_single_value("LMS Settings", "is_onboarding_complete", 1)
+		frappe.db.set_single_value("Hublms Settings", "is_onboarding_complete", 1)
 
 	return {
-		"is_onboarded": frappe.db.get_single_value("LMS Settings", "is_onboarding_complete"),
+		"is_onboarded": frappe.db.get_single_value("Hublms Settings", "is_onboarding_complete"),
 		"course_created": course_created,
 		"chapter_created": chapter_created,
 		"lesson_created": lesson_created,
-		"first_course": frappe.get_all("LMS Course", limit=1, order_by=None, pluck="name")[0]
+		"first_course": frappe.get_all("Hublms Course", limit=1, order_by=None, pluck="name")[0]
 		if course_created
 		else None,
 	}
@@ -831,9 +831,9 @@ def has_submitted_assessment(assessment, type, member=None):
 		member = frappe.session.user
 
 	doctype = (
-		"LMS Assignment Submission" if type == "LMS Assignment" else "LMS Quiz Submission"
+		"Hublms Assignment Submission" if type == "Hublms Assignment" else "Hublms Quiz Submission"
 	)
-	docfield = "assignment" if type == "LMS Assignment" else "quiz"
+	docfield = "assignment" if type == "Hublms Assignment" else "quiz"
 
 	filters = {}
 	filters[docfield] = assessment
@@ -842,7 +842,7 @@ def has_submitted_assessment(assessment, type, member=None):
 
 
 def has_graded_assessment(submission):
-	status = frappe.db.get_value("LMS Assignment Submission", submission, "status")
+	status = frappe.db.get_value("Hublms Assignment Submission", submission, "status")
 	return False if status == "Not Graded" else True
 
 
@@ -857,14 +857,14 @@ def get_evaluator(course, batch=None):
 		)
 
 	if not evaluator:
-		evaluator = frappe.db.get_value("LMS Course", course, "evaluator")
+		evaluator = frappe.db.get_value("Hublms Course", course, "evaluator")
 
 	return evaluator
 
 
 def get_upcoming_evals(student, courses):
 	upcoming_evals = frappe.get_all(
-		"LMS Certificate Request",
+		"Hublms Certificate Request",
 		{
 			"member": student,
 			"course": ["in", courses],
@@ -875,7 +875,7 @@ def get_upcoming_evals(student, courses):
 	)
 
 	for evals in upcoming_evals:
-		evals.course_title = frappe.db.get_value("LMS Course", evals.course, "title")
+		evals.course_title = frappe.db.get_value("Hublms Course", evals.course, "title")
 		evals.evaluator_name = frappe.db.get_value("User", evals.evaluator, "full_name")
 	return upcoming_evals
 
@@ -897,7 +897,7 @@ def get_payment_options(doctype, docname, phone, country):
 	order = create_order(client, details.amount, details.currency)
 
 	options = {
-		"key_id": frappe.db.get_single_value("LMS Settings", "razorpay_key"),
+		"key_id": frappe.db.get_single_value("Hublms Settings", "razorpay_key"),
 		"name": frappe.db.get_single_value("Website Settings", "app_name"),
 		"description": _("Payment for {0} course").format(details["title"]),
 		"order_id": order["id"],
@@ -913,11 +913,11 @@ def get_payment_options(doctype, docname, phone, country):
 
 
 def check_multicurrency(amount, currency, country=None):
-	show_usd_equivalent = frappe.db.get_single_value("LMS Settings", "show_usd_equivalent")
+	show_usd_equivalent = frappe.db.get_single_value("Hublms Settings", "show_usd_equivalent")
 	exception_country = frappe.get_all(
-		"Payment Country", filters={"parent": "LMS Settings"}, pluck="country"
+		"Payment Country", filters={"parent": "Hublms Settings"}, pluck="country"
 	)
-	apply_rounding = frappe.db.get_single_value("LMS Settings", "apply_rounding")
+	apply_rounding = frappe.db.get_single_value("Hublms Settings", "apply_rounding")
 	country = country or frappe.db.get_value(
 		"Address", {"email_id": frappe.session.user}, "country"
 	)
@@ -940,7 +940,7 @@ def check_multicurrency(amount, currency, country=None):
 
 def apply_gst(amount, country=None):
 	gst_applied = False
-	apply_gst = frappe.db.get_single_value("LMS Settings", "apply_gst")
+	apply_gst = frappe.db.get_single_value("Hublms Settings", "apply_gst")
 
 	if not country:
 		country = frappe.db.get_value("User", frappe.session.user, "country")
@@ -953,9 +953,9 @@ def apply_gst(amount, country=None):
 
 
 def get_details(doctype, docname):
-	if doctype == "LMS Course":
+	if doctype == "Hublms Course":
 		details = frappe.db.get_value(
-			"LMS Course",
+			"Hublms Course",
 			docname,
 			["name", "title", "paid_course", "currency", "course_price as amount"],
 			as_dict=True,
@@ -964,7 +964,7 @@ def get_details(doctype, docname):
 			frappe.throw(_("This course is free."))
 	else:
 		details = frappe.db.get_value(
-			"LMS Batch",
+			"Hublms Batch",
 			docname,
 			["name", "title", "paid_batch", "currency", "amount"],
 			as_dict=True,
@@ -997,7 +997,7 @@ def save_address(address):
 
 
 def get_client():
-	settings = frappe.get_single("LMS Settings")
+	settings = frappe.get_single("Hublms Settings")
 	razorpay_key = settings.razorpay_key
 	razorpay_secret = settings.get_password("razorpay_secret", raise_exception=True)
 
@@ -1038,7 +1038,7 @@ def verify_payment(response, doctype, docname, address, order_id):
 	)
 
 	payment = record_payment(address, response, client, doctype, docname)
-	if doctype == "LMS Course":
+	if doctype == "Hublms Course":
 		return create_membership(docname, payment)
 	else:
 		return add_student_to_batch(docname, payment)
@@ -1049,7 +1049,7 @@ def record_payment(address, response, client, doctype, docname):
 	address_name = save_address(address)
 
 	payment_details = get_payment_details(doctype, docname, address)
-	payment_doc = frappe.new_doc("LMS Payment")
+	payment_doc = frappe.new_doc("Hublms Payment")
 	payment_doc.update(
 		{
 			"member": frappe.session.user,
@@ -1073,7 +1073,7 @@ def record_payment(address, response, client, doctype, docname):
 
 
 def get_payment_details(doctype, docname, address):
-	amount_field = "course_price" if doctype == "LMS Course" else "amount"
+	amount_field = "course_price" if doctype == "Hublms Course" else "amount"
 	amount = frappe.db.get_value(doctype, docname, amount_field)
 	currency = frappe.db.get_value(doctype, docname, "currency")
 	amount_with_gst = 0
@@ -1090,7 +1090,7 @@ def get_payment_details(doctype, docname, address):
 
 
 def create_membership(course, payment):
-	membership = frappe.new_doc("LMS Enrollment")
+	membership = frappe.new_doc("Hublms Enrollment")
 	membership.update(
 		{"member": frappe.session.user, "course": course, "payment": payment.name}
 	)
@@ -1106,7 +1106,7 @@ def add_student_to_batch(batchname, payment):
 			"payment": payment.name,
 			"source": payment.source,
 			"parent": batchname,
-			"parenttype": "LMS Batch",
+			"parenttype": "Hublms Batch",
 			"parentfield": "students",
 		}
 	)

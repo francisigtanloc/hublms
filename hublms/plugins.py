@@ -17,6 +17,7 @@ be loaded in a webpage.
 import frappe
 from urllib.parse import quote
 from frappe import _
+import random
 
 
 class PageExtension:
@@ -115,6 +116,8 @@ def quiz_renderer(quiz_name):
 		[
 			"name",
 			"title",
+			"randomize_questions",
+			"subset",
 			"max_attempts",
 			"show_answers",
 			"show_submission_history",
@@ -136,7 +139,11 @@ def quiz_renderer(quiz_name):
 		fields=["question", "marks"],
 		order_by="idx",
 	)
+	if quiz.randomize_questions == True:
+		random.shuffle(questions)
 
+	questions = questions[:int(quiz.subset)]
+  
 	for question in questions:
 		details = frappe.db.get_value("Hublms Question", question.question, fields, as_dict=1)
 		details["marks"] = question.marks
