@@ -5,7 +5,7 @@
    "label": "Signups"
   },
   {
-   "chart_name": "Course Enrollments",
+   "chart_name": "Top Customers",
    "label": "Enrollments"
   }
  ],
@@ -66,45 +66,6 @@
    "label": "Review",
    "link_count": 0,
    "link_to": "LMS Course Review",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Certification",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Certification",
-   "link_count": 0,
-   "link_to": "LMS Certificate",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Evaluation Request",
-   "link_count": 0,
-   "link_to": "LMS Certificate Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Evaluation",
-   "link_count": 0,
-   "link_to": "LMS Certificate Evaluation",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -196,9 +157,47 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Certification",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Certification",
+   "link_count": 0,
+   "link_to": "Hublms Certificate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Evaluation Request",
+   "link_count": 0,
+   "link_to": "Hublms Certificate Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Evaluation",
+   "link_count": 0,
+   "link_to": "Hublms Certificate Evaluation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-11-29 09:30:06.282166",
+ "modified": "2023-12-07 12:31:09.177540",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms",
@@ -229,6 +228,15 @@
    "type": "DocType"
   },
   {
+   "color": "Pink",
+   "doc_view": "List",
+   "format": "{} Granted",
+   "label": "Certificate",
+   "link_to": "Hublms Certificate",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
    "color": "Blue",
    "doc_view": "List",
    "format": "{} Completed",
@@ -242,8 +250,8 @@
    "doc_view": "List",
    "format": "{} Passed",
    "label": "Evaluation",
-   "link_to": "LMS Certificate Evaluation",
-   "stats_filter": "{\"status\":[\"=\",\"Pass\"]}",
+   "link_to": "Hublms Certificate Evaluation",
+   "stats_filter": "[]",
    "type": "DocType"
   },
   {
@@ -253,15 +261,6 @@
    "label": "Users",
    "link_to": "User",
    "stats_filter": "{\"enabled\":[\"=\",1]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Pink",
-   "doc_view": "List",
-   "format": "{} Granted",
-   "label": "Certificate",
-   "link_to": "LMS Certificate",
-   "stats_filter": "{\"name\":[\"is\",\"set\"]}",
    "type": "DocType"
   }
  ],
