@@ -168,7 +168,7 @@ def get_students(course, batch=None):
 	if batch:
 		filters["batch_old"] = batch
 
-	return frappe.get_all("Hublms Enrollment", filters, ["member"])
+	return frappe.get_all("Hublms User Enrollment", filters, ["member"])
 
 
 def get_average_rating(course):
@@ -320,7 +320,7 @@ def get_mentors(course):
 			"User", mentor.mentor, ["name", "username", "full_name", "user_image"]
 		)
 		member.batch_count = frappe.db.count(
-			"Hublms Enrollment", {"member": member.name, "member_type": "Mentor"}
+			"Hublms User Enrollment", {"member": member.name, "member_type": "Mentor"}
 		)
 		course_mentors.append(member)
 	return course_mentors
@@ -362,7 +362,7 @@ def get_course_progress(course, member=None):
 
 
 def get_initial_members(course):
-	members = frappe.get_all("Hublms Enrollment", {"course": course}, ["member"], limit=3)
+	members = frappe.get_all("Hublms User Enrollment", {"course": course}, ["member"], limit=3)
 
 	member_details = []
 	for member in members:
@@ -415,7 +415,7 @@ def get_popular_courses():
 		course_membership.append(
 			{
 				"course": course.name,
-				"members": cint(frappe.db.count("Hublms Enrollment", {"course": course.name})),
+				"members": cint(frappe.db.count("Hublms User Enrollment", {"course": course.name})),
 			}
 		)
 
@@ -777,7 +777,7 @@ def get_chart_data(chart_name, timespan, timegrain, from_date, to_date):
 
 @frappe.whitelist(allow_guest=True)
 def get_course_completion_data():
-	all_membership = frappe.db.count("Hublms Enrollment")
+	all_membership = frappe.db.count("Hublms User Enrollment")
 	completed = frappe.db.count("Hublms User Enrollment", {"progress": ["like", "%100%"]})
 
 	return {
@@ -1090,7 +1090,7 @@ def get_payment_details(doctype, docname, address):
 
 
 def create_membership(course, payment):
-	membership = frappe.new_doc("Hublms Enrollment")
+	membership = frappe.new_doc("Hublms User Enrollment")
 	membership.update(
 		{"member": frappe.session.user, "course": course, "payment": payment.name}
 	)
