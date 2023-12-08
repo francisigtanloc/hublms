@@ -80,7 +80,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-07 01:26:29.314247",
+ "modified": "2023-12-08 08:08:33.264072",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms User Enrollment",
@@ -106,7 +106,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Hublms Student",
+   "role": "LMS Student",
    "select": 1,
    "share": 1,
    "write": 1
@@ -125,7 +125,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
