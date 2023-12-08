@@ -3,7 +3,7 @@ import unittest
 import frappe
 from frappe.utils import getdate
 
-from lms.lms.doctype.lms_course.test_lms_course import new_course, new_user
+from hublms.hublms.doctype.lms_course.test_lms_course import new_course, new_user
 
 from .utils import get_evaluation_details, slugify
 

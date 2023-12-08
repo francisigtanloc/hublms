@@ -107,7 +107,7 @@ const generate_graph = (chart_name, element, type = "line") => {
 	let date = frappe.datetime;
 
 	frappe.call({
-		method: "lms.lms.utils.get_chart_data",
+		method: "hublms.hublms.utils.get_chart_data",
 		args: {
 			chart_name: chart_name,
 			timespan: "Select Date Range",
@@ -139,7 +139,7 @@ const render_chart = (data, chart_name, element, type) => {
 
 const generate_course_completion_graph = () => {
 	frappe.call({
-		method: "lms.lms.utils.get_course_completion_data",
+		method: "hublms.hublms.utils.get_course_completion_data",
 		callback: (data) => {
 			render_chart(
 				data.message,

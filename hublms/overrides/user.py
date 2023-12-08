@@ -5,10 +5,10 @@ from frappe import _
 from frappe.core.doctype.user.user import User
 from frappe.utils import cint, escape_html, random_string
 from frappe.website.utils import is_signup_disabled
-from lms.lms.utils import get_average_rating
+from hublms.hublms.utils import get_average_rating
 from frappe.website.utils import cleanup_page_name
 from frappe.model.naming import append_number_if_name_exists
-from lms.widgets import Widgets
+from hublms.widgets import Widgets
 
 
 class CustomUser(User):

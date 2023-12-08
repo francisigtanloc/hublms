@@ -1,7 +1,7 @@
 import frappe
 from frappe import _
 
-# from lms.lms.utils import (
+# from hublms.hublms.utils import (
 # 	can_create_courses,
 # 	get_evaluation_details,
 # 	get_membership,

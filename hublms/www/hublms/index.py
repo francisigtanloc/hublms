@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-# from lms.lms.utils import (
+# from hublms.hublms.utils import (
 # 	check_profile_restriction,
 # 	get_restriction_details,
 # 	has_course_moderator_role,

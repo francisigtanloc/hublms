@@ -7,7 +7,7 @@ from frappe.model.document import Document
 from frappe.utils import get_link_to_form
 from frappe.utils.user import get_system_managers
 
-from lms.lms.utils import validate_image
+from hublms.hublms.utils import validate_image
 
 
 class JobOpportunity(Document):

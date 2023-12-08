@@ -23,10 +23,10 @@ def update_website_context(context):
 
 	Called from hooks.
 	"""
-	context.widgets = HublmsWidgets()
+	context.widgets = Widgets()
 
 
-class HublmsWidgets:
+class Widgets:
 	"""The widget collection.
 
 	This is just a placeholder object and returns the appropriate

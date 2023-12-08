@@ -1,7 +1,7 @@
 import frappe
 from frappe.utils import rounded
 
-from lms.lms.utils import get_course_progress
+from hublms.hublms.utils import get_course_progress
 
 
 def execute():

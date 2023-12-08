@@ -17,8 +17,7 @@ app_license = "mit"
 # web_include_css = "/assets/hublms/css/hublms.css"
 # web_include_js = "/assets/hublms/js/hublms.js"
 # include js, css files in header of web template
-web_include_css = "lms.bundle.css"
-# web_include_css = "/assets/lms/css/lms.css"
+web_include_css = "hublms.bundle.css"
 web_include_js = ["website.bundle.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
@@ -252,7 +251,10 @@ jinja = {
 		"hublms.hublms.utils.get_progress",
   
 		"hublms.page_renderers.get_profile_url",
-		
+		"hublms.overrides.user.get_enrolled_courses",
+		"hublms.overrides.user.get_course_membership",
+		"hublms.overrides.user.get_authored_courses",
+		"hublms.overrides.user.get_palette",
 		"hublms.hublms.utils.get_membership",
 		"hublms.hublms.utils.get_tags",
 		"hublms.hublms.utils.get_students",

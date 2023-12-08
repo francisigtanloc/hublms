@@ -3,7 +3,7 @@ import json
 import frappe
 from frappe.website.doctype.web_template.web_template import WebTemplate
 
-from lms.widgets import Widgets
+from hublms.widgets import Widgets
 
 
 class CustomWebTemplate(WebTemplate):

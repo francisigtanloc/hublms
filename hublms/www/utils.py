@@ -1,8 +1,7 @@
 import frappe
 
-from lms.lms.utils import get_lesson_url, get_lessons, get_membership
 from frappe.utils import cstr
-# from lms.lms.utils import redirect_to_courses_list
+# from hublms.hublms.utils import redirect_to_courses_list
 
 
 def get_common_context(context):
@@ -33,10 +32,7 @@ def get_livecode_url():
 
 
 def redirect_to_lesson(course, index_="1.1"):
-	frappe.local.flags.redirect_location = (
-		get_lesson_url(course.name, index_) + course.query_parameter
-	)
-	raise frappe.Redirect
+	pass
 
 
 def get_current_lesson_details(lesson_number, context, is_edit=False):
