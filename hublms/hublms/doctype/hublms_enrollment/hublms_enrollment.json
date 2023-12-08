@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "autoincrement",
  "creation": "2023-11-23 00:39:38.173967",
  "default_view": "List",
@@ -146,7 +147,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-08 08:03:36.764652",
+ "modified": "2023-12-08 09:12:09.640209",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Enrollment",

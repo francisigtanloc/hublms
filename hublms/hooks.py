@@ -252,10 +252,7 @@ jinja = {
 		"hublms.hublms.utils.get_progress",
   
 		"hublms.page_renderers.get_profile_url",
-		"hublms.overrides.user.get_enrolled_courses",
-		"hublms.overrides.user.get_course_membership",
-		"hublms.overrides.user.get_authored_courses",
-		"hublms.overrides.user.get_palette",
+		
 		"hublms.hublms.utils.get_membership",
 		"hublms.hublms.utils.get_tags",
 		"hublms.hublms.utils.get_students",
