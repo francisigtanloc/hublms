@@ -133,7 +133,7 @@
             All Listings
         </div>
         <ul class="nav lms-nav" id="courses-tab">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#all">
                     All
                     <span class="course-list-count">
@@ -149,23 +149,23 @@
                         {{ programs | length }} 
                     </span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#courses">
+                <a class="nav-link active" data-toggle="tab" href="#courses">
                     Courses
                     <span class="course-list-count">
                         {{ courses | length }} 
                     </span>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#topics">
                     Topics
                     <span class="course-list-count">
                         {{ topics | length }} 
                     </span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#upcoming">
                     Upcoming
@@ -202,7 +202,7 @@
         <div class="border-bottom mb-4"></div>
         <div class="tab-content">
             <!-- TABS -->
-            <div class="tab-pane active" id="all" role="tabpanel" aria-labelledby="all">
+            <!-- <div class="tab-pane active" id="all" role="tabpanel" aria-labelledby="all">
                 <div class="all_listtings">
                     <div class="course-cards-parent cards-parent">
                         <div class="common-card-style course-card program" data-course="course-1" data-rating="0"
@@ -404,12 +404,12 @@
                     </div>
                 </div>
                 
-            </div>
+            </div> -->
             <!-- TABS -->
-            <div class="tab-pane" id="programs" role="tabpanel" aria-labelledby="programs">
+            <!-- <div class="tab-pane" id="programs" role="tabpanel" aria-labelledby="programs">
                 <div class="programs">
                     <div class="course-cards-parent cards-parent">
-                        <!-- COURSE CARDS -->
+                        
                         <div class="common-card-style course-card" data-course="course-1" data-rating="0"
                             data-enrollment="0" data-creation="2023-11-23 10:34:09.980434">
                             <div class="course-image  default-image ">
@@ -475,12 +475,12 @@
                                 <a class="stretched-link" href="/hublms/programs/program-1"></a>
                             </div>
                         </div>
-                        <!-- COURSE CARDS -->
+                       
                     </div>
                 </div>
                 
-            </div>
-            <div class="tab-pane" id="courses" role="tabpanel" aria-labelledby="courses">
+            </div> -->
+            <div class="tab-pane active" id="courses" role="tabpanel" aria-labelledby="courses">
                 <div class="courses">
                     
                     {% if courses | length %}
