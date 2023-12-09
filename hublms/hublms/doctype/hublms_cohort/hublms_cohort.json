@@ -103,7 +103,7 @@
  "links": [
   {
    "group": "Links",
-   "link_doctype": "Cohort Subgroup",
+   "link_doctype": "Hublms Cohort Subgroup",
    "link_fieldname": "cohort"
   }
  ],

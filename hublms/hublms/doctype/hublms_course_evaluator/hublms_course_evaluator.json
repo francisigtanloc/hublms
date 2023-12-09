@@ -23,12 +23,12 @@
    "fieldname": "schedule",
    "fieldtype": "Table",
    "label": "Schedule",
-   "options": "Evaluator Schedule"
+   "options": "Hublms Evaluator Schedule"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:15:58.662917",
+ "modified": "2023-12-09 10:30:11.424866",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Course Evaluator",
@@ -68,6 +68,18 @@
    "read": 1,
    "report": 1,
    "role": "Class Evaluator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hublms Instructor",
    "share": 1,
    "write": 1
   }

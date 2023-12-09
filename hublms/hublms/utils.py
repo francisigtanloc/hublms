@@ -28,9 +28,14 @@ from frappe.utils import (
 )
 from frappe.utils.dateutils import get_period
 from hublms.hublms.md import find_macros, markdown_to_html
+import random
 
 RE_SLUG_NOTALLOWED = re.compile("[^a-z0-9]+")
 
+
+def shuffle(list = []):
+    random.shuffle(list)
+    return list
 
 def slugify(title, used_slugs=None):
 	"""Converts title to a slug.

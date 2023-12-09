@@ -70,7 +70,7 @@
 			</div>
 
 			{% if question.type == "Choices" %}
-			{% set options = [question.option_1, question.option_2, question.option_3, question.option_4] %}
+			{% set options = shuffle([question.option_1, question.option_2, question.option_3, question.option_4]) %}
 			{% for option in options %}
 				{% if option %}
 				<div class="mb-2">

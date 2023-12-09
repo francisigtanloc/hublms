@@ -12,7 +12,6 @@
   "column_break_4",
   "exercise_title",
   "course",
-  "lesson",
   "section_break_8",
   "solution",
   "image",
@@ -20,9 +19,7 @@
   "comments",
   "latest_submission",
   "member",
-  "member_email",
-  "member_cohort",
-  "member_subgroup"
+  "member_email"
  ],
  "fields": [
   {
@@ -67,13 +64,6 @@
    "read_only": 1
   },
   {
-   "fetch_from": "exercise.lesson",
-   "fieldname": "lesson",
-   "fieldtype": "Link",
-   "label": "Lesson",
-   "options": "Course Lesson"
-  },
-  {
    "fieldname": "section_break_8",
    "fieldtype": "Section Break"
   },
@@ -105,7 +95,7 @@
    "fieldname": "latest_submission",
    "fieldtype": "Link",
    "label": "Latest Submission",
-   "options": "Exercise Submission"
+   "options": "Hublms Exercise Submission"
   },
   {
    "fieldname": "member",
@@ -122,27 +112,11 @@
    "label": "Member Email",
    "options": "User",
    "search_index": 1
-  },
-  {
-   "fetch_from": "member.cohort",
-   "fieldname": "member_cohort",
-   "fieldtype": "Link",
-   "label": "Member Cohort",
-   "options": "Cohort",
-   "search_index": 1
-  },
-  {
-   "fetch_from": "member.subgroup",
-   "fieldname": "member_subgroup",
-   "fieldtype": "Link",
-   "label": "Member Subgroup",
-   "options": "Cohort Subgroup",
-   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:15:52.617799",
+ "modified": "2023-12-09 10:35:01.450069",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms  Exercise Latest Submission",
@@ -157,6 +131,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hublms Instructor",
    "share": 1,
    "write": 1
   }

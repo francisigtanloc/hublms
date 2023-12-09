@@ -11,27 +11,20 @@
  "field_order": [
   "title",
   "show_answers",
+  "passing_percentage",
   "column_break_gaac",
   "max_attempts",
   "show_submission_history",
-  "section_break_hsiv",
-  "passing_percentage",
-  "column_break_rocd",
   "total_marks",
   "section_break_dupm",
   "description",
   "section_break_sbjx",
   "questions",
   "add_multiple",
-  "column_break_cdkm",
-  "section_break_3",
-  "lesson",
-  "column_break_5",
-  "course",
-  "time",
   "settings_tab",
   "randomize_questions",
-  "subset"
+  "subset",
+  "time"
  ],
  "fields": [
   {
@@ -65,19 +58,11 @@
    "label": "Show Submission History"
   },
   {
-   "fieldname": "section_break_hsiv",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "passing_percentage",
    "fieldtype": "Int",
    "label": "Passing Percentage",
    "non_negative": 1,
    "reqd": 1
-  },
-  {
-   "fieldname": "column_break_rocd",
-   "fieldtype": "Column Break"
   },
   {
    "default": "0",
@@ -103,33 +88,9 @@
    "label": "Add Multiple"
   },
   {
-   "fieldname": "section_break_3",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "lesson",
-   "fieldtype": "Link",
-   "label": "Lesson",
-   "options": "Course Lesson",
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_5",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fetch_from": "lesson.course",
-   "fieldname": "course",
-   "fieldtype": "Link",
-   "label": "Course",
-   "options": "Hublms Course",
-   "read_only": 1
-  },
-  {
    "default": "0",
    "fieldname": "time",
    "fieldtype": "Int",
-   "hidden": 1,
    "label": "Time Per Question (in Seconds)"
   },
   {
@@ -156,15 +117,11 @@
    "fieldname": "description",
    "fieldtype": "Text Editor",
    "label": "Description"
-  },
-  {
-   "fieldname": "column_break_cdkm",
-   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-07 00:18:54.787614",
+ "modified": "2023-12-09 12:12:11.656375",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz",
@@ -204,6 +161,18 @@
    "read": 1,
    "report": 1,
    "role": "Course Creator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hublms Instructor",
    "share": 1,
    "write": 1
   }

@@ -10,11 +10,12 @@
   "program",
   "course",
   "topic",
-  "member",
-  "current_content",
+  "column_break_zbru",
   "member_type",
+  "member",
   "section_break_8",
   "column_break_12",
+  "current_content",
   "progress"
  ],
  "fields": [
@@ -33,11 +34,13 @@
   },
   {
    "fieldname": "column_break_12",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "fieldname": "progress",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Progress",
    "read_only": 1
   },
@@ -75,12 +78,17 @@
   {
    "fieldname": "current_content",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Current Content"
+  },
+  {
+   "fieldname": "column_break_zbru",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-08 08:08:33.264072",
+ "modified": "2023-12-09 11:50:58.088783",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms User Enrollment",
@@ -121,6 +129,18 @@
    "report": 1,
    "role": "Moderator",
    "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hublms Instructor",
    "share": 1,
    "write": 1
   }

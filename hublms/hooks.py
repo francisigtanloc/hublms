@@ -243,6 +243,7 @@ website_route_rules = [
 ]
 jinja = {
 	"methods": [
+		"hublms.hublms.utils.shuffle",
 		"hublms.hublms.utils.get_instructors",
 		"hublms.hublms.utils.get_topic_count",
 		"hublms.hublms.utils.get_topics",

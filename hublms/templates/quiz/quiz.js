@@ -102,6 +102,7 @@ const initialize_timer = () => {
 			clearInterval(self.timer);
 			$(".timer").addClass("hide");
 			check_answer();
+			$("#next").attr("disabled", false);
 		}
 	}, 100);
 };

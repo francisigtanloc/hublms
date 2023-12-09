@@ -107,7 +107,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-23 09:15:59.618396",
+ "modified": "2023-12-09 10:25:56.163683",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Certificate Evaluation",
@@ -134,6 +134,18 @@
    "read": 1,
    "report": 1,
    "role": "Class Evaluator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hublms Instructor",
    "share": 1,
    "write": 1
   }

@@ -115,6 +115,7 @@ def quiz_renderer(quiz_name):
 		quiz_name,
 		[
 			"name",
+			"time",
 			"title",
 			"randomize_questions",
 			"subset",

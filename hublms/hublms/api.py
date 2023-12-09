@@ -73,7 +73,7 @@ def join_cohort(course, cohort, subgroup, invite_code):
 @frappe.whitelist()
 def approve_cohort_join_request(join_request):
 	r = frappe.get_doc("Cohort Join Request", join_request)
-	sg = r and frappe.get_doc("Cohort Subgroup", r.subgroup)
+	sg = r and frappe.get_doc("Hublms Cohort Subgroup", r.subgroup)
 	if not sg or r.status not in ["Pending", "Accepted"]:
 		return {"ok": False, "error": "Invalid Join Request"}
 	if (
@@ -89,7 +89,7 @@ def approve_cohort_join_request(join_request):
 @frappe.whitelist()
 def reject_cohort_join_request(join_request):
 	r = frappe.get_doc("Cohort Join Request", join_request)
-	sg = r and frappe.get_doc("Cohort Subgroup", r.subgroup)
+	sg = r and frappe.get_doc("Hublms Cohort Subgroup", r.subgroup)
 	if not sg or r.status not in ["Pending", "Rejected"]:
 		return {"ok": False, "error": "Invalid Join Request"}
 	if (
@@ -105,7 +105,7 @@ def reject_cohort_join_request(join_request):
 @frappe.whitelist()
 def undo_reject_cohort_join_request(join_request):
 	r = frappe.get_doc("Cohort Join Request", join_request)
-	sg = r and frappe.get_doc("Cohort Subgroup", r.subgroup)
+	sg = r and frappe.get_doc("Hublms Cohort Subgroup", r.subgroup)
 	# keeping Pending as well to consider the case of duplicate requests
 	if not sg or r.status not in ["Pending", "Rejected"]:
 		return {"ok": False, "error": "Invalid Join Request"}
@@ -122,7 +122,7 @@ def undo_reject_cohort_join_request(join_request):
 @frappe.whitelist()
 def add_mentor_to_subgroup(subgroup, email):
 	try:
-		sg = frappe.get_doc("Cohort Subgroup", subgroup)
+		sg = frappe.get_doc("Hublms Cohort Subgroup", subgroup)
 	except frappe.DoesNotExistError:
 		return {"ok": False, "error": f"Invalid subgroup: {subgroup}"}
 
