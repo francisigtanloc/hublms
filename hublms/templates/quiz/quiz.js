@@ -267,7 +267,7 @@ const add_icon = (element, icon) => {
 	let label = $(element).siblings(".option-text").text();
 	$(element).siblings(".option-text").html(`
         <div>
-            <img class="d-inline mr-3" src="/assets/lms/icons/${icon}.svg">
+            <img class="d-inline mr-3" src="/assets/hublms/icons/${icon}.svg">
             ${label}
         </div>
     `);

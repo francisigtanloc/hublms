@@ -430,7 +430,7 @@ input[type=checkbox] {
   margin-right: 0.5rem;
 }
 .custom-checkbox > label > input:checked + .empty-checkbox {
-  background: url(/assets/lms/icons/tick.svg);
+  background: url(/assets/hublms/icons/tick.svg);
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -1027,12 +1027,12 @@ pre {
   border-radius: 50%;
 }
 .carousel-control-prev-icon {
-  background-image: url(/assets/lms/icons/slider-arrow-left.svg);
+  background-image: url(/assets/hublms/icons/slider-arrow-left.svg);
   width: 40px;
   height: 40px;
 }
 .carousel-control-next-icon {
-  background-image: url(/assets/lms/icons/slider-arrow-right.svg);
+  background-image: url(/assets/hublms/icons/slider-arrow-right.svg);
   width: 40px;
   height: 40px;
 }
@@ -1706,7 +1706,7 @@ select {
   border-radius: var(--border-radius);
   padding: 0.15rem 0.5rem;
   box-shadow: var(--btn-shadow);
-  background-image: url(/assets/lms/icons/down-arrow.svg);
+  background-image: url(/assets/hublms/icons/down-arrow.svg);
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
   background-size: 0.75rem;

@@ -18,7 +18,7 @@ app_license = "mit"
 # web_include_js = "/assets/hublms/js/hublms.js"
 # include js, css files in header of web template
 web_include_css = "lms.bundle.css"
-# web_include_css = "/assets/lms/css/lms.css"
+# web_include_css = "/assets/hublms/css/lms.css"
 web_include_js = ["website.bundle.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
