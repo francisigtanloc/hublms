@@ -43,7 +43,7 @@
  ],
  "image_field": "hero_image",
  "links": [],
- "modified": "2023-11-27 09:04:27.731856",
+ "modified": "2023-12-09 09:25:07.946179",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Topic",
@@ -83,6 +83,18 @@
    "read": 1,
    "report": 1,
    "role": "Instructor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hublms Instructor",
    "share": 1,
    "write": 1
   }
