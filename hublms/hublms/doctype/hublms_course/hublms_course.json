@@ -70,7 +70,8 @@
    "in_standard_filter": 1,
    "label": "Instructors",
    "max_height": "50px",
-   "options": "Hublms Course Instructor"
+   "options": "Hublms Course Instructor",
+   "reqd": 1
   },
   {
    "fieldname": "tags",
@@ -228,7 +229,7 @@
  "is_published_field": "published",
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-12-09 09:23:18.037288",
+ "modified": "2023-12-10 13:36:31.170958",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Course",

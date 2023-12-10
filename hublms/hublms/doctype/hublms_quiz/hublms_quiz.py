@@ -18,6 +18,10 @@ class HublmsQuiz(Document):
 	def validate(self):
 		self.validate_duplicate_questions()
 		self.total_marks = set_total_marks(self.name, self.questions)
+		if (not self.subset):
+			self.subset = set_default_subset(self.questions)
+   
+		self.time = 15
 
 	def validate_duplicate_questions(self):
 		questions = [row.question for row in self.questions]
@@ -54,6 +58,8 @@ def set_total_marks(quiz, questions):
 	for question in questions:
 		marks += question.get("marks")
 	return marks
+def set_default_subset( questions):
+	return len(questions)
 
 
 @frappe.whitelist()

@@ -106,7 +106,7 @@
   },
   {
    "fieldname": "subset",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "label": "Subset"
   },
   {
@@ -121,7 +121,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-09 12:12:11.656375",
+ "modified": "2023-12-10 14:05:32.536818",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz",

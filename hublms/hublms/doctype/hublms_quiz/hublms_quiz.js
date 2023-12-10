@@ -12,18 +12,11 @@
 frappe.ui.form.on("Hublms Quiz", {
    
     refresh: function(frm) {
-        // This function will be executed when the form is refreshed
-        if (frm.doc.randomize_questions) {
-            // If the checkbox is checked, set the value of the data field
-            frm.set_value('subset', frm.doc.questions.length);
-        } else {
-            // If the checkbox is not checked, clear the data field
-            frm.set_value('subset', '');
-        }
+        
     },
     randomize_questions: function(frm) {
         // This function will be executed when the "randomize_questions" field changes
-        if (frm.doc.randomize_questions) {
+        if (frm.doc.randomize_questions && (frm.doc.subset == 0) ) {
             // If the checkbox is checked, set the value of the data field
             frm.set_value('subset', frm.doc.questions.length);
         } 

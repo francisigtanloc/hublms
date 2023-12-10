@@ -101,19 +101,20 @@ def get_topics(course):
 	topics = frappe.get_all(
 		"Hublms Topic Reference", {"parent": course}, ["idx", "topics"], order_by="idx"
 	)
-	
-	for topic in topics:
-		topic_details = frappe.db.get_value(
-			"Hublms Topic",
-			{"name": topic.topics},
-			["name", "name", "description"],
-			as_dict=True,
-		)
-		topic.update(topic_details)
+	if  topics:
+		for topic in topics:
+			topic_details = frappe.db.get_value(
+				"Hublms Topic",
+				{"name": topic.topics},
+				["name", "name", "description"],
+				as_dict=True,
+			)
+			topic.update(topic_details)
 
-	
-	return topics
-
+		
+		return topics
+	else:
+		return []
 
 def get_topic_contents(course, topic=None, get_details=True):
 	"""If chapter is passed, returns lessons of only that chapter.
@@ -123,16 +124,15 @@ def get_topic_contents(course, topic=None, get_details=True):
 	doc_topic = frappe.get_doc("Hublms Topic", topic.name)
 	for tc in doc_topic.topic_content:
 		tc_details = frappe.get_doc("Hublms Topic Content",  {"parent": topic.name, "content": tc.content})
-  
-		if tc_details.content_type == "Hublms Video":
-			tc_details.icon = "icon-youtube"
-		elif tc_details.content_type == "Hublms Quiz":
-			tc_details.icon = "icon-quiz"
-		else :
-			tc_details.icon = "icon-list"
-		
-		data.append(tc_details)
-	
+		if  tc_details:
+			if tc_details.content_type == "Hublms Video":
+				tc_details.icon = "icon-youtube"
+			elif tc_details.content_type == "Hublms Quiz":
+				tc_details.icon = "icon-quiz"
+			else :
+				tc_details.icon = "icon-list"
+			data.append(tc_details)
+
 	return data
 
 def get_topic_details(topic=None,content_index=None):
