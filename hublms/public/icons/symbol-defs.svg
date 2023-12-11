@@ -5,6 +5,21 @@
     <svg id="icon-video-blue" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M1 9C1 4.58172 4.58172 1 9 1C11.1217 1 13.1566 1.84286 14.6569 3.34315C16.1571 4.84343 17 6.87827 17 9C17 13.4182 13.4182 17 9 17C4.58172 17 1 13.4182 1 9ZM8.00636 12.0679L11.8766 9.51133C12.0614 9.40191 12.174 9.2084 12.174 9C12.174 8.79161 12.0614 8.59809 11.8766 8.48867L8.00636 5.932C7.79102 5.78453 7.51 5.75869 7.2694 5.86422C7.0288 5.96977 6.86529 6.1906 6.84063 6.44334V11.5567C6.86529 11.8094 7.0288 12.0302 7.2694 12.1358C7.51 12.2413 7.79102 12.2155 8.00636 12.0679Z" fill="#2D95F0"/>
     </svg>
+     <svg width="16" height="16" viewBox="0 0 16 16" id="icon-article" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_3613_984)">
+        <mask id="mask0_3613_984" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+        <path d="M16 0H0V16H16V0Z" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_3613_984)">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.667 3.25a.75.75 0 0 0 0 1.5h.007a.75.75 0 0 0 0-1.5h-.007zm2.666.25a.5.5 0 0 0 0 1H14a.5.5 0 0 0 0-1H5.333zm0 4a.5.5 0 0 0 0 1H14a.5.5 0 0 0 0-1H5.333zm-.5 4.5a.5.5 0 0 1 .5-.5H14a.5.5 0 0 1 0 1H5.333a.5.5 0 0 1-.5-.5zM1.917 8a.75.75 0 0 1 .75-.75h.007a.75.75 0 0 1 0 1.5h-.007a.75.75 0 0 1-.75-.75zm.75 3.25a.75.75 0 0 0 0 1.5h.007a.75.75 0 0 0 0-1.5h-.007z" fill="#525252"/>
+        </g>
+        </g>
+        <defs>
+        <clipPath id="clip0_3613_984">
+        <rect width="16" height="16" fill="white"/>
+        </clipPath>
+        </defs>
+    </svg>
     <svg width="16" height="16" viewBox="0 0 16 16" id="icon-youtube" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_3613_984)">
         <mask id="mask0_3613_984" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">

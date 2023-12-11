@@ -2483,3 +2483,8 @@ select {
 .text-color {
 	color: var(--text-color);
 }
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

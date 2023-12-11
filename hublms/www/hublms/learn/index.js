@@ -45,7 +45,7 @@ const save_current_content = () => {
 	if ($(".title").hasClass("is-member")) {
 		frappe.call("hublms.hublms.api.save_current_content", {
 			course_name: $(".title").attr("data-course"),
-			lesson_name: $(".title").attr("data-content"),
+			lesson_name: $(".title").attr("data-lesson"),
 		});
 	}
 };
@@ -57,7 +57,7 @@ const mark_progress = () => {
 	frappe.call({
 		method: "hublms.hublms.doctype.hublms_topic_content.hublms_topic_content.save_progress",
 		args: {
-			content: $(".title").attr("data-content"),
+			content: $(".title").attr("data-lesson"),
 			topic: $(".title").attr("data-topic"),
 			course: $(".title").attr("data-course"),
 			status: status,

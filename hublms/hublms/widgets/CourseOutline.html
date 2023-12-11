@@ -27,6 +27,9 @@
                 {{ topic.name }}
             </div>
             
+
+            
+            
         </div>
 
 
@@ -40,7 +43,7 @@
 
             <div class="lessons">
 
-                {% if topic_content | length %}
+            {% if topic_content | length %}
 
                 {% for content in topic_content %}
                 {% set url_index =  "{}{}{}".format(topic.idx,'.', content.idx) %}
@@ -54,7 +57,12 @@
                         <svg class="icon icon-sm mr-2">
                             <use class="" href="#{{ content.icon }}">
                         </svg>
-                        <div>{{ content.content }}</div>
+                        <div class="text-truncate" title="{{ content.content }}">{{ content.content | truncate(20) }}</div>
+                        {% if membership %}
+                        <svg class="icon icon-md lesson-progress-tick ml-auto {{ get_progress(course.name, content.content) != 'Complete' and 'hide' }}">
+                            <use class="" href="#icon-success">
+                        </svg>
+                        {% endif %}
 
                     </a>
                 </div>

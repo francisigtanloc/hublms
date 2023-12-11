@@ -30,6 +30,19 @@
         $(".enroll-in-hublms-course").click((e2) => {
           enroll_in_hublms_course(e2);
         });
+        expand_the_active_chapter();
+        $(".chapter-title").unbind().click((e2) => {
+          rotate_chapter_icon(e2);
+        });
+        $(".no-preview").click((e2) => {
+          show_no_preview_dialog(e2);
+        });
+        $("#create-batch").click((e2) => {
+          open_batch_dialog(e2);
+        });
+        $("#course-filter").change((e2) => {
+          filter_courses(e2);
+        });
       });
       var pin_header = () => {
         const el = document.querySelector(".sticky");
@@ -60,6 +73,227 @@
           window.location.href = `/hublms/course/${course}/learn/1.1`;
           return;
         }
+      };
+      var expand_the_first_chapter = () => {
+        let elements = $(".course-home-outline .collapse");
+        elements.each((i2, element) => {
+          if (i2 < 1) {
+            show_section(element);
+            return false;
+          }
+        });
+      };
+      var expand_the_active_chapter = () => {
+        let selector = $(".course-home-headings.title");
+        if (selector.length && $(".course-details-page").length) {
+          expand_for_course_details(selector);
+        } else if ($(".active-lesson").length) {
+          selector = $(".active-lesson");
+          show_section(selector.parent().parent());
+        } else {
+          expand_the_first_chapter();
+        }
+      };
+      var expand_for_course_details = (selector) => {
+        $(".lesson-info").removeClass("active-lesson");
+        $(".lesson-info").each((i2, elem) => {
+          if ($(elem).data("lesson") == selector.data("lesson")) {
+            $(elem).addClass("active-lesson");
+            show_section($(elem).parent().parent());
+          }
+        });
+      };
+      var show_section = (element) => {
+        $(element).addClass("show");
+        $(element).siblings(".chapter-title").children(".chapter-icon").css("transform", "rotate(90deg)");
+        $(element).siblings(".chapter-title").attr("aria-expanded", true);
+      };
+      var rotate_chapter_icon = (e2) => {
+        let icon = $(e2.currentTarget).children(".chapter-icon");
+        if (icon.css("transform") == "none") {
+          icon.css("transform", "rotate(90deg)");
+        } else {
+          icon.css("transform", "none");
+        }
+      };
+      var show_no_preview_dialog = (e2) => {
+        $("#no-preview-modal").modal("show");
+      };
+      var open_batch_dialog = () => {
+        exports.batch_dialog = new frappe.ui.Dialog({
+          title: __("New Batch"),
+          fields: [
+            {
+              fieldtype: "Data",
+              label: __("Title"),
+              fieldname: "title",
+              reqd: 1,
+              default: batch_info && batch_info.title
+            },
+            {
+              fieldtype: "Check",
+              label: __("Published"),
+              fieldname: "published",
+              default: batch_info && batch_info.published
+            },
+            {
+              fieldtype: "Column Break"
+            },
+            {
+              fieldtype: "Int",
+              label: __("Seat Count"),
+              fieldname: "seat_count",
+              default: batch_info && batch_info.seat_count
+            },
+            {
+              fieldtype: "Section Break"
+            },
+            {
+              fieldtype: "Date",
+              label: __("Start Date"),
+              fieldname: "start_date",
+              reqd: 1,
+              default: batch_info && batch_info.start_date
+            },
+            {
+              fieldtype: "Date",
+              label: __("End Date"),
+              fieldname: "end_date",
+              reqd: 1,
+              default: batch_info && batch_info.end_date
+            },
+            {
+              fieldtype: "Select",
+              label: __("Medium"),
+              fieldname: "medium",
+              options: ["Online", "Offline"],
+              default: batch_info && batch_info.medium || "Online"
+            },
+            {
+              fieldtype: "Column Break"
+            },
+            {
+              fieldtype: "Time",
+              label: __("Start Time"),
+              fieldname: "start_time",
+              default: batch_info && batch_info.start_time,
+              reqd: 1
+            },
+            {
+              fieldtype: "Time",
+              label: __("End Time"),
+              fieldname: "end_time",
+              default: batch_info && batch_info.end_time,
+              reqd: 1
+            },
+            {
+              fieldtype: "Link",
+              label: __("Category"),
+              fieldname: "category",
+              options: "Hublms Category",
+              only_select: 1,
+              default: batch_info && batch_info.category
+            },
+            {
+              fieldtype: "Section Break"
+            },
+            {
+              fieldtype: "Small Text",
+              label: __("Description"),
+              fieldname: "description",
+              default: batch_info && batch_info.description,
+              reqd: 1
+            },
+            {
+              fieldtype: "Text Editor",
+              label: __("Batch Details"),
+              fieldname: "batch_details",
+              default: batch_info && batch_info.batch_details,
+              reqd: 1
+            },
+            {
+              fieldtype: "HTML Editor",
+              label: __("Batch Details Raw"),
+              fieldname: "batch_details_raw",
+              default: batch_info && batch_info.batch_details_raw
+            },
+            {
+              fieldtype: "Attach Image",
+              label: __("Meta Image"),
+              fieldname: "meta_image",
+              default: batch_info && batch_info.meta_image
+            },
+            {
+              fieldtype: "Section Break",
+              label: __("Pricing"),
+              fieldname: "pricing"
+            },
+            {
+              fieldtype: "Check",
+              label: __("Paid Batch"),
+              fieldname: "paid_batch",
+              default: batch_info && batch_info.paid_batch
+            },
+            {
+              fieldtype: "Currency",
+              label: __("Amount"),
+              fieldname: "amount",
+              default: batch_info && batch_info.amount,
+              mandatory_depends_on: "paid_batch",
+              depends_on: "paid_batch"
+            },
+            {
+              fieldtype: "Link",
+              label: __("Currency"),
+              fieldname: "currency",
+              options: "Currency",
+              default: batch_info && batch_info.currency,
+              mandatory_depends_on: "paid_batch",
+              depends_on: "paid_batch",
+              only_select: 1
+            }
+          ],
+          primary_action_label: __("Save"),
+          primary_action: (values) => {
+            save_batch(values);
+          }
+        });
+        exports.batch_dialog.show();
+      };
+      var save_batch = (values) => {
+        let args = {};
+        if (batch_info) {
+          args = Object.assign(batch_info, values);
+        } else {
+          args = values;
+        }
+        frappe.call({
+          method: "lms.lms.doctype.lms_batch.lms_batch.create_batch",
+          args,
+          callback: (r2) => {
+            if (r2.message) {
+              frappe.show_alert({
+                message: batch_info ? __("Batch Updated") : __("Batch Created"),
+                indicator: "green"
+              });
+              exports.batch_dialog.hide();
+              window.location.href = `/batches/details/${r2.message.name}`;
+            }
+          }
+        });
+      };
+      var filter_courses = (e2) => {
+        const course_lists = $(".course-cards-parent");
+        const filter = $(e2.currentTarget).val();
+        course_lists.each((i2, list) => {
+          const course_cards = $(list).children(".course-card");
+          course_cards.sort((a2, b2) => {
+            var value1 = $(a2).data(filter);
+            var value2 = $(b2).data(filter);
+            return value1 > value2 ? -1 : value1 < value2 ? 1 : 0;
+          });
+          $(list).append(course_cards);
+        });
       };
     }
   });
@@ -2148,4 +2382,4 @@
     return object;
   };
 })();
-//# sourceMappingURL=website.bundle.7KJLKNRQ.js.map
+//# sourceMappingURL=website.bundle.77YFTMN3.js.map

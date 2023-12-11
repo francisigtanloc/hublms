@@ -5,7 +5,25 @@ frappe.ready(() => {
 	$(".enroll-in-hublms-course").click((e) => {
 		enroll_in_hublms_course(e);
 	});
+	expand_the_active_chapter();
 
+	$(".chapter-title")
+		.unbind()
+		.click((e) => {
+			rotate_chapter_icon(e);
+		});
+
+	$(".no-preview").click((e) => {
+		show_no_preview_dialog(e);
+	});
+
+	$("#create-batch").click((e) => {
+		open_batch_dialog(e);
+	});
+
+	$("#course-filter").change((e) => {
+		filter_courses(e);
+	});
 	
 });
 
@@ -171,7 +189,6 @@ const expand_the_first_chapter = () => {
 
 const expand_the_active_chapter = () => {
 	let selector = $(".course-home-headings.title");
-
 	if (selector.length && $(".course-details-page").length) {
 		expand_for_course_details(selector);
 	} else if ($(".active-lesson").length) {

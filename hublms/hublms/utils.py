@@ -130,7 +130,7 @@ def get_topic_contents(course, topic=None, get_details=True):
 			elif tc_details.content_type == "Hublms Quiz":
 				tc_details.icon = "icon-quiz"
 			else :
-				tc_details.icon = "icon-list"
+				tc_details.icon = "icon-article"
 			data.append(tc_details)
 
 	return data
@@ -352,9 +352,9 @@ def get_course_progress(course, member=None):
 		count += frappe.db.count(
 			"Hublms Topic Content",	{"parent": topic_content.topics}
 		)
-	print("-------------------")
-	print(topics)
-	print("-------------------")
+	# print("-------------------")
+	# print(topics)
+	# print("-------------------")
 	if not count:
 		return 0
 	completed_lessons = frappe.db.count(
@@ -1132,3 +1132,8 @@ def change_currency(amount, currency, country=None):
 	amount = cint(amount)
 	amount, currency = check_multicurrency(amount, currency, country)
 	return fmt_money(amount, 0, currency)
+
+def truncate(str, num) :
+    if (str.length <= num):
+        return str;
+    return str.slice(0, num) + '...';

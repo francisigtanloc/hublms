@@ -10,8 +10,8 @@
  "engine": "InnoDB",
  "field_order": [
   "topic_name",
-  "topic_content",
   "description",
+  "topic_content",
   "hero_image"
  ],
  "fields": [
@@ -31,7 +31,7 @@
   },
   {
    "fieldname": "description",
-   "fieldtype": "Small Text",
+   "fieldtype": "Text Editor",
    "label": "Description"
   },
   {
@@ -43,7 +43,7 @@
  ],
  "image_field": "hero_image",
  "links": [],
- "modified": "2023-12-09 09:25:07.946179",
+ "modified": "2023-12-11 11:48:49.552140",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Topic",
