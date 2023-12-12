@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"jNO4sdKxHu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Get Started</b></span>\",\"col\":12}},{\"id\":\"hSV_0xeWrW\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"/hublms\\\">Go to LMS Portal</a>\",\"col\":12}},{\"id\":\"kMuzko0uAU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"iuvIOHmztI\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px;\\\"><b>Statistics</b></span>\",\"col\":12}},{\"id\":\"l0VTd66Uy2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Users\",\"col\":4}},{\"id\":\"wAWZin1KKk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course\",\"col\":4}},{\"id\":\"RLrIlFx0Hd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Enrollments\",\"col\":4}},{\"id\":\"OuhWkhCQmq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course Completed\",\"col\":4}},{\"id\":\"3g8QmNqUXG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Certificate\",\"col\":4}},{\"id\":\"EZsdsujs8N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluation\",\"col\":4}},{\"id\":\"s-nfsFQbGV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jeOBWBzHEa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Master</b></span>\",\"col\":12}},{\"id\":\"9N0KSsMDQ4\",\"type\":\"card\",\"data\":{\"card_name\":\"Links\",\"col\":4}}]",
+ "content": "[{\"id\":\"jNO4sdKxHu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Get Started</b></span>\",\"col\":12}},{\"id\":\"hSV_0xeWrW\",\"type\":\"paragraph\",\"data\":{\"text\":\"<a href=\\\"/hublms\\\">Go to LMS Portal</a>\",\"col\":12}},{\"id\":\"kMuzko0uAU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"iuvIOHmztI\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px;\\\"><b>Statistics</b></span>\",\"col\":12}},{\"id\":\"l0VTd66Uy2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Users\",\"col\":4}},{\"id\":\"wAWZin1KKk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course\",\"col\":4}},{\"id\":\"RLrIlFx0Hd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Enrollments\",\"col\":4}},{\"id\":\"OuhWkhCQmq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Course Completed\",\"col\":4}},{\"id\":\"3g8QmNqUXG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Certificate\",\"col\":4}},{\"id\":\"EZsdsujs8N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluation\",\"col\":4}},{\"id\":\"FMnkQqdTSn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Quiz Submissions\",\"col\":3}},{\"id\":\"s-nfsFQbGV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jeOBWBzHEa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Master</b></span>\",\"col\":12}},{\"id\":\"9N0KSsMDQ4\",\"type\":\"card\",\"data\":{\"card_name\":\"Links\",\"col\":4}}]",
  "creation": "2023-11-28 10:19:57.931522",
  "custom_blocks": [],
  "docstatus": 0,
@@ -221,7 +221,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-12-08 14:10:45.391176",
+ "modified": "2023-12-12 08:09:53.123225",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms",
@@ -239,6 +239,14 @@
    "format": "{} Published",
    "label": "Course",
    "link_to": "Hublms Course",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Quiz Submissions",
+   "link_to": "Hublms Quiz Submission",
    "stats_filter": "[]",
    "type": "DocType"
   },
