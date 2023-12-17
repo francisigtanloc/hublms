@@ -1,15 +1,14 @@
 {
  "actions": [],
  "allow_import": 1,
- "allow_rename": 1,
- "autoname": "field:title",
+ "autoname": "autoincrement",
  "creation": "2023-11-23 00:34:15.977956",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "title",
+  "tags",
   "question",
   "type",
   "multiple",
@@ -42,22 +41,23 @@
  ],
  "fields": [
   {
-   "fieldname": "title",
-   "fieldtype": "Data",
-   "label": "Title",
-   "reqd": 1,
-   "unique": 1
-  },
-  {
    "fieldname": "question",
    "fieldtype": "Text Editor",
+   "in_filter": 1,
+   "in_global_search": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Question"
   },
   {
    "fieldname": "type",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_global_search": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Type",
    "options": "Choices\nUser Input"
   },
@@ -199,15 +199,27 @@
    "fieldname": "possibility_4",
    "fieldtype": "Small Text",
    "label": "Possible Answer 4"
+  },
+  {
+   "fieldname": "tags",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Tags",
+   "reqd": 1,
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-09 13:17:19.513869",
+ "modified": "2023-12-13 10:04:47.690478",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Question",
- "naming_rule": "By fieldname",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [
   {
@@ -264,5 +276,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "title"
+ "title_field": "question"
 }

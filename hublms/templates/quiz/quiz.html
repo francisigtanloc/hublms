@@ -1,4 +1,5 @@
 {% if not hide_quiz %}
+
 <div class="mt-4">
 	<ul class="alert alert-info pl-8">
 
@@ -155,18 +156,80 @@
 		</div>
 		<div>
 			{% for submission in all_submissions %}
+			
 			<div class="grid-row">
 				<div class="data-row row">
-					<div class="col grid-static-col col-xs-1">{{ loop.index }}</div>
+					<div class="col grid-static-col col-xs-1 " >{{ loop.index }}</div>
 					<div class="col grid-static-col text-right">{{ submission.score }}</div>
-					<div class="col grid-static-col" title="{{ frappe.utils.format_datetime(submission.creation, "medium") }}">
+					<div class="col grid-static-col btn-show-results" data-name="{{ submission.name }}" title="{{ frappe.utils.format_datetime(submission.creation, "medium") }}">
 						{{ frappe.utils.pretty_date(submission.creation) }}
 					</div>
+					
 				</div>
 			</div>
 			{% endfor %}
 		</div>
 	</div>
+	
 
 </article>
+<!-- Add this modal at the end of the file -->
+
+<div class="modal fade review-modal" id="answersModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">{{ _("Write a Review") }}</div>
+            </div>
+
+
+            <div class="modal-body">
+                <form class="review-form" id="review-form">
+                    <div class="form-group">
+                        <div class="clearfix">
+                            <label class="control-label reqd" style="padding-right: 0px;">{{ _("Rating") }}</label>
+                        </div>
+                        <div class="control-input-wrapper">
+                            <div class="control-input">
+                                <div class="rating rating-field" id="rating">
+                                    {% for i in [1, 2, 3, 4, 5] %}
+                                    <svg class="icon icon-md icon-rating" data-rating="{{ i }}">
+                                        <use href="#icon-star"></use>
+                                    </svg>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="clearfix">
+                            <label class="control-label reqd" style="padding-right: 0px;">{{ _("Review") }}</label>
+                        </div>
+                        <div class="control-input-wrapper">
+                            <div class="control-input">
+                                <textarea type="text" autocomplete="off" class="input-with-feedback form-control review-field"
+                                data-fieldtype="Text" data-fieldname="feedback_comments" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="error-field muted-text"></p>
+                </form>
+            </div>
+
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm mr-2" data-dismiss="modal" aria-label="Close">
+                    {{ _("Discard") }}
+                </button>
+
+                <button class="btn btn-primary btn-sm"  id="submit-review">
+                    {{ _("Submit") }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endif %}

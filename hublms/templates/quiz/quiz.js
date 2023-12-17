@@ -44,6 +44,10 @@ frappe.ready(() => {
 	$("#try-again").click((e) => {
 		try_quiz_again(e);
 	});
+
+	$(".btn-show-results").click((e) => {
+		show_results_modal(e);
+	});
 });
 
 const mark_active_question = (e = undefined) => {
@@ -290,4 +294,112 @@ const add_to_local_storage = () => {
 
 	self.answer = [];
 	self.is_correct = [];
+};
+const show_results_modal = (e) => {
+	const target = $(e.currentTarget);
+
+	const id = target.data("name");
+	list = [];
+	frappe.call({
+		method: 'frappe.client.get',
+		args: {
+			fieldname: "result",
+			doctype: "Hublms Quiz Submission",
+			filters: {name: id}
+		},
+		callback: function(response) {
+			var parentDoc = response.message;
+			var childTableData = parentDoc.result;  // Replace with the fieldname of the child table in the parent DocType
+			console.log(childTableData);
+			
+			html = `<div class="form-grid">
+				<div class="grid-heading-row">
+					<div class="grid-row">
+						<div class="data-row row">
+							<div class="col grid-static-col">Question.</div>
+							<div class="col grid-static-col">Answer</div>
+							<div class="col grid-static-col">Is Correct</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="grid-row">`;
+						
+
+						childTableData.forEach(function (item) {
+								html += `
+								<div class="data-row row">
+								<div class="col btn-show-results" >` + item.question + `</div>
+								<div class="col btn-show-results" >` + item.answer + `</div>
+								<div class="col btn-show-results" >` + (item.is_correct == 0 ? "Correct" : "Wrong")   + `</div>
+								</div>` ;
+						});
+
+			html += `	
+					</div>
+				</div>
+			</div>`;
+
+			
+
+			frappe.msgprint({
+				title: 'Answers',
+				message: html
+			});
+		}
+	});
+	
+	
+
+	// let course_modal = new frappe.ui.Dialog({
+	// 	title: "Quiz Result",
+	// 	fields: [
+	// 		{
+	// 			fieldname: "questions",
+	// 			fieldtype: "Table",
+	// 			in_place_edit: 1,
+	// 			label: __("Questions"),
+	// 			fields: [
+	// 				{
+	// 					fieldname: "question",
+	// 					fieldtype: "Link",
+	// 					label: __("Question"),
+	// 					options: "LMS Question",
+	// 					in_list_view: 1,
+	// 					only_select: 1,
+	// 					reqd: 1,
+	// 				},
+	// 				{
+	// 					fieldname: "marks",
+	// 					fieldtype: "Int",
+	// 					label: __("Marks"),
+	// 					in_list_view: 1,
+	// 					reqd: 1,
+	// 				},
+	// 				{
+	// 					fieldname: "question_name",
+	// 					fieldname: "Link",
+	// 					options: "LMS Quiz Question",
+	// 					label: __("Question Name"),
+	// 				},
+	// 			],
+	// 		},
+	// 		// {
+	// 		// 	fieldtype: "Link",
+	// 		// 	options: "Course Evaluator",
+	// 		// 	label: __("Course Evaluator"),
+	// 		// 	fieldname: "evaluator",
+	// 		// 	only_select: 1,
+	// 		// 	default: evaluator || "",
+	// 		// },
+	// 	],
+	// 	primary_action_label: __("Close"),
+	// 	primary_action(values) {
+	// 		course_modal.hide();
+	// 	},
+	// });
+	// course_modal.show();
+	// setTimeout(() => {
+	// 	$(".modal-body").css("min-height", "300px");
+	// }, 1000);
 };

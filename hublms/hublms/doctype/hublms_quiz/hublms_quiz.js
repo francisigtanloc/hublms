@@ -35,7 +35,8 @@ frappe.ui.form.on("Hublms Quiz", {
         new frappe.ui.form.MultiSelectDialog({
             doctype: "Hublms Question", // Replace with your actual DocType
             target: this.cur_frm,
-            setters: {},
+            columns: {'question':null},
+            setters: {'tags':null},
             // allow_child_item_selection: 1,
             // child_fieldname: "questions", // child table fieldname, whose records will be shown &amp; can be filtered
             // child_columns: ["questions"], // child item columns to be displayed

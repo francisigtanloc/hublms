@@ -245,10 +245,10 @@ def get_lesson_index(lesson_name):
 	return f"{chapter.idx}.{lesson.idx}"
 
 
-def get_lesson_url(course, lesson_number):
-	if not lesson_number:
+def get_lesson_url(course, content_number):
+	if not content_number:
 		return
-	return f"/hublms/course/{course}/learn/{lesson_number}"
+	return f"/hublms/course/{course}/learn/{content_number}"
 
 
 def get_batch(course, batch_name):

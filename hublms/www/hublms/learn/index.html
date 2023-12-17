@@ -9,7 +9,6 @@
 
 {% block head_include %}
 <link rel="stylesheet" href="/assets/frappe/css/hljs-night-owl.css">
-
 {% for ext in page_extensions %}
 {{ ext.render_header() }}
 {% endfor %}
@@ -94,8 +93,10 @@
 <div>
     <div>
         <div class="pull-right">
+            {% if topics | length %}
             {% if get_progress(course.name, topic_content) == 'Complete' %}
             <span id="status-indicator" class="indicator-pill green">{{ _("COMPLETED") }}</span>
+            {% endif %}
             {% endif %}
 
             <!-- Edit Button -->
@@ -157,11 +158,29 @@
         {% endif %}
     </div>
 
-    
+    {{ pagination(prev_url, next_url) }}
 
 </div>
 {% endmacro %}
 
+<!-- Pagination -->
+{% macro pagination(prev_url, next_url) %}
+    {% if prev_url or next_url %}
+    <div class="lesson-pagination">
+        {% if prev_url %}
+        <a class="btn btn-secondary btn-sm prev" href="{{ prev_url }}">
+            {{ _("Previous Content") }}
+        </a>
+        {% endif %}
+
+        {% if next_url %}
+        <a class="btn btn-primary btn-sm next pull-right" href="{{ next_url }}">
+            {{ _("Next Content") }}
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endmacro %}
 
 {%- block script %}
     {{ super() }}

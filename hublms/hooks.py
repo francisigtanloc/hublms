@@ -233,6 +233,7 @@ website_route_rules = [
 	{"from_route": "/hublms/programs/<program>", "to_route": "hublms/programs"},
 	{"from_route": "/hublms/course/<course>", "to_route": "hublms/course"},
 	{"from_route": "/hublms/topics/<topics>", "to_route": "hublms/topics"},
+	{"from_route": "/hublms/quiz_result/<subname>", "to_route": "hublms/quiz_result"},
  
  	# {	"from_route": "/hublms/course/<course>/learn", "to_route": "hublms/learn"},
 	{
