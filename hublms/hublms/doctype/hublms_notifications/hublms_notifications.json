@@ -29,7 +29,7 @@
    "fieldname": "trigger",
    "fieldtype": "Select",
    "label": "Trigger",
-   "options": "Registration\nSubmission\nCertification"
+   "options": "Registration\nNew Quiz Submission\nQuiz Passed\nCertificate\nCourse Completion"
   },
   {
    "fieldname": "template",
@@ -46,7 +46,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-18 07:28:24.371273",
+ "modified": "2023-12-18 08:24:17.928749",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Notifications",

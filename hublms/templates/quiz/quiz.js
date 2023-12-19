@@ -331,7 +331,7 @@ const show_results_modal = (e) => {
 								<div class="data-row row">
 								<div class="col btn-show-results" >` + item.question + `</div>
 								<div class="col btn-show-results" >` + item.answer + `</div>
-								<div class="col btn-show-results" >` + (item.is_correct == 0 ? "Correct" : "Wrong")   + `</div>
+								<div class="col btn-show-results" >` + (item.is_correct == 1 ? "Correct" : "Wrong")   + `</div>
 								</div>` ;
 						});
 

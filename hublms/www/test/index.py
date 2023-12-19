@@ -1,25 +1,83 @@
 import frappe
 from frappe import _
+import random
 
 def get_context(context):
     context.no_cache = 1
-    table_fieldname = "course_topics"
-    # course_name = frappe.form_dict["course"]
-    context.course_list     = frappe.db.get_list('Hublms Course', "*")
-    context.course_all      = frappe.db.get_all('Hublms Course', "*")
-    context.course_value    = frappe.db.get_value('Hublms Course','Course 102', ["name","*"])
     
-    context.course_doc      = frappe.get_doc('Hublms Course', 'Course 102')
-
-    # Define the doctype and fieldnames
-    parent_doctype = "Sales Order"
-    table_fieldname = "items"
-
-    # Specify the fields you want to retrieve, including the table field
-    fields = ["name", "customer", "transaction_date", f"{table_fieldname}*item", f"{table_fieldname}*quantity", f"{table_fieldname}*rate"]
-    context.test  = frappe.get_list(
-        parent_doctype,
-        fields=fields,
-        filters={"status": "Open"},  # Add any filters as needed
-        limit=10  # Limit the number of records returned (optional)
+    quiz_name = "quiz-1"
+    quiz = frappe.db.get_value(
+    "Hublms Quiz",
+    quiz_name,
+    [
+    "name",
+    "time",
+    "title",
+    "randomize_questions",
+    "subset",
+    "max_attempts",
+    "show_answers",
+    "show_submission_history",
+    "passing_percentage",
+    ],
+    as_dict=True,
     )
+    quiz.questions = []
+    fields = ["name", "question", "type", "multiple"]
+    for num in range(1, 5):
+        fields.append(f"option_{num}")
+        fields.append(f"is_correct_{num}")
+        fields.append(f"explanation_{num}")
+        fields.append(f"possibility_{num}")
+
+    questions = frappe.get_all(
+		"Hublms Quiz Question",
+		filters={"parent": quiz.name},
+		fields=["question", "marks"],
+		order_by="idx",
+	)
+    if quiz.randomize_questions == True:
+        random.shuffle(questions)
+
+    submission = frappe.get_value(
+        "Hublms Quiz Submission",
+        {
+            "quiz": quiz.name,
+            "member": frappe.session.user,
+            "name" : "c435e1f244"
+        },
+        ["name", "score", "creation"],
+        order_by="creation desc",
+        as_dict=True,
+    )
+    answers = frappe.get_all(
+        "Hublms Quiz Result",
+        {
+            "parent" : submission.name
+        },
+        ["*"],
+        order_by="creation desc",
+    )
+    questions = questions[:int(quiz.subset)]
+    for question in questions:
+        details = frappe.db.get_value("Hublms Question", question.question, fields, as_dict=1)
+        details["marks"] = question.marks
+        for answer in answers:
+            if answer.question == details.question:
+                details["answer"] = answer.answer
+                details["is_correct"] = answer.is_correct
+        quiz.questions.append(details)
+
+    no_of_attempts = frappe.db.count(
+        "Hublms Quiz Submission", {"owner": frappe.session.user, "quiz": quiz_name}
+    )
+
+    
+        
+    context.submission = submission
+    context.answers = answers
+    context.quiz = quiz
+    context.no_of_attempts = no_of_attempts
+    
+    context.hide_quiz = False
+    

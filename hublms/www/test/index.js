@@ -1,110 +1,390 @@
 frappe.ready(() => {
-    alert('Hello World!');
-    let questions = [
-        {
-            text: 'What is 1 + 1?',
-            options: ['1', '2', '3', '4'],
-            correctAnswer: '2'
-        },
-        {
-            text: 'What is 2 + 2?',
-            options: ['2', '3', '4', '5'],
-            correctAnswer: '4'
-        },
-        {
-            text: 'What is 3 + 3?',
-            options: ['3', '6', '9', '12'],
-            correctAnswer: '6'
-        },
-        {
-            text: 'What is 4 + 4?',
-            options: ['4', '8', '12', '16'],
-            correctAnswer: '8'
-        },
-        {
-            text: 'What is 5 + 5?',
-            options: ['5', '10', '15', '20'],
-            correctAnswer: '10'
-        }
-    ];
+	const self = this;
+	this.quiz_submitted = false;
+	this.answer = [];
+	this.is_correct = [];
+	this.show_answers = $("#quiz-title").data("show-answers");
+	localStorage.removeItem($("#quiz-title").data("name"));
+	
+        parse_options();
+	$(".btn-start-hublms-quiz").click((e) => {
+		$("#start-banner").addClass("hide");
+		$("#quiz-form").removeClass("hide");
+		mark_active_question();
+	});
 
-    let currentQuestionIndex = 0;
-    let questionStatus = questions.map(() => 'unanswered');
+	$(".option").click((e) => {
+		if (!$("#check").hasClass("hide")) enable_check(e);
+	});
 
-    function renderQuestion() {
-        let questionContainer = $('#quiz-container');
-        questionContainer.empty();
+	$(".possibility").keyup((e) => {
+		enable_check(e);
+	});
 
-        let question = questions[currentQuestionIndex];
-        let questionElement = $('<div></div>');
+	$("#summary").click((e) => {
+		e.preventDefault();
+		if (!this.show_answers) check_answer();
 
-        let questionText = $('<h2></h2>').text(question.text);
-        questionElement.append(questionText);
+		setTimeout(() => {
+			quiz_summary(e);
+		}, 500);
+	});
 
-        for (let i = 0; i < question.options.length; i++) {
-            let option = $('<input>').attr({
-                type: 'radio',
-                name: `question${currentQuestionIndex}`,
-                value: question.options[i]
-            });
-            let label = $('<label></label>').text(question.options[i]);
-            questionElement.append(option, label, $('<br>'));
-        
-            option.on('change', function() {
-                if (this.value === question.correctAnswer) {
-                    questionStatus[currentQuestionIndex] = 'correct';
-                } else {
-                    questionStatus[currentQuestionIndex] = 'incorrect';
-                }
-            });
-        }
+	$("#check").click((e) => {
+		e.preventDefault();
+		check_answer(e);
+	});
 
-       
+	$("#next").click((e) => {
+		e.preventDefault();
+		if (!this.show_answers) check_answer();
 
-        questionContainer.append(questionElement);
-    }
+		mark_active_question(e);
+	});
 
-    function renderPagination() {
-        let paginationContainer = $('#pagination');
-        paginationContainer.empty();
+	$("#try-again").click((e) => {
+		try_quiz_again(e);
+	});
 
-        for (let i = 0; i < questions.length; i++) {
-            let button = $('<button></button>');
-
-            if (questionStatus[i] === 'unanswered') {
-                button.css('background-color', 'gray');
-            } else if (questionStatus[i] === 'correct') {
-                button.css('background-color', 'green');
-            } else {
-                button.css('background-color', 'red');
-            }
-
-            button.on('click', function () {
-                currentQuestionIndex = i;
-                renderQuestion();
-                renderPagination();
-            });
-
-            paginationContainer.append(button);
-        }
-    }
-
-    $('#prev').on('click', function () {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            renderQuestion();
-            renderPagination();
-        }
-    });
-
-    $('#next').on('click', function () {
-        if (currentQuestionIndex < questions.length - 1 && questionStatus[currentQuestionIndex] !== 'unanswered') {
-            currentQuestionIndex++;
-            renderQuestion();
-            renderPagination();
-        }
-    });
-
-    renderQuestion();
-    renderPagination();
+	$(".btn-show-results").click((e) => {
+		show_results_modal(e);
+	});
 });
+
+const mark_active_question = (e = undefined) => {
+	let total_questions = $(".question").length;
+	let current_index = $(".active-question").attr("data-qt-index") || 0;
+	let next_index = parseInt(current_index) + 1;
+
+	if (this.show_answers) {
+		$("#next").addClass("hide");
+	} else if (!this.show_answers && next_index == total_questions) {
+		$("#next").addClass("hide");
+		$("#summary").removeClass("hide");
+	}
+
+	$(".question").addClass("hide").removeClass("active-question");
+	$(`.question[data-qt-index='${next_index}']`)
+		.removeClass("hide")
+		.addClass("active-question");
+
+	$(".current-question").text(`${next_index}`);
+	$("#check").removeClass("hide").attr("disabled", true);
+	$("#next").attr("disabled", true);
+	$(".explanation").addClass("hide");
+
+	$(".timer").addClass("hide");
+	calculate_and_display_time(100);
+	$(".timer").removeClass("hide");
+	initialize_timer();
+};
+
+const calculate_and_display_time = (percent_time) => {
+	$(".timer .progress-bar").attr("aria-valuenow", percent_time);
+	$(".timer .progress-bar").attr("aria-valuemax", percent_time);
+	$(".timer .progress-bar").css("width", `${percent_time}%`);
+	let progress_color = percent_time < 20 ? "red" : "var(--primary-color)";
+	$(".timer .progress-bar").css("background-color", progress_color);
+};
+
+const initialize_timer = () => {
+	this.time_left = $(".timer").data("time");
+	calculate_and_display_time(100, this.time_left);
+	$(".timer").removeClass("hide");
+	const total_time = $(".timer").data("time");
+	this.start_time = new Date().getTime();
+	const self = this;
+	let old_diff;
+
+	this.timer = setInterval(function () {
+		var diff = (new Date().getTime() - self.start_time) / 1000;
+		var variation = old_diff ? diff - old_diff : diff;
+		old_diff = diff;
+		self.time_left -= variation;
+		let percent_time = (self.time_left / total_time) * 100;
+		calculate_and_display_time(percent_time);
+		if (self.time_left <= 0) {
+			clearInterval(self.timer);
+			$(".timer").addClass("hide");
+			check_answer();
+			$("#next").attr("disabled", false);
+		}
+	}, 100);
+};
+
+const enable_check = (e) => {
+	if ($(".option:checked").length || $(".possibility").val().trim()) {
+		$("#check").removeAttr("disabled");
+		$("#next").removeAttr("disabled");
+		$(".custom-checkbox").removeClass("active-option");
+		$(".option:checked")
+			.closest(".custom-checkbox")
+			.addClass("active-option");
+	}
+};
+
+const quiz_summary = (e = undefined) => {
+	e && e.preventDefault();
+	let quiz_name = $("#quiz-title").data("name");
+	let self = this;
+
+	frappe.call({
+		method: "hublms.hublms.doctype.hublms_quiz.hublms_quiz.quiz_summary",
+		args: {
+			quiz: quiz_name,
+			results: localStorage.getItem(quiz_name),
+		},
+		callback: (data) => {
+			$(".question").addClass("hide");
+			$("#summary").addClass("hide");
+			$(".quiz-footer span").addClass("hide");
+			$("#quiz-form").prepend(
+				`<div class="summary bold-heading text-center">
+					${__("Your score is")} ${data.message.score}
+					${__("out of")} ${data.message.score_out_of}
+				</div>`
+			);
+			$("#try-again").attr("data-submission", data.message.submission);
+			$("#try-again").removeClass("hide");
+			self.quiz_submitted = true;
+			if (
+				this.hasOwnProperty("marked_as_complete") &&
+				data.message.pass
+			) {
+				mark_progress();
+			}
+		},
+	});
+};
+
+const try_quiz_again = (e) => {
+	e.preventDefault();
+	if (window.location.href.includes("new-submission")) {
+		const target = $(e.currentTarget);
+		window.location.href = `/quiz-submission/
+		${target.data("quiz")}/
+		${target.data("submission")}`;
+	} else {
+		window.location.reload();
+	}
+};
+
+const check_answer = (e = undefined) => {
+	e && e.preventDefault();
+	let answer = $(".active-question textarea");
+	let total_questions = $(".question").length;
+	let current_index = $(".active-question").attr("data-qt-index");
+
+	if (answer.length && !answer.val().trim()) {
+		frappe.throw(__("Please enter your answer"));
+	}
+
+	clearInterval(self.timer);
+	$(".timer").addClass("hide");
+
+	$(".explanation").removeClass("hide");
+	$("#check").addClass("hide");
+
+	if (current_index == total_questions) {
+		$("#summary").removeClass("hide");
+	} else if (this.show_answers) {
+		$("#next").removeClass("hide");
+	}
+	parse_options();
+};
+
+const parse_options = () => {
+	
+    $(".active-question").each((i, question) => {
+        let element;
+        let type = $(question).data("type");
+        let is_answer_correct =  $(question).data("is_correct");
+
+        if (type == "Choices") {
+            element = $(question).find('input');
+            parse_choices(element, is_answer_correct);
+
+        } else {
+            element = $(question).find('textarea');
+			parse_possible_answers(element, is_answer_correct);
+
+        }
+    });
+
+};
+
+const parse_choices = (element, is_correct) => {
+	element.each((i, elem) => {
+		if ($(elem).prop("checked")) {
+            console.log(this.show_answers);
+
+			self.answer.push(decodeURIComponent($(elem).val()));
+			self.is_correct.push(is_correct[i]);
+			if (this.show_answers)
+				is_correct[i]
+					? add_icon(elem, "check")
+					: add_icon(elem, "wrong");
+		} else {
+			add_icon(elem, "minus-circle");
+		}
+	});
+};
+
+const parse_possible_answers = (element, correct) => {
+	self.answer.push(decodeURIComponent($(element).val()));
+	self.is_correct.push(correct);
+	if (this.show_answers)
+		correct
+			? show_indicator("success", element)
+			: show_indicator("failure", element);
+};
+
+const show_indicator = (class_name, element) => {
+	let label = class_name == "success" ? "Correct" : "Incorrect";
+	let icon =
+		class_name == "success" ? "#icon-solid-success" : "#icon-solid-error";
+	$(`<div class="answer-indicator ${class_name}">
+			<svg class="icon icon-md">
+				<use href=${icon}>
+			</svg>
+			<span style="font-weight: 500">${__(label)}</span>
+		</div>`).insertAfter(element);
+};
+
+const add_icon = (element, icon) => {
+	$(element).closest(".custom-checkbox").removeClass("active-option");
+	$(element).closest(".option").addClass("hide");
+	let label = $(element).siblings(".option-text").text();
+	$(element).siblings(".option-text").html(`
+        <div>
+            <img class="d-inline mr-3" src="/assets/hublms/icons/${icon}.svg">
+            ${label}
+        </div>
+    `);
+};
+
+const add_to_local_storage = () => {
+	let current_index = $(".active-question").attr("data-qt-index");
+	let quiz_name = $("#quiz-title").data("name");
+	let quiz_stored = JSON.parse(localStorage.getItem(quiz_name));
+
+	let quiz_obj = {
+		question_index: current_index - 1,
+		answer: self.answer.join(),
+		is_correct: self.is_correct,
+	};
+
+	quiz_stored ? quiz_stored.push(quiz_obj) : (quiz_stored = [quiz_obj]);
+	localStorage.setItem(quiz_name, JSON.stringify(quiz_stored));
+
+	self.answer = [];
+	self.is_correct = [];
+};
+const show_results_modal = (e) => {
+	const target = $(e.currentTarget);
+
+	const id = target.data("name");
+	list = [];
+	frappe.call({
+		method: 'frappe.client.get',
+		args: {
+			fieldname: "result",
+			doctype: "Hublms Quiz Submission",
+			filters: {name: id}
+		},
+		callback: function(response) {
+			var parentDoc = response.message;
+			var childTableData = parentDoc.result;  // Replace with the fieldname of the child table in the parent DocType
+			console.log(childTableData);
+			
+			html = `<div class="form-grid">
+				<div class="grid-heading-row">
+					<div class="grid-row">
+						<div class="data-row row">
+							<div class="col grid-static-col">Question.</div>
+							<div class="col grid-static-col">Answer</div>
+							<div class="col grid-static-col">Is Correct</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="grid-row">`;
+						
+
+						childTableData.forEach(function (item) {
+								html += `
+								<div class="data-row row">
+								<div class="col btn-show-results" >` + item.question + `</div>
+								<div class="col btn-show-results" >` + item.answer + `</div>
+								<div class="col btn-show-results" >` + (item.is_correct == 0 ? "Correct" : "Wrong")   + `</div>
+								</div>` ;
+						});
+
+			html += `	
+					</div>
+				</div>
+			</div>`;
+
+			
+
+			frappe.msgprint({
+				title: 'Answers',
+				message: html
+			});
+		}
+	});
+	
+	
+
+	// let course_modal = new frappe.ui.Dialog({
+	// 	title: "Quiz Result",
+	// 	fields: [
+	// 		{
+	// 			fieldname: "questions",
+	// 			fieldtype: "Table",
+	// 			in_place_edit: 1,
+	// 			label: __("Questions"),
+	// 			fields: [
+	// 				{
+	// 					fieldname: "question",
+	// 					fieldtype: "Link",
+	// 					label: __("Question"),
+	// 					options: "LMS Question",
+	// 					in_list_view: 1,
+	// 					only_select: 1,
+	// 					reqd: 1,
+	// 				},
+	// 				{
+	// 					fieldname: "marks",
+	// 					fieldtype: "Int",
+	// 					label: __("Marks"),
+	// 					in_list_view: 1,
+	// 					reqd: 1,
+	// 				},
+	// 				{
+	// 					fieldname: "question_name",
+	// 					fieldname: "Link",
+	// 					options: "LMS Quiz Question",
+	// 					label: __("Question Name"),
+	// 				},
+	// 			],
+	// 		},
+	// 		// {
+	// 		// 	fieldtype: "Link",
+	// 		// 	options: "Course Evaluator",
+	// 		// 	label: __("Course Evaluator"),
+	// 		// 	fieldname: "evaluator",
+	// 		// 	only_select: 1,
+	// 		// 	default: evaluator || "",
+	// 		// },
+	// 	],
+	// 	primary_action_label: __("Close"),
+	// 	primary_action(values) {
+	// 		course_modal.hide();
+	// 	},
+	// });
+	// course_modal.show();
+	// setTimeout(() => {
+	// 	$(".modal-body").css("min-height", "300px");
+	// }, 1000);
+};

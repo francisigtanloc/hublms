@@ -1,13 +1,96 @@
-{{course_list}}
-</br>
-------------------------------------------------------------------------
-</br>
-{{course_all}}
-</br>
-------------------------------------------------------------------------
-</br>
-{{course_value}}
-</br>
-------------------------------------------------------------------------
-</br>
-{{course_doc}} 
+{% extends "hublms/templates/hublms_base.html" %}
+{% from "www/macros/livecode.html" import LiveCodeEditorJS, LiveCodeEditor with context %}
+
+
+
+
+{% block head_include %}
+<link rel="stylesheet" href="/assets/frappe/css/hljs-night-owl.css">
+{% for ext in page_extensions %}
+{{ ext.render_header() }}
+{% endfor %}
+{% endblock %}
+{% block page_content %}
+
+{% if not hide_quiz %}
+
+
+<div class="common-page-style">
+    <div class="container course-details-page">
+        <div>
+            <!-- Lesson Content -->
+                <form id="quiz-form" class="common-card-style column-card ">
+                    <div class="text-center">
+                        <div class="bold-heading" id="quiz-title" data-max-attempts="{{ quiz.max_attempts }}"
+                            data-name="{{ quiz.name }}" data-show-answers="{{ quiz.show_answers }}">
+                            {{ quiz.title }}
+                        </div>
+                    </div>
+                    <div class="questions">
+                    {% for question in quiz.questions %}
+                    
+                    <div class="question active-question" data-is_correct="{{question.is_correct}}"  data-name="{{ question.name }}" data-type="{{ question.type }}"
+                        data-multi="{{ question.multiple }}" data-qt-index="{{ loop.index }}">
+                        <div>
+                            <div class="question-text">
+                                {{ question.question }} 
+                            </div>
+                        </div>
+            
+                        {% if question.type == "Choices" %}
+                        {% set options = shuffle([question.option_1, question.option_2, question.option_3, question.option_4]) %}
+                        {% for option in options %}
+                            {% if option %}
+                            <div class="mb-2">
+                                <div class="custom-checkbox">
+                                    <label class="option-row">
+                                    <input class="option" value="{{ option | urlencode }}"
+                                    
+                                        {% if question.answer == option %}  checked {% endif %}
+                                        {% if question.multiple %} type="checkbox" {% else %} type="radio" name="{{ question.question | urlencode }}" {% endif %}>
+                                    <div class="option-text">{{ frappe.utils.md_to_html(option) }}</div>
+                                    </label>
+                                </div>
+            
+                            {% set explanation = question['explanation_' + loop.index | string] %}
+                            {% if explanation %}
+                                <small class="explanation ml-10 hide">{{ explanation }}</small>
+                            {% endif %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+            
+                        {% else %}
+                        <div class="control-input-wrapper">
+                            <div class="control-input">
+                                <textarea type="text" autocomplete="off" class="input-with-feedback form-control bold possibility mt-4" style="height: 150px;" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+                        {% endif %}
+            
+                    </div>
+                    {% endfor %}
+                    </div>
+            
+                    <div class="quiz-footer">
+                        <button class="btn btn-secondary btn-sm {% if quiz.show_answers %} hide {% endif %}" id="next" disabled>
+                            {{ _("Next Question") }}
+                        </button>
+                        <button class="btn btn-secondary btn-sm hide" id="summary">
+                            {{ _("Submit") }}
+                        </button>
+                        <button class="btn btn-secondary btn-sm mx-auto hide" id="try-again" data-quiz="{{ quiz.name }}">
+                            {{ _("Try Again") }}
+                        </button>
+                    </div>
+                </form>
+                
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+
+
+{% endblock %}
