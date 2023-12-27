@@ -5,7 +5,9 @@ frappe.ready(() => {
 	this.is_correct = [];
 	this.show_answers = $("#quiz-title").data("show-answers");
 	localStorage.removeItem($("#quiz-title").data("name"));
-
+	
+    parse_options();
+	
 	$(".btn-start-hublms-quiz").click((e) => {
 		$("#start-banner").addClass("hide");
 		$("#quiz-form").removeClass("hide");
@@ -48,70 +50,8 @@ frappe.ready(() => {
 	$(".btn-show-results").click((e) => {
 		show_results_modal(e);
 	});
-	
-        
-	document.body.addEventListener('click', function(event) {
-		if (event.target.id === 'downloadPdf') {
-			var html = document.querySelector('.modal-content');
-			
-
-			var originalBody = document.body.innerHTML; // save the current body
-            document.body.innerHTML = `<div class="empty-state group-by-loading">
-			"Loading..."
-			</div>`; // clear the body
-
-            
-
-            setTimeout(function() {
-                html2pdf(html, {
-                    margin: 1,
-                    filename: 'myfile.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
-                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                }).then(function() {
-					location.reload()
-                    document.body.innerHTML = originalBody; // put the original body back
-                });
-            }, 3000); // delay of 3 seconds
-			// html2pdf(element);
-		}
-	});   
-	
 });
-const parse_modal_options = () => {
-	setTimeout(function() {
-		$(".active-question").each((i, question) => {
 
-			let element;
-			let type = $(question).data("type");
-			let is_answer_correct =  $(question).data("is_correct");
-
-			if (type == "Choices") {
-				element = $(question).find('input');
-				parse_modal_choices(element, is_answer_correct);
-
-			} else {
-				element = $(question).find('textarea');
-				parse_possible_answers(element, is_answer_correct);
-
-			}
-		});
-	}, 200);
-};
-const parse_modal_choices = (element, is_correct) => {
-	element.each((i, elem) => {
-		if ($(elem).prop("checked")) {
-
-			if (this.show_answers)
-				is_correct
-					? add_icon(elem, "check")
-					: add_icon(elem, "wrong");
-		} else {
-			add_icon(elem, "minus-circle");
-		}
-	});
-};
 const mark_active_question = (e = undefined) => {
 	let total_questions = $(".question").length;
 	let current_index = $(".active-question").attr("data-qt-index") || 0;
@@ -255,48 +195,30 @@ const check_answer = (e = undefined) => {
 };
 
 const parse_options = () => {
-	let user_answers ;
-	let element;
-	let type = $(".active-question").data("type");
+	
+    $(".active-question").each((i, question) => {
+        let element;
+        let type = $(question).data("type");
+        let is_answer_correct =  $(question).data("is_correct");
 
-	if (type == "Choices") {
-		$(".active-question input").each((i, element) => {
-			if ($(element).prop("checked")) {
-				user_answers = $(element).data("id");
-			}
-		});
-		element = $(".active-question input");
-	} else {
-		user_answers.push($(".active-question textarea").val());
-		element = $(".active-question textarea");
-	}
+        if (type == "Choices") {
+            element = $(question).find('input');
+            parse_choices(element, is_answer_correct);
 
-	is_answer_correct(type, user_answers, element);
-};
+        } else {
+            element = $(question).find('textarea');
+			parse_possible_answers(element, is_answer_correct);
 
-const is_answer_correct = (type, user_answers, element) => {
-	frappe.call({
-		async: false,
-		method: "hublms.hublms.doctype.hublms_quiz.hublms_quiz.check_answer",
-		args: {
-			question: $(".active-question").data("name"),
-			type: type,
-			answers: user_answers,
-		},
-		callback: (data) => {
-			type == "Choices"
-				? parse_choices(element, data.message)
-				: parse_possible_answers(element, data.message);
-			add_to_local_storage();
-		},
-	});
+        }
+    });
+
 };
 
 const parse_choices = (element, is_correct) => {
 	element.each((i, elem) => {
 		if ($(elem).prop("checked")) {
-			self.answer.push(decodeURIComponent($(elem).val()));
-			self.is_correct.push(is_correct);
+            console.log(is_correct);
+
 			if (this.show_answers)
 				is_correct
 					? add_icon(elem, "check")
@@ -358,26 +280,6 @@ const add_to_local_storage = () => {
 	self.is_correct = [];
 };
 const show_results_modal = (e) => {
-	
-	const target = $(e.currentTarget);
-
-	const id = target.data("name");
-	fetch('/hublms/submission/'+ id )
-    .then(response => response.text())
-    .then(html => {
-		frappe.msgprint({
-			title: 'Answers',
-			message: html,
-			indicator:"green",
-		});
-    })
-	.then(() => parse_modal_options());
-
-};
-			
-		
-	
-const show_results_modal_unused = (e) => {
 	const target = $(e.currentTarget);
 
 	const id = target.data("name");
@@ -411,9 +313,9 @@ const show_results_modal_unused = (e) => {
 						childTableData.forEach(function (item) {
 								html += `
 								<div class="data-row row">
-								<div class="col " >` + item.question + `</div>
-								<div class="col " >` + item.answer + `</div>
-								<div class="col " >` + (item.is_correct == 1 ? "Correct" : "Wrong")   + `</div>
+								<div class="col btn-show-results" >` + item.question + `</div>
+								<div class="col btn-show-results" >` + item.answer + `</div>
+								<div class="col btn-show-results" >` + (item.is_correct == 0 ? "Correct" : "Wrong")   + `</div>
 								</div>` ;
 						});
 
@@ -432,6 +334,7 @@ const show_results_modal_unused = (e) => {
 	});
 	
 	
+
 	// let course_modal = new frappe.ui.Dialog({
 	// 	title: "Quiz Result",
 	// 	fields: [

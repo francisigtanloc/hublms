@@ -240,6 +240,7 @@ website_route_rules = [
 		"from_route": "/hublms/course/<course>/learn/<int:topic>.<int:content>",
 		"to_route": "hublms/learn",
 	},
+	{"from_route": "/hublms/submission/<subname>", "to_route": "hublms/submission"},
 	
 ]
 jinja = {

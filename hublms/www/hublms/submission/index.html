@@ -1,19 +1,20 @@
-{% extends "hublms/templates/hublms_base.html" %}
+{% extends "templates/hublms.html" %}
+
 {% from "www/macros/livecode.html" import LiveCodeEditorJS, LiveCodeEditor with context %}
 
+{% block content %}
 
 
 
 {% block head_include %}
 <link rel="stylesheet" href="/assets/frappe/css/hljs-night-owl.css">
-{% for ext in page_extensions %}
-{{ ext.render_header() }}
-{% endfor %}
 {% endblock %}
+
+
 {% block page_content %}
 
 {% if not hide_quiz %}
-
+<body>
 
 <div class="common-page-style">
     <div class="container course-details-page">
@@ -24,7 +25,10 @@
                         <div class="bold-heading" id="quiz-title" data-max-attempts="{{ quiz.max_attempts }}"
                             data-name="{{ quiz.name }}" data-show-answers="{{ quiz.show_answers }}">
                             {{ quiz.title }}
-                        <button id="downloadPdf">Download PDF</button>
+                        </div>
+                        <div class="col grid-static-col">
+                            <button class='btn btn-info' id="downloadPdf" onclick="event.preventDefault();">{{ _("Download PDF") }}</button>
+                        </div>
                     </div>
                     <div class="questions">
                     {% for question in quiz.questions %}
@@ -36,7 +40,7 @@
                                 {{ question.question }} 
                             </div>
                         </div>
-            
+                        
                         {% if question.type == "Choices" %}
                         {% set options = [question.option_1, question.option_2, question.option_3, question.option_4] %}
                         {% for option in options %}
@@ -88,11 +92,11 @@
         </div>
     </div>
 </div>
+</body>
 
 
 {% endif %}
 
 
 {% endblock %}
-
-
+{% endblock %}

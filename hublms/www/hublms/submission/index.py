@@ -1,30 +1,28 @@
 import frappe
 from frappe import _
-from frappe.utils.pdf import get_pdf
-import requests
 import random
-
+from types import SimpleNamespace
 
 def get_context(context):
     context.no_cache = 1
-    
+    subname = frappe.form_dict["subname"]
+    print("-------------------")
+    print(subname)
+    print("-------------------")
     quiz_name = "quiz-1"
-    quiz = frappe.db.get_value(
-    "Hublms Quiz",
-    quiz_name,
-    [
-    "name",
-    "time",
-    "title",
-    "randomize_questions",
-    "subset",
-    "max_attempts",
-    "show_answers",
-    "show_submission_history",
-    "passing_percentage",
-    ],
-    as_dict=True,
-    )
+    doc = frappe.get_doc("Hublms Quiz", quiz_name, ignore_permissions=True)
+    quiz_dict = {
+        "name": doc.name,
+        "time": doc.time,
+        "title": doc.title,
+        "randomize_questions": doc.randomize_questions,
+        "subset": doc.subset,
+        "max_attempts": doc.max_attempts,
+        "show_answers": doc.show_answers,
+        "show_submission_history": doc.show_submission_history,
+        "passing_percentage": doc.passing_percentage
+    }
+    quiz = SimpleNamespace(**quiz_dict)
     quiz.questions = []
     fields = ["name", "question", "type", "multiple"]
     for num in range(1, 5):
@@ -42,17 +40,13 @@ def get_context(context):
     if quiz.randomize_questions == True:
         random.shuffle(questions)
 
-    submission = frappe.get_value(
-        "Hublms Quiz Submission",
-        {
-            "quiz": quiz.name,
-            "member": frappe.session.user,
-            "name" : "c435e1f244"
-        },
-        ["name", "score", "creation"],
-        order_by="creation desc",
-        as_dict=True,
-    )
+    doc = frappe.get_doc("Hublms Quiz Submission", subname, ignore_permissions=True)
+    submission_dict = {
+        "name": doc.name,
+        "score": doc.score,
+        "creation": doc.creation
+    }
+    submission = SimpleNamespace(**submission_dict)
     answers = frappe.get_all(
         "Hublms Quiz Result",
         {
@@ -63,10 +57,13 @@ def get_context(context):
     )
     questions = questions[:int(quiz.subset)]
     for question in questions:
-        details = frappe.db.get_value("Hublms Question", question.question, fields, as_dict=1)
+        doc = frappe.get_doc("Hublms Question", question.question, ignore_permissions=True)
+        details = {field: doc.get(field) for field in fields}
+        
         details["marks"] = question.marks
-        for answer in answers:
-            if answer.question == details.question:
+        for answer_dict in answers:
+            answer = SimpleNamespace(**answer_dict)
+            if answer.question == details['question']:
                 details["answer"] = answer.answer
                 details["is_correct"] = answer.is_correct
         quiz.questions.append(details)
@@ -74,7 +71,7 @@ def get_context(context):
     no_of_attempts = frappe.db.count(
         "Hublms Quiz Submission", {"owner": frappe.session.user, "quiz": quiz_name}
     )
-    
+
     
         
     context.submission = submission
@@ -84,13 +81,3 @@ def get_context(context):
     
     context.hide_quiz = False
     
-
-@frappe.whitelist()
-def test_pdf():
-    url = 'http://lms.test:8010/hublms/submission/99e450508d'
-    response = requests.get(url)
-    html = response.content
-
-    frappe.response.filename = "test.pdf"
-    frappe.response.filecontent = get_pdf(html)
-    frappe.response.type = "pdf"

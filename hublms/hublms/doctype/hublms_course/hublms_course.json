@@ -4,7 +4,7 @@
  "allow_rename": 1,
  "autoname": "field:title",
  "creation": "2023-11-23 00:28:34.893556",
- "default_view": "List",
+ "default_view": "Dashboard",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -38,7 +38,10 @@
   "column_break_rxww",
   "grant_certificate_after",
   "evaluator",
-  "duration"
+  "duration",
+  "student_statistics_tab",
+  "student_list",
+  "dashboard_tab"
  ],
  "fields": [
   {
@@ -224,12 +227,35 @@
    "fieldtype": "Table",
    "label": "Topics",
    "options": "Hublms Topic Reference"
+  },
+  {
+   "fieldname": "student_statistics_tab",
+   "fieldtype": "Tab Break",
+   "label": "Student statistics"
+  },
+  {
+   "fieldname": "student_list",
+   "fieldtype": "Table",
+   "label": "Student List",
+   "options": "Hublms Students Stats"
+  },
+  {
+   "fieldname": "dashboard_tab",
+   "fieldtype": "Tab Break",
+   "label": "Dashboard",
+   "show_dashboard": 1
   }
  ],
  "is_published_field": "published",
- "links": [],
+ "links": [
+  {
+   "group": "Course Details",
+   "link_doctype": "Hublms User Enrollment",
+   "link_fieldname": "course"
+  }
+ ],
  "make_attachments_public": 1,
- "modified": "2023-12-10 13:36:31.170958",
+ "modified": "2023-12-23 17:00:49.251114",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Course",

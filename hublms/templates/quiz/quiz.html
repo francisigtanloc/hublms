@@ -71,15 +71,15 @@
 			</div>
 
 			{% if question.type == "Choices" %}
-			{% set options = [question.option_1, question.option_2, question.option_3, question.option_4] %}
+			{% set options = shuffle([ {"id" : "1" , "value" : question.option_1}, {"id" : "2" , "value" : question.option_2}, {"id" : "3" , "value" : question.option_3}, {"id" : "4" , "value" : question.option_4}]) %}
 			{% for option in options %}
 				{% if option %}
 				<div class="mb-2">
 					<div class="custom-checkbox">
 						<label class="option-row">
-						<input class="option" value="{{ option | urlencode }}"
-							{% if question.multiple %} type="checkbox" {% else %} type="radio" name="{{ question.question | urlencode }}" {% endif %}>
-						<div class="option-text">{{ frappe.utils.md_to_html(option) }}</div>
+						<input class="option" value="{{ option.value | urlencode }}"
+							{% if question.multiple %} type="checkbox" {% else %} type="radio" data-id = "{{option.id}}" name="{{ question.question | urlencode }}" {% endif %}>
+						<div class="option-text">{{ frappe.utils.md_to_html(option.value) }}</div>
 						</label>
 					</div>
 
@@ -151,6 +151,8 @@
 					<div class="col grid-static-col col-xs-1">{{ _("No.") }}</div>
 					<div class="col grid-static-col text-right">{{ _("Score") }}</div>
 					<div class="col grid-static-col">{{ _("Date") }}</div>
+					<div class="col grid-static-col">{{ _("View Submission") }}</div>
+					<div class="col grid-static-col">{{ _("Download Submission") }}</div>
 				</div>
 			</div>
 		</div>
@@ -161,8 +163,14 @@
 				<div class="data-row row">
 					<div class="col grid-static-col col-xs-1 " >{{ loop.index }}</div>
 					<div class="col grid-static-col text-right">{{ submission.score }}</div>
-					<div class="col grid-static-col btn-show-results" data-name="{{ submission.name }}" title="{{ frappe.utils.format_datetime(submission.creation, "medium") }}">
+					<div class="col grid-static-col" data-name="{{ submission.name }}" title="{{ frappe.utils.format_datetime(submission.creation, "medium") }}">
 						{{ frappe.utils.pretty_date(submission.creation) }}
+					</div>
+					<div class="col grid-static-col" >
+						<button class='btn btn-primary btn-show-results' data-name="{{ submission.name }}"  data-id="{{submission.name}}"> {{ _("View") }}</button>
+					</div>
+					<div class="col grid-static-col">
+						<button class='btn btn-info' id='downloadPdf' data-id='{{submission.name}}'>{{ _("Download PDF") }}</button>
 					</div>
 					
 				</div>
@@ -173,63 +181,5 @@
 	
 
 </article>
-<!-- Add this modal at the end of the file -->
 
-<div class="modal fade review-modal" id="answersModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">{{ _("Write a Review") }}</div>
-            </div>
-
-
-            <div class="modal-body">
-                <form class="review-form" id="review-form">
-                    <div class="form-group">
-                        <div class="clearfix">
-                            <label class="control-label reqd" style="padding-right: 0px;">{{ _("Rating") }}</label>
-                        </div>
-                        <div class="control-input-wrapper">
-                            <div class="control-input">
-                                <div class="rating rating-field" id="rating">
-                                    {% for i in [1, 2, 3, 4, 5] %}
-                                    <svg class="icon icon-md icon-rating" data-rating="{{ i }}">
-                                        <use href="#icon-star"></use>
-                                    </svg>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="clearfix">
-                            <label class="control-label reqd" style="padding-right: 0px;">{{ _("Review") }}</label>
-                        </div>
-                        <div class="control-input-wrapper">
-                            <div class="control-input">
-                                <textarea type="text" autocomplete="off" class="input-with-feedback form-control review-field"
-                                data-fieldtype="Text" data-fieldname="feedback_comments" spellcheck="false"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="error-field muted-text"></p>
-                </form>
-            </div>
-
-
-            <div class="modal-footer">
-                <button class="btn btn-secondary btn-sm mr-2" data-dismiss="modal" aria-label="Close">
-                    {{ _("Discard") }}
-                </button>
-
-                <button class="btn btn-primary btn-sm"  id="submit-review">
-                    {{ _("Submit") }}
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 {% endif %}

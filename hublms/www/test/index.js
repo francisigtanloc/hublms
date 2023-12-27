@@ -1,3 +1,27 @@
+function open_url_post(url, data) {
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Frappe-CSRF-Token': frappe.csrf_token
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        // handle the blob
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'filename.pdf';
+        document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+        a.click();    
+        a.remove();  //afterwards we remove the element again         
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
 frappe.ready(() => {
 	const self = this;
 	this.quiz_submitted = false;
@@ -5,8 +29,9 @@ frappe.ready(() => {
 	this.is_correct = [];
 	this.show_answers = $("#quiz-title").data("show-answers");
 	localStorage.removeItem($("#quiz-title").data("name"));
-	
-        parse_options();
+    let url = "/api/method/hublms.www.test.index.test_pdf";
+    open_url_post(url, {name: "test"});
+    parse_options();
 	$(".btn-start-hublms-quiz").click((e) => {
 		$("#start-banner").addClass("hide");
 		$("#quiz-form").removeClass("hide");
@@ -49,6 +74,15 @@ frappe.ready(() => {
 	$(".btn-show-results").click((e) => {
 		show_results_modal(e);
 	});
+    $('#downloadPdf').click(function(event) {
+        event.preventDefault();
+        document.getElementById('downloadPdf').addEventListener('click', function() {
+            var element = document.body; // or specify a specific element
+            console.log(element);
+            html2pdf(element);
+        });
+        
+    });
 });
 
 const mark_active_question = (e = undefined) => {
@@ -335,7 +369,7 @@ const show_results_modal = (e) => {
 	});
 	
 	
-
+    
 	// let course_modal = new frappe.ui.Dialog({
 	// 	title: "Quiz Result",
 	// 	fields: [

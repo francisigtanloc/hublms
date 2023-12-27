@@ -24,7 +24,9 @@
   "settings_tab",
   "randomize_questions",
   "subset",
-  "time"
+  "time",
+  "quiz_submission_list_tab",
+  "list"
  ],
  "fields": [
   {
@@ -117,11 +119,22 @@
    "fieldname": "description",
    "fieldtype": "Text Editor",
    "label": "Description"
+  },
+  {
+   "fieldname": "quiz_submission_list_tab",
+   "fieldtype": "Tab Break",
+   "label": "Quiz Submission List"
+  },
+  {
+   "fieldname": "list",
+   "fieldtype": "Table",
+   "label": "Student List",
+   "options": "Hublms Quiz User Listing"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-10 14:05:32.536818",
+ "modified": "2023-12-22 08:18:59.415971",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz",

@@ -267,6 +267,7 @@ def check_answer(question, type, answers):
 
 
 def check_choice_answers(question, answers):
+    
 	fields = []
 	is_correct = []
 	for num in range(1, 5):
@@ -275,13 +276,22 @@ def check_choice_answers(question, answers):
 
 	question_details = frappe.db.get_value("Hublms Question", question, fields, as_dict=1)
 
-	for num in range(1, 5):
-		if question_details[f"option_{num}"] in answers:
-			is_correct.append(question_details[f"is_correct_{num}"])
-		else:
-			is_correct.append(0)
+	# for num in range(1, 5):
+	# 	if num == answers:
+	# 		is_correct.append(question_details[f"is_correct_{num}"])
+	# 	else:
+	# 		is_correct.append(0)
+	question_details = frappe.db.get_value("Hublms Question", question, fields, as_dict=1)
+	print("-----------------")
+	print(is_correct)
+	print("-----------------")
+	print(answers)
+	print("-----------------")
+	print(question_details[f"is_correct_{answers}"])
+	print("-----------------")
+	return question_details[f"is_correct_{answers}"]
 
-	return is_correct
+	# return is_correct
 
 
 def check_input_answers(question, answer):
