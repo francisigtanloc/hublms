@@ -36,7 +36,7 @@ frappe.ui.form.on("Hublms Quiz", {
             doctype: "Hublms Question", // Replace with your actual DocType
             target: this.cur_frm,
             columns: {'question':null},
-            setters: {'tags':null},
+            setters: {'title':null},
             // allow_child_item_selection: 1,
             // child_fieldname: "questions", // child table fieldname, whose records will be shown &amp; can be filtered
             // child_columns: ["questions"], // child item columns to be displayed
