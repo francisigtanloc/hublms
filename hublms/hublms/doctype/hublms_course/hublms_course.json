@@ -4,7 +4,7 @@
  "allow_rename": 1,
  "autoname": "field:title",
  "creation": "2023-11-23 00:28:34.893556",
- "default_view": "Dashboard",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -35,6 +35,7 @@
   "enable_certification",
   "expiry",
   "max_attempts",
+  "certificate_template",
   "column_break_rxww",
   "grant_certificate_after",
   "evaluator",
@@ -231,6 +232,7 @@
   {
    "fieldname": "student_statistics_tab",
    "fieldtype": "Tab Break",
+   "hidden": 1,
    "label": "Student statistics"
   },
   {
@@ -244,6 +246,12 @@
    "fieldtype": "Tab Break",
    "label": "Dashboard",
    "show_dashboard": 1
+  },
+  {
+   "fieldname": "certificate_template",
+   "fieldtype": "Link",
+   "label": "Certificate Template",
+   "options": "Hublms Certificate Template"
   }
  ],
  "is_published_field": "published",
@@ -255,7 +263,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2023-12-23 17:00:49.251114",
+ "modified": "2024-01-09 05:22:48.251855",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Course",

@@ -53,14 +53,11 @@ frappe.ready(() => {
 	document.body.addEventListener('click', function(event) {
 		if (event.target.id === 'downloadPdf') {
 			var html = document.querySelector('.modal-content');
-			
 
 			var originalBody = document.body.innerHTML; // save the current body
             document.body.innerHTML = `<div class="empty-state group-by-loading">
 			"Loading..."
 			</div>`; // clear the body
-
-            
 
             setTimeout(function() {
                 html2pdf(html, {
@@ -358,6 +355,7 @@ const add_to_local_storage = () => {
 	self.is_correct = [];
 };
 const show_results_modal = (e) => {
+	
 	
 	const target = $(e.currentTarget);
 

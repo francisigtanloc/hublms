@@ -17,6 +17,7 @@ def get_context(context):
 	context.programs = get_programs();
 	context.courses = get_courses()
 	context.topics = get_topics()
+	context.enrolled = get_enrolled()
  
 
 
@@ -63,3 +64,40 @@ def get_topics():
 	)
 
 	return topics
+
+def get_enrolled():
+	logged_in_user = frappe.session.user
+	enrollments = frappe.get_all(
+		"Hublms User Enrollment",
+		filters={
+			"member": logged_in_user,
+		},
+		pluck='course'
+		# fields=[
+		# 	"course",
+		# ],
+	)
+	print('xxxxxxxxxx')
+	print(enrollments)
+	print('xxxxxxxxxx')
+ 
+	enrolled_courses = frappe.get_all(
+		"Hublms Course",
+		filters={
+		'name': ['in', enrollments]},
+		fields=[
+			"name",
+			"upcoming",
+			"title",
+			"short_introduction",
+			"image",
+			"video_link",
+			"paid_course",
+			"course_price",
+			"currency",
+			"creation",
+		],
+	)
+ 
+
+	return enrolled_courses

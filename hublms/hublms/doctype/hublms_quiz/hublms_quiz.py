@@ -20,8 +20,8 @@ class HublmsQuiz(Document):
 		self.total_marks = set_total_marks(self.name, self.questions)
 		if (not self.subset):
 			self.subset = set_default_subset(self.questions)
-   
-		self.time = 15
+		if not self.time:
+			self.time = 15
 
 	def validate_duplicate_questions(self):
 		questions = [row.question for row in self.questions]
@@ -95,8 +95,7 @@ def quiz_summary(quiz, results):
 		"Hublms Quiz", quiz, ["total_marks", "passing_percentage"], as_dict=1
 	)
 	score_out_of = quiz_details.total_marks
-	print("-----------------")
-	print(score_out_of)
+	
 	percentage = (score / score_out_of) * 100
 
 	submission = frappe.get_doc(

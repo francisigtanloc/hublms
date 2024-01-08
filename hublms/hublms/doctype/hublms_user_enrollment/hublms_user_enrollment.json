@@ -10,13 +10,16 @@
   "program",
   "course",
   "topic",
+  "progress",
+  "view_progress",
   "column_break_zbru",
   "member_type",
   "member",
+  "category",
+  "tags",
   "section_break_8",
   "column_break_12",
-  "current_content",
-  "progress"
+  "current_content"
  ],
  "fields": [
   {
@@ -39,24 +42,21 @@
   },
   {
    "fieldname": "progress",
-   "fieldtype": "Float",
-   "hidden": 1,
+   "fieldtype": "Percent",
+   "in_filter": 1,
+   "in_list_view": 1,
    "label": "Progress",
    "read_only": 1
   },
   {
    "fieldname": "program",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Program",
    "options": "Hublms Program"
   },
   {
    "fieldname": "topic",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Topic",
    "options": "Hublms Topic"
   },
@@ -84,11 +84,35 @@
   {
    "fieldname": "column_break_zbru",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Table MultiSelect",
+   "in_filter": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Category",
+   "options": "Hublms Category Reference"
+  },
+  {
+   "fieldname": "tags",
+   "fieldtype": "Table MultiSelect",
+   "in_filter": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Tags",
+   "options": "Hublms Tags Reference"
+  },
+  {
+   "fieldname": "view_progress",
+   "fieldtype": "Button",
+   "label": "View Progress",
+   "options": "view_progress"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-09 11:50:58.088783",
+ "modified": "2024-01-09 05:36:24.919494",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms User Enrollment",

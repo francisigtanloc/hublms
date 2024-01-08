@@ -24,6 +24,7 @@
   {
    "fieldname": "author",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Author"
   },
   {
@@ -38,7 +39,7 @@
   }
  ],
  "links": [],
- "modified": "2023-12-09 10:29:02.531360",
+ "modified": "2024-01-09 06:41:47.703494",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Article",

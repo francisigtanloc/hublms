@@ -2,75 +2,21 @@
 # For license information, please see license.txt
 
 import frappe
-import logging
+from frappe import _
+import click
 from frappe.model.document import Document
-from frappe.utils import add_years, nowdate
 from frappe.utils import get_url
 from urllib.parse import quote
-from datetime import datetime
 
-class HublmsCertificate(Document):
+class HublmsCertificateTemplate(Document):
 	pass
 
-@frappe.whitelist()
-def verfiy_certificate(code):
-	valid = frappe.db.exists(
-		"Hublms Certificate", {"name": code}
-	)
-	if not valid:
-		return 0
-	# logging.warning('Watch out!')  
- 
-	# print("--------------")
-	# print(code)
-	# print("--------------")
- 
-	return 1
-@frappe.whitelist()
-def create_certificate(course):
-	
-	
 
-     
-	enable_certification = (frappe.db.get_value("Hublms Course", course, "enable_certification"))
-	expires_after_yrs 	 = int(frappe.db.get_value("Hublms Course", course, "expiry"))
-	certificate_template 	 = frappe.db.get_value("Hublms Course", course, "certificate_template");
-	
-	certificate = frappe.get_all(
-		"Hublms Certificate",
-		filters={"member_name": frappe.session.user,"course": course,"template": certificate_template},
-		order_by="idx",
-	)
-
-	if certificate:
-		return certificate
-
-	expiry_date = None
-	if expires_after_yrs:
-		expiry_date = add_years(nowdate(), expires_after_yrs)
-
-	enable_certification = (frappe.db.get_value("Hublms Course", course, "enable_certification"))
-	if not enable_certification:
-		return
-
-	certificate = frappe.get_doc(
-		{
-			"doctype": "Hublms Certificate",
-			"member_name": frappe.session.user,
-			"course": course,
-			"issue_date": nowdate(),
-			"expiry_date": expiry_date,
-			"template": certificate_template,
-		}
-	)
-	certificate.save(ignore_permissions=True)
-
-	return certificate
 
 @frappe.whitelist()
-def download_pdf(name,template_id):
+def download_pdf(template_id):
 	HTML, CSS = import_weasyprint()
-	certificate = frappe.db.get_value('Hublms Certificate', name, '*')
+
 	template = frappe.get_doc('Hublms Certificate Template', template_id)
 	template_items = frappe.get_all('Hublms Certificate Template Item',
 		filters={
@@ -79,17 +25,13 @@ def download_pdf(name,template_id):
 		fields=['text', 'image', 'position_x', 'position_y', 'font_size', 'font_color'],
 	)
 
+	title = template.title
 	orientation = template.orientation
-	member = certificate.member_name
-	date = certificate.creation.strftime("%m/%d/%Y, %H:%M:%S")
-	course = certificate.course
-	code = certificate.name
-	
 	background_image = template.background_image
 	items = template_items
 	css_code = (
     '''
-    @page { size: A4 '''+orientation+'''; margin: 1cm }
+    @page { size: A4 landscape; margin: 1cm }
 
     .certificate-content {
         position: absolute;
@@ -150,7 +92,7 @@ def download_pdf(name,template_id):
 		'</body>\n'
 		'</html>\n'
 	)
-	html_code = html_code.replace('{student}', member).replace('{date}', date).replace('{course}', course).replace('{code}', code)
+	print(html_code)
 	css = CSS(string=css_code)
 	html = HTML(string=html_code,base_url='http://lms.test:8010/').write_pdf(stylesheets=[css])
 	
@@ -179,6 +121,3 @@ def import_weasyprint():
 		)
 		click.secho(message, fg="yellow")
 		frappe.throw(message)
-
-
-

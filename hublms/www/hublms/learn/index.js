@@ -52,7 +52,6 @@ const save_current_content = () => {
 
 const mark_progress = () => {
     
-
 	let status = "Complete";
 	frappe.call({
 		method: "hublms.hublms.doctype.hublms_topic_content.hublms_topic_content.save_progress",
@@ -64,6 +63,7 @@ const mark_progress = () => {
 		},
 		callback: (data) => {
 			if (data.message) {
+
 				change_progress_indicators();
 				show_certificate_if_course_completed(data);
 			}
@@ -78,23 +78,26 @@ const change_progress_indicators = () => {
 const show_certificate_if_course_completed = (data) => {
 	if (
 		data.message == 100 &&
-		!$(".next").length &&
-		$("#certification").hasClass("hide")
+		!$(".next").length 
+		
 	) {
-		$("#certification").removeClass("hide");
+		
+        create_certificate();
+
 	}
 };
 
-const create_certificate = (e) => {
-	e.preventDefault();
+const create_certificate = () => {
 	course = $(".title").attr("data-course");
 	frappe.call({
-		method: "lms.lms.doctype.lms_certificate.lms_certificate.create_certificate",
+		method: "hublms.hublms.doctype.hublms_certificate.hublms_certificate.create_certificate",
 		args: {
 			course: course,
 		},
 		callback: (data) => {
-			window.location.href = `/courses/${course}/${data.message.name}`;
+            // alert(data);
+            // console.log(data);
+			// window.location.href = `/courses/${course}/${data.message.name}`;
 		},
 	});
 };

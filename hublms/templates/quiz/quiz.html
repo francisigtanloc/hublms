@@ -24,7 +24,8 @@
 		{% endif %}
 
 		{% if quiz.time %}
-			<li class="alert alert-info medium">
+			<!-- <li class="alert alert-info medium"> -->
+			<li>
 				{{ _("The quiz has a time limit. For each question you will be given {0} seconds.").format(quiz.time) }}
 			</li>
 		{% endif %}
@@ -152,7 +153,6 @@
 					<div class="col grid-static-col text-right">{{ _("Score") }}</div>
 					<div class="col grid-static-col">{{ _("Date") }}</div>
 					<div class="col grid-static-col">{{ _("View Submission") }}</div>
-					<div class="col grid-static-col">{{ _("Download Submission") }}</div>
 				</div>
 			</div>
 		</div>
@@ -164,13 +164,10 @@
 					<div class="col grid-static-col col-xs-1 " >{{ loop.index }}</div>
 					<div class="col grid-static-col text-right">{{ submission.score }}</div>
 					<div class="col grid-static-col" data-name="{{ submission.name }}" title="{{ frappe.utils.format_datetime(submission.creation, "medium") }}">
-						{{ frappe.utils.pretty_date(submission.creation) }}
+						{{ frappe.utils.format_datetime(submission.creation, "medium") }}
 					</div>
 					<div class="col grid-static-col" >
 						<button class='btn btn-primary btn-show-results' data-name="{{ submission.name }}"  data-id="{{submission.name}}"> {{ _("View") }}</button>
-					</div>
-					<div class="col grid-static-col">
-						<button class='btn btn-info' id='downloadPdf' data-id='{{submission.name}}'>{{ _("Download PDF") }}</button>
 					</div>
 					
 				</div>

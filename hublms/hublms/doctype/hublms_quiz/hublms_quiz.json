@@ -25,8 +25,14 @@
   "randomize_questions",
   "subset",
   "time",
-  "quiz_submission_list_tab",
-  "list"
+  "section_break_pred",
+  "certification_column",
+  "enable_certification",
+  "expiry",
+  "certificate_template",
+  "column_break_hkxo",
+  "grant_certificate_after",
+  "evaluator"
  ],
  "fields": [
   {
@@ -121,20 +127,50 @@
    "label": "Description"
   },
   {
-   "fieldname": "quiz_submission_list_tab",
-   "fieldtype": "Tab Break",
-   "label": "Quiz Submission List"
+   "fieldname": "certificate_template",
+   "fieldtype": "Link",
+   "label": "Certificate Template",
+   "options": "Hublms Certificate Template"
   },
   {
-   "fieldname": "list",
-   "fieldtype": "Table",
-   "label": "Student List",
-   "options": "Hublms Quiz User Listing"
+   "fieldname": "section_break_pred",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "certification_column",
+   "fieldtype": "Column Break",
+   "label": "Certification"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_certification",
+   "fieldtype": "Check",
+   "label": "Enable Certification"
+  },
+  {
+   "fieldname": "expiry",
+   "fieldtype": "Data",
+   "label": "Certification Expires After (Years)"
+  },
+  {
+   "fieldname": "column_break_hkxo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grant_certificate_after",
+   "fieldtype": "Data",
+   "label": "Grant Certificate After"
+  },
+  {
+   "fieldname": "evaluator",
+   "fieldtype": "Link",
+   "label": "Evaluator",
+   "options": "Hublms Course Evaluator"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-22 08:18:59.415971",
+ "modified": "2023-12-29 08:29:20.707185",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz",
