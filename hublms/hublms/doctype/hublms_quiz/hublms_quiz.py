@@ -63,7 +63,7 @@ def set_default_subset( questions):
 
 
 @frappe.whitelist()
-def quiz_summary(quiz, results):
+def quiz_summary(quiz,course, results):
 	score = 0
 	results = results and json.loads(results)
 
@@ -102,6 +102,7 @@ def quiz_summary(quiz, results):
 		{
 			"doctype": "Hublms Quiz Submission",
 			"quiz": quiz,
+			"course": course,
 			"result": results,
 			"score": score,
 			"score_out_of": score_out_of,

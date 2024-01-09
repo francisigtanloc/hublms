@@ -30,12 +30,11 @@
    "options": "Hublms Quiz"
   },
   {
-   "fetch_from": "quiz.course",
+   "fetch_from": ".course",
    "fieldname": "course",
    "fieldtype": "Link",
    "label": "Course",
-   "options": "Hublms Course",
-   "read_only": 1
+   "options": "Hublms Course"
   },
   {
    "fieldname": "column_break_3",
@@ -111,7 +110,7 @@
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-09 10:46:12.408867",
+ "modified": "2024-01-09 12:45:07.926916",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz Submission",

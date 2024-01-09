@@ -200,12 +200,15 @@ const enable_check = (e) => {
 const quiz_summary = (e = undefined) => {
 	e && e.preventDefault();
 	let quiz_name = $("#quiz-title").data("name");
+	let course = $("#title").attr("data-course");
+
 	let self = this;
 
 	frappe.call({
 		method: "hublms.hublms.doctype.hublms_quiz.hublms_quiz.quiz_summary",
 		args: {
 			quiz: quiz_name,
+			course: course,
 			results: localStorage.getItem(quiz_name),
 		},
 		callback: (data) => {
