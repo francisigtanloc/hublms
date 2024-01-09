@@ -66,7 +66,7 @@ def set_default_subset( questions):
 def quiz_summary(quiz,course, results):
 	score = 0
 	results = results and json.loads(results)
-
+	total = 0
 	for result in results:
 		correct = result["is_correct"][0]
 		for point in result["is_correct"]:
@@ -88,13 +88,14 @@ def quiz_summary(quiz,course, results):
 
 		result["marks"] = marks
 		score += marks
+		total += question_details.marks
 
 		del result["question_index"]
 
 	quiz_details = frappe.db.get_value(
 		"Hublms Quiz", quiz, ["total_marks", "passing_percentage"], as_dict=1
 	)
-	score_out_of = quiz_details.total_marks
+	score_out_of = total
 	
 	percentage = (score / score_out_of) * 100
 
