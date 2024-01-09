@@ -27,7 +27,7 @@ def download_pdf(template_id):
 
 	title = template.title
 	orientation = template.orientation
-	background_image = template.background_image
+	background_image = get_url(quote( template.background_image))
 	items = template_items
 	css_code = (
     '''
@@ -39,7 +39,7 @@ def download_pdf(template_id):
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: url('http://lms.test:8010{background_image}');
+        background-image: url('{background_image}');
         background-size: 100% 100%;
         background-repeat: no-repeat;
         font-family: Arial, sans-serif;
