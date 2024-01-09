@@ -87,7 +87,6 @@ const create_quiz_certificate = () => {
 			course: course,
 		},
 		callback: (data) => {
-            alert(data);
             // console.log(data);
 			// window.location.href = `/courses/${course}/${data.message.name}`;
 		},
