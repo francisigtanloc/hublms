@@ -28,7 +28,8 @@
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Position X"
+   "label": "Position X",
+   "reqd": 1
   },
   {
    "fieldname": "position_y",
@@ -36,7 +37,8 @@
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Position Y"
+   "label": "Position Y",
+   "reqd": 1
   },
   {
    "fieldname": "font_size",
@@ -44,7 +46,8 @@
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Font Size"
+   "label": "Font Size",
+   "reqd": 1
   },
   {
    "fieldname": "font_color",
@@ -52,7 +55,8 @@
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Font Color"
+   "label": "Font Color",
+   "reqd": 1
   },
   {
    "fieldname": "image",
@@ -66,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-01-03 08:12:20.373235",
+ "modified": "2024-01-09 10:27:52.581790",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Certificate Template Item",

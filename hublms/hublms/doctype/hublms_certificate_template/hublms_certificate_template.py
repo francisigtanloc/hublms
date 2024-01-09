@@ -31,7 +31,7 @@ def download_pdf(template_id):
 	items = template_items
 	css_code = (
     '''
-    @page { size: A4 landscape; margin: 1cm }
+    @page { size: A4 '''+orientation+'''; margin: 1cm }
 
     .certificate-content {
         position: absolute;

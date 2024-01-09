@@ -29,10 +29,9 @@
   "certification_column",
   "enable_certification",
   "expiry",
-  "certificate_template",
   "column_break_hkxo",
-  "grant_certificate_after",
-  "evaluator"
+  "grant_certificate_at",
+  "certificate_template"
  ],
  "fields": [
   {
@@ -157,20 +156,14 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "grant_certificate_after",
+   "fieldname": "grant_certificate_at",
    "fieldtype": "Data",
-   "label": "Grant Certificate After"
-  },
-  {
-   "fieldname": "evaluator",
-   "fieldtype": "Link",
-   "label": "Evaluator",
-   "options": "Hublms Course Evaluator"
+   "label": "Grant Certificate At Score Percentage"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-09 07:22:08.311397",
+ "modified": "2024-01-09 09:20:48.529187",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz",

@@ -76,6 +76,23 @@ frappe.ready(() => {
 	});   
 	
 });
+const create_quiz_certificate = () => {
+
+	quiz = $("#quiz-title").attr("data-name");
+	course = $("#title").attr("data-course");
+	frappe.call({
+		method: "hublms.hublms.doctype.hublms_certificate.hublms_certificate.create_quiz_certificate",
+		args: {
+			quiz: quiz,
+			course: course,
+		},
+		callback: (data) => {
+            alert(data);
+            // console.log(data);
+			// window.location.href = `/courses/${course}/${data.message.name}`;
+		},
+	});
+};
 const parse_modal_options = () => {
 	setTimeout(function() {
 		$(".active-question").each((i, question) => {
@@ -210,6 +227,7 @@ const quiz_summary = (e = undefined) => {
 				data.message.pass
 			) {
 				mark_progress();
+				create_quiz_certificate();
 			}
 		},
 	});
@@ -372,7 +390,6 @@ const show_results_modal = (e) => {
 	.then(() => parse_modal_options());
 
 };
-			
 		
 	
 const show_results_modal_unused = (e) => {

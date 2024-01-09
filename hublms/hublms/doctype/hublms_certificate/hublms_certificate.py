@@ -33,6 +33,8 @@ def create_certificate(course):
 
      
 	enable_certification = (frappe.db.get_value("Hublms Course", course, "enable_certification"))
+	if not enable_certification:
+		return
 	expires_after_yrs 	 = int(frappe.db.get_value("Hublms Course", course, "expiry"))
 	certificate_template 	 = frappe.db.get_value("Hublms Course", course, "certificate_template");
 	
@@ -49,9 +51,7 @@ def create_certificate(course):
 	if expires_after_yrs:
 		expiry_date = add_years(nowdate(), expires_after_yrs)
 
-	enable_certification = (frappe.db.get_value("Hublms Course", course, "enable_certification"))
-	if not enable_certification:
-		return
+	
 
 	certificate = frappe.get_doc(
 		{
@@ -66,6 +66,43 @@ def create_certificate(course):
 	certificate.save(ignore_permissions=True)
 
 	return certificate
+@frappe.whitelist()
+def create_quiz_certificate(quiz,course):
+	enable_certification = (frappe.db.get_value("Hublms Quiz", quiz, "enable_certification"))
+	if not enable_certification:
+			return
+	expires_after_yrs 	 	= int(frappe.db.get_value("Hublms Quiz", quiz, "expiry"))
+	certificate_template 	= frappe.db.get_value("Hublms Quiz", quiz, "certificate_template");
+	
+	certificate = frappe.get_all(
+		"Hublms Certificate",
+		filters={"member_name": frappe.session.user,"course": course,"template": certificate_template},
+		order_by="idx",
+	)
+
+	if certificate:
+		return certificate
+
+	expiry_date = None
+	if expires_after_yrs:
+		expiry_date = add_years(nowdate(), expires_after_yrs)
+
+	
+
+	certificate = frappe.get_doc(
+		{
+			"doctype": "Hublms Certificate",
+			"member_name": frappe.session.user,
+			"course": course,
+			"issue_date": nowdate(),
+			"expiry_date": expiry_date,
+			"template": certificate_template,
+		}
+	)
+	certificate.save(ignore_permissions=True)
+
+	return certificate
+
 
 @frappe.whitelist()
 def download_pdf(name,template_id):
