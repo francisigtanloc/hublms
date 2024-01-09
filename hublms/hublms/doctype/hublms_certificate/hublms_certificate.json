@@ -20,8 +20,9 @@
   {
    "fetch_from": "member.full_name",
    "fieldname": "member_name",
-   "fieldtype": "Data",
-   "label": "Member Name"
+   "fieldtype": "Link",
+   "label": "Member Name",
+   "options": "User"
   },
   {
    "fieldname": "template",
@@ -73,7 +74,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-04 14:05:56.570554",
+ "modified": "2024-01-09 11:25:33.441407",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Certificate",
