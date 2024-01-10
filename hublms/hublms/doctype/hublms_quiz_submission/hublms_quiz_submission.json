@@ -68,7 +68,7 @@
    "reqd": 1
   },
   {
-   "fetch_from": "quiz.total_marks",
+   "fetch_from": ".",
    "fieldname": "score_out_of",
    "fieldtype": "Int",
    "label": "Score Out Of",
@@ -110,7 +110,7 @@
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-09 12:45:07.926916",
+ "modified": "2024-01-09 14:40:35.308320",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz Submission",

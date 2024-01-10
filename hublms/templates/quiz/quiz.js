@@ -388,6 +388,7 @@ const show_results_modal = (e) => {
 			message: html,
 			indicator:"green",
 		});
+		
     })
 	.then(() => parse_modal_options());
 
