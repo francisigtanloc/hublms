@@ -31,6 +31,9 @@
                             data-name="{{ quiz.name }}" data-show-answers="{{ quiz.show_answers }}">
                             {{ quiz.title }}
                         </div>
+                        <div class="bold-heading">
+                            Score : {{ submission.score }}/{{ quiz.subset }}
+                        </div>
                         <div class="col grid-static-col">
                             <button class='btn btn-info' id="downloadPdf" onclick="event.preventDefault();">{{ _("Download PDF") }}</button>
                         </div>
@@ -38,7 +41,7 @@
                     <div class="questions">
                     {% for question in quiz.questions %}
                     
-                    <div class="question active-question" data-is_correct="{{question.is_correct}}"  data-name="{{ question.name }}" data-type="{{ question.type }}"
+                    <div class="question " data-is_correct="{{question.is_correct}}"  data-name="{{ question.name }}" data-type="{{ question.type }}"
                         data-multi="{{ question.multiple }}" data-qt-index="{{ loop.index }}">
                         <div>
                             <div class="question-text">
@@ -53,11 +56,44 @@
                             <div class="mb-2">
                                 <div class="custom-checkbox">
                                     <label class="option-row">
-                                    <input class="option" value="{{ option | urlencode }}"
-                                    
+                                    <input class="option hide" value="{{ option | urlencode }}"
+                                        
+
                                         {% if question.answer == option %}  checked {% endif %}
                                         {% if question.multiple %} type="checkbox" {% else %} type="radio" name="{{ question.question | urlencode }}" {% endif %}>
-                                    <div class="option-text">{{ frappe.utils.md_to_html(option) }}</div>
+                                    <div class="option-text">
+                                        <div>
+                                            {% set vars = {'correct': 'None'} %}
+                                            {% for answer in answers %}
+                                                {% if frappe.utils.md_to_html(answer.answer) == frappe.utils.md_to_html(option)   %}
+                                                    {% if answer.is_correct %}
+                                                        {% if vars.update({'correct': "Correct"}) %} {% endif %}
+                                                    {% else %}
+                                                        {% if vars.update({'correct': "Wrong"}) %} {% endif %}
+                                                    {% endif %}
+                                                    
+                                                {% endif %}
+                                                
+                                            {% endfor %}
+                                            
+                                            {# Now, correct is accessible outside the loop #}
+
+                                            {% if vars.correct == "Correct" %}
+                                                <img class="d-inline mr-3" src="/assets/hublms/icons/check.svg">
+                                            {% elif vars.correct == "Wrong" %}
+                                                <img class="d-inline mr-3" src="/assets/hublms/icons/wrong.svg">
+                                            {% else %}
+                                                <img class="d-inline mr-3" src="/assets/hublms/icons/minus-circle.svg">
+                                            {% endif %}
+                                        
+                                        
+                                        {{frappe.utils.md_to_html(option)}}
+                                        
+                                        </div>
+
+                                    </div>
+                                    
+
                                     </label>
                                 </div>
             
@@ -93,6 +129,7 @@
                         </button>
                     </div>
                 </form>
+                
                 
         </div>
     </div>

@@ -6,10 +6,9 @@ from types import SimpleNamespace
 def get_context(context):
     context.no_cache = 1
     subname = frappe.form_dict["subname"]
-    print("-------------------")
-    print(subname)
-    print("-------------------")
-    quiz_name = "quiz-1"
+    doc_submission = frappe.get_doc("Hublms Quiz Submission", subname, ignore_permissions=True)
+    
+    quiz_name = doc_submission.quiz
     doc = frappe.get_doc("Hublms Quiz", quiz_name, ignore_permissions=True)
     quiz_dict = {
         "name": doc.name,
@@ -37,8 +36,8 @@ def get_context(context):
 		fields=["question", "marks"],
 		order_by="idx",
 	)
-    if quiz.randomize_questions == True:
-        random.shuffle(questions)
+    # if quiz.randomize_questions == True:
+    #     random.shuffle(questions)
 
     doc = frappe.get_doc("Hublms Quiz Submission", subname, ignore_permissions=True)
     submission_dict = {
@@ -55,7 +54,7 @@ def get_context(context):
         ["*"],
         order_by="creation desc",
     )
-    questions = questions[:int(quiz.subset)]
+    # questions = questions[:int(quiz.subset)]
     for question in questions:
         doc = frappe.get_doc("Hublms Question", question.question, ignore_permissions=True)
         details = {field: doc.get(field) for field in fields}
@@ -72,7 +71,9 @@ def get_context(context):
         "Hublms Quiz Submission", {"owner": frappe.session.user, "quiz": quiz_name}
     )
 
-    
+    print("-------------------")
+    print(subname)
+    print("-------------------")
         
     context.submission = submission
     context.answers = answers

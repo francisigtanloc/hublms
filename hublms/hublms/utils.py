@@ -297,6 +297,7 @@ def render_html(topic,content_index):
 		body = content_details.content
 
 	render = body + content
+	print(render )
 	return markdown_to_html(render)
 
 

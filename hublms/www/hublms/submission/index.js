@@ -124,39 +124,7 @@ const enable_check = (e) => {
 	}
 };
 
-const quiz_summary = (e = undefined) => {
-	e && e.preventDefault();
-	let quiz_name = $("#quiz-title").data("name");
-	let self = this;
 
-	frappe.call({
-		method: "hublms.hublms.doctype.hublms_quiz.hublms_quiz.quiz_summary",
-		args: {
-			quiz: quiz_name,
-			results: localStorage.getItem(quiz_name),
-		},
-		callback: (data) => {
-			$(".question").addClass("hide");
-			$("#summary").addClass("hide");
-			$(".quiz-footer span").addClass("hide");
-			$("#quiz-form").prepend(
-				`<div class="summary bold-heading text-center">
-					${__("Your score is")} ${data.message.score}
-					${__("out of")} ${data.message.score_out_of}
-				</div>`
-			);
-			$("#try-again").attr("data-submission", data.message.submission);
-			$("#try-again").removeClass("hide");
-			self.quiz_submitted = true;
-			if (
-				this.hasOwnProperty("marked_as_complete") &&
-				data.message.pass
-			) {
-				mark_progress();
-			}
-		},
-	});
-};
 
 const try_quiz_again = (e) => {
 	e.preventDefault();
@@ -216,16 +184,15 @@ const parse_options = () => {
 
 const parse_choices = (element, is_correct) => {
 	element.each((i, elem) => {
-		if ($(elem).prop("checked")) {
-            console.log(is_correct);
+		// if ($(elem).prop("checked")) {
 
-			if (this.show_answers)
-				is_correct
-					? add_icon(elem, "check")
-					: add_icon(elem, "wrong");
-		} else {
-			add_icon(elem, "minus-circle");
-		}
+		// 	if (this.show_answers)
+		// 		is_correct
+		// 			? add_icon(elem, "check")
+		// 			: add_icon(elem, "wrong");
+		// } else {
+		// 	add_icon(elem, "minus-circle");
+		// }
 	});
 };
 
@@ -262,128 +229,4 @@ const add_icon = (element, icon) => {
     `);
 };
 
-const add_to_local_storage = () => {
-	let current_index = $(".active-question").attr("data-qt-index");
-	let quiz_name = $("#quiz-title").data("name");
-	let quiz_stored = JSON.parse(localStorage.getItem(quiz_name));
 
-	let quiz_obj = {
-		question_index: current_index - 1,
-		answer: self.answer.join(),
-		is_correct: self.is_correct,
-	};
-
-	quiz_stored ? quiz_stored.push(quiz_obj) : (quiz_stored = [quiz_obj]);
-	localStorage.setItem(quiz_name, JSON.stringify(quiz_stored));
-
-	self.answer = [];
-	self.is_correct = [];
-};
-const show_results_modal = (e) => {
-	const target = $(e.currentTarget);
-
-	const id = target.data("name");
-	list = [];
-	frappe.call({
-		method: 'frappe.client.get',
-		args: {
-			fieldname: "result",
-			doctype: "Hublms Quiz Submission",
-			filters: {name: id}
-		},
-		callback: function(response) {
-			var parentDoc = response.message;
-			var childTableData = parentDoc.result;  // Replace with the fieldname of the child table in the parent DocType
-			console.log(childTableData);
-			
-			html = `<div class="form-grid">
-				<div class="grid-heading-row">
-					<div class="grid-row">
-						<div class="data-row row">
-							<div class="col grid-static-col">Question.</div>
-							<div class="col grid-static-col">Answer</div>
-							<div class="col grid-static-col">Is Correct</div>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="grid-row">`;
-						
-
-						childTableData.forEach(function (item) {
-								html += `
-								<div class="data-row row">
-								<div class="col btn-show-results" >` + item.question + `</div>
-								<div class="col btn-show-results" >` + item.answer + `</div>
-								<div class="col btn-show-results" >` + (item.is_correct == 0 ? "Correct" : "Wrong")   + `</div>
-								</div>` ;
-						});
-
-			html += `	
-					</div>
-				</div>
-			</div>`;
-
-			
-
-			frappe.msgprint({
-				title: 'Answers',
-				message: html
-			});
-		}
-	});
-	
-	
-
-	// let course_modal = new frappe.ui.Dialog({
-	// 	title: "Quiz Result",
-	// 	fields: [
-	// 		{
-	// 			fieldname: "questions",
-	// 			fieldtype: "Table",
-	// 			in_place_edit: 1,
-	// 			label: __("Questions"),
-	// 			fields: [
-	// 				{
-	// 					fieldname: "question",
-	// 					fieldtype: "Link",
-	// 					label: __("Question"),
-	// 					options: "LMS Question",
-	// 					in_list_view: 1,
-	// 					only_select: 1,
-	// 					reqd: 1,
-	// 				},
-	// 				{
-	// 					fieldname: "marks",
-	// 					fieldtype: "Int",
-	// 					label: __("Marks"),
-	// 					in_list_view: 1,
-	// 					reqd: 1,
-	// 				},
-	// 				{
-	// 					fieldname: "question_name",
-	// 					fieldname: "Link",
-	// 					options: "LMS Quiz Question",
-	// 					label: __("Question Name"),
-	// 				},
-	// 			],
-	// 		},
-	// 		// {
-	// 		// 	fieldtype: "Link",
-	// 		// 	options: "Course Evaluator",
-	// 		// 	label: __("Course Evaluator"),
-	// 		// 	fieldname: "evaluator",
-	// 		// 	only_select: 1,
-	// 		// 	default: evaluator || "",
-	// 		// },
-	// 	],
-	// 	primary_action_label: __("Close"),
-	// 	primary_action(values) {
-	// 		course_modal.hide();
-	// 	},
-	// });
-	// course_modal.show();
-	// setTimeout(() => {
-	// 	$(".modal-body").css("min-height", "300px");
-	// }, 1000);
-};

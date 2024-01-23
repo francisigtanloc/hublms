@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "autoname": "format:{content}-{#####}",
  "creation": "2023-11-27 09:00:31.726896",
  "default_view": "List",
  "doctype": "DocType",
@@ -7,8 +8,9 @@
  "engine": "InnoDB",
  "field_order": [
   "content_type",
-  "column_break_2",
-  "content"
+  "content",
+  "prerequisite",
+  "column_break_2"
  ],
  "fields": [
   {
@@ -30,14 +32,22 @@
    "label": "Content",
    "options": "content_type",
    "reqd": 1
+  },
+  {
+   "fieldname": "prerequisite",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Prerequisite",
+   "options": "Hublms Topic Content"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2023-11-27 09:17:27.845496",
+ "modified": "2024-01-23 10:55:31.136872",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Topic Content",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [],
  "quick_entry": 1,

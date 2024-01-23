@@ -1,5 +1,5 @@
 import frappe
-from lms.lms.md import markdown_to_html
+from hublms.hublms.md import markdown_to_html
 
 
 def execute():
