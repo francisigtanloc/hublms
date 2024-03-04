@@ -42,7 +42,9 @@
   "duration",
   "student_statistics_tab",
   "student_list",
-  "dashboard_tab"
+  "dashboard_tab",
+  "publish",
+  "route"
  ],
  "fields": [
   {
@@ -80,6 +82,7 @@
   {
    "fieldname": "tags",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Tags"
   },
   {
@@ -252,6 +255,17 @@
    "fieldtype": "Link",
    "label": "Certificate Template",
    "options": "Hublms Certificate Template"
+  },
+  {
+   "default": "0",
+   "fieldname": "publish",
+   "fieldtype": "Check",
+   "label": "Publish"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
   }
  ],
  "is_published_field": "published",
@@ -263,7 +277,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2024-01-09 05:22:48.251855",
+ "modified": "2024-02-06 08:03:26.768601",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Course",

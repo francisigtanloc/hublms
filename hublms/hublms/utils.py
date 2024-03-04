@@ -295,9 +295,17 @@ def render_html(topic,content_index):
 	if topic_details.content_type == "Hublms Article":
 		content = ""
 		body = content_details.content
+	if topic_details.content_type == "Hublms Assignment":
+	
+  
+		content = ""
+		assignment = "{{ Assignment('" + content_details.type + "-" + content_details.type + "') }}"
+		content = content + assignment
+		body = content_details.question
+		
+
 
 	render = body + content
-	print(render )
 	return markdown_to_html(render)
 
 

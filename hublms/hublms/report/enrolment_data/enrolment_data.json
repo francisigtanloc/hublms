@@ -10,15 +10,16 @@
  "is_standard": "Yes",
  "json": "{}",
  "letterhead": null,
- "modified": "2023-12-23 16:58:10.025077",
+ "modified": "2024-02-21 10:12:13.711410",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Enrolment Data",
  "owner": "Administrator",
  "prepared_report": 0,
+ "query": "SELECT\n    name as \"Name\", creation as \"Created date\"\nFROM\n    `tabHublms Course`",
  "ref_doctype": "Hublms Course",
  "report_name": "Enrolment Data",
- "report_type": "Script Report",
+ "report_type": "Query Report",
  "roles": [
   {
    "role": "System Manager"

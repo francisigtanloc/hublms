@@ -1,424 +1,108 @@
-function open_url_post(url, data) {
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Frappe-CSRF-Token': frappe.csrf_token
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.blob())
-    .then(blob => {
-        // handle the blob
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'filename.pdf';
-        document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-        a.click();    
-        a.remove();  //afterwards we remove the element again         
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
+
+
 frappe.ready(() => {
-	const self = this;
-	this.quiz_submitted = false;
-	this.answer = [];
-	this.is_correct = [];
-	this.show_answers = $("#quiz-title").data("show-answers");
-	localStorage.removeItem($("#quiz-title").data("name"));
-    let url = "/api/method/hublms.www.test.index.test_pdf";
-    open_url_post(url, {name: "test"});
-    parse_options();
-	$(".btn-start-hublms-quiz").click((e) => {
-		$("#start-banner").addClass("hide");
-		$("#quiz-form").removeClass("hide");
-		mark_active_question();
+	$(".testButton").click((e) => {
+		attach_work(e);
 	});
-
-	$(".option").click((e) => {
-		if (!$("#check").hasClass("hide")) enable_check(e);
-	});
-
-	$(".possibility").keyup((e) => {
-		enable_check(e);
-	});
-
-	$("#summary").click((e) => {
-		e.preventDefault();
-		if (!this.show_answers) check_answer();
-
-		setTimeout(() => {
-			quiz_summary(e);
-		}, 500);
-	});
-
-	$("#check").click((e) => {
-		e.preventDefault();
-		check_answer(e);
-	});
-
-	$("#next").click((e) => {
-		e.preventDefault();
-		if (!this.show_answers) check_answer();
-
-		mark_active_question(e);
-	});
-
-	$("#try-again").click((e) => {
-		try_quiz_again(e);
-	});
-
-	$(".btn-show-results").click((e) => {
-		show_results_modal(e);
-	});
-    $('#downloadPdf').click(function(event) {
-        event.preventDefault();
-        document.getElementById('downloadPdf').addEventListener('click', function() {
-            var element = document.body; // or specify a specific element
-            console.log(element);
-            html2pdf(element);
-        });
-        
-    });
 });
 
-const mark_active_question = (e = undefined) => {
-	let total_questions = $(".question").length;
-	let current_index = $(".active-question").attr("data-qt-index") || 0;
-	let next_index = parseInt(current_index) + 1;
-
-	if (this.show_answers) {
-		$("#next").addClass("hide");
-	} else if (!this.show_answers && next_index == total_questions) {
-		$("#next").addClass("hide");
-		$("#summary").removeClass("hide");
-	}
-
-	$(".question").addClass("hide").removeClass("active-question");
-	$(`.question[data-qt-index='${next_index}']`)
-		.removeClass("hide")
-		.addClass("active-question");
-
-	$(".current-question").text(`${next_index}`);
-	$("#check").removeClass("hide").attr("disabled", true);
-	$("#next").attr("disabled", true);
-	$(".explanation").addClass("hide");
-
-	$(".timer").addClass("hide");
-	calculate_and_display_time(100);
-	$(".timer").removeClass("hide");
-	initialize_timer();
-};
-
-const calculate_and_display_time = (percent_time) => {
-	$(".timer .progress-bar").attr("aria-valuenow", percent_time);
-	$(".timer .progress-bar").attr("aria-valuemax", percent_time);
-	$(".timer .progress-bar").css("width", `${percent_time}%`);
-	let progress_color = percent_time < 20 ? "red" : "var(--primary-color)";
-	$(".timer .progress-bar").css("background-color", progress_color);
-};
-
-const initialize_timer = () => {
-	this.time_left = $(".timer").data("time");
-	calculate_and_display_time(100, this.time_left);
-	$(".timer").removeClass("hide");
-	const total_time = $(".timer").data("time");
-	this.start_time = new Date().getTime();
-	const self = this;
-	let old_diff;
-
-	this.timer = setInterval(function () {
-		var diff = (new Date().getTime() - self.start_time) / 1000;
-		var variation = old_diff ? diff - old_diff : diff;
-		old_diff = diff;
-		self.time_left -= variation;
-		let percent_time = (self.time_left / total_time) * 100;
-		calculate_and_display_time(percent_time);
-		if (self.time_left <= 0) {
-			clearInterval(self.timer);
-			$(".timer").addClass("hide");
-			check_answer();
-			$("#next").attr("disabled", false);
-		}
-	}, 100);
-};
-
-const enable_check = (e) => {
-	if ($(".option:checked").length || $(".possibility").val().trim()) {
-		$("#check").removeAttr("disabled");
-		$("#next").removeAttr("disabled");
-		$(".custom-checkbox").removeClass("active-option");
-		$(".option:checked")
-			.closest(".custom-checkbox")
-			.addClass("active-option");
+const attach_work = (e) => {
+	const target = $(e.currentTarget);
+	let files = target.siblings(".attach-file").prop("files");
+	if (files && files.length) {
+		files = add_files(files);
+		return_as_dataurl(files);
+		files.map((file) => {
+			upload_file(file, target);
+		});
 	}
 };
-
-const quiz_summary = (e = undefined) => {
-	e && e.preventDefault();
-	let quiz_name = $("#quiz-title").data("name");
-	let self = this;
-
+const create_lesson_work = (file, target) => {
 	frappe.call({
-		method: "hublms.hublms.doctype.hublms_quiz.hublms_quiz.quiz_summary",
+		method: "hublms.hublms.doctype.hublms_test.hublms_test.upload_assignment",
 		args: {
-			quiz: quiz_name,
-			results: localStorage.getItem(quiz_name),
+			assignment_attachment: file.file_url,
+			// lesson: $(".title").attr("data-lesson"),
+			// submission: $(".preview-work").data("submission") || "",
 		},
 		callback: (data) => {
-			$(".question").addClass("hide");
-			$("#summary").addClass("hide");
-			$(".quiz-footer span").addClass("hide");
-			$("#quiz-form").prepend(
-				`<div class="summary bold-heading text-center">
-					${__("Your score is")} ${data.message.score}
-					${__("out of")} ${data.message.score_out_of}
-				</div>`
-			);
-			$("#try-again").attr("data-submission", data.message.submission);
-			$("#try-again").removeClass("hide");
-			self.quiz_submitted = true;
-			if (
-				this.hasOwnProperty("marked_as_complete") &&
-				data.message.pass
-			) {
-				mark_progress();
+			target.siblings(".attach-file").addClass("hide");
+			target.siblings(".preview-work").removeClass("hide");
+			target
+				.siblings(".preview-work")
+				.find("a")
+				.attr("href", file.file_url)
+				.text(file.file_name);
+			target.addClass("hide");
+		},
+	});
+};
+const upload_file = (file, target) => {
+	return new Promise((resolve, reject) => {
+		let xhr = new XMLHttpRequest();
+
+		xhr.onreadystatechange = () => {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					let response = JSON.parse(xhr.responseText);
+					create_lesson_work(response.message, target);
+				} else if (xhr.status === 403) {
+					let response = JSON.parse(xhr.responseText);
+					frappe.msgprint(
+						`Not permitted. ${response._error_message || ""}`
+					);
+				} else if (xhr.status === 413) {
+					frappe.msgprint(
+						__("Size exceeds the maximum allowed file size.")
+					);
+				} else {
+					frappe.msgprint(
+						xhr.status === 0
+							? "XMLHttpRequest Error"
+							: `${xhr.status} : ${xhr.statusText}`
+					);
+				}
 			}
-		},
-	});
-};
+		};
+		xhr.open("POST", "/api/method/upload_file", true);
+		xhr.setRequestHeader("Accept", "application/json");
+		xhr.setRequestHeader("X-Frappe-CSRF-Token", frappe.csrf_token);
 
-const try_quiz_again = (e) => {
-	e.preventDefault();
-	if (window.location.href.includes("new-submission")) {
-		const target = $(e.currentTarget);
-		window.location.href = `/quiz-submission/
-		${target.data("quiz")}/
-		${target.data("submission")}`;
-	} else {
-		window.location.reload();
-	}
-};
-
-const check_answer = (e = undefined) => {
-	e && e.preventDefault();
-	let answer = $(".active-question textarea");
-	let total_questions = $(".question").length;
-	let current_index = $(".active-question").attr("data-qt-index");
-
-	if (answer.length && !answer.val().trim()) {
-		frappe.throw(__("Please enter your answer"));
-	}
-
-	clearInterval(self.timer);
-	$(".timer").addClass("hide");
-
-	$(".explanation").removeClass("hide");
-	$("#check").addClass("hide");
-
-	if (current_index == total_questions) {
-		$("#summary").removeClass("hide");
-	} else if (this.show_answers) {
-		$("#next").removeClass("hide");
-	}
-	parse_options();
-};
-
-const parse_options = () => {
-	
-    $(".active-question").each((i, question) => {
-        let element;
-        let type = $(question).data("type");
-        let is_answer_correct =  $(question).data("is_correct");
-
-        if (type == "Choices") {
-            element = $(question).find('input');
-            parse_choices(element, is_answer_correct);
-
-        } else {
-            element = $(question).find('textarea');
-			parse_possible_answers(element, is_answer_correct);
-
-        }
-    });
-
-};
-
-const parse_choices = (element, is_correct) => {
-	element.each((i, elem) => {
-		if ($(elem).prop("checked")) {
-            console.log(this.show_answers);
-
-			self.answer.push(decodeURIComponent($(elem).val()));
-			self.is_correct.push(is_correct[i]);
-			if (this.show_answers)
-				is_correct[i]
-					? add_icon(elem, "check")
-					: add_icon(elem, "wrong");
-		} else {
-			add_icon(elem, "minus-circle");
+		let form_data = new FormData();
+		if (file.file_obj) {
+			form_data.append("file", file.file_obj, file.name);
 		}
+
+		xhr.send(form_data);
 	});
 };
-
-const parse_possible_answers = (element, correct) => {
-	self.answer.push(decodeURIComponent($(element).val()));
-	self.is_correct.push(correct);
-	if (this.show_answers)
-		correct
-			? show_indicator("success", element)
-			: show_indicator("failure", element);
+const return_as_dataurl = (files) => {
+	let promises = files.map((file) =>
+		frappe.dom.file_to_base64(file.file_obj).then((dataurl) => {
+			file.dataurl = dataurl;
+			this.on_success && this.on_success(file);
+		})
+	);
+	return Promise.all(promises);
 };
-
-const show_indicator = (class_name, element) => {
-	let label = class_name == "success" ? "Correct" : "Incorrect";
-	let icon =
-		class_name == "success" ? "#icon-solid-success" : "#icon-solid-error";
-	$(`<div class="answer-indicator ${class_name}">
-			<svg class="icon icon-md">
-				<use href=${icon}>
-			</svg>
-			<span style="font-weight: 500">${__(label)}</span>
-		</div>`).insertAfter(element);
-};
-
-const add_icon = (element, icon) => {
-	$(element).closest(".custom-checkbox").removeClass("active-option");
-	$(element).closest(".option").addClass("hide");
-	let label = $(element).siblings(".option-text").text();
-	$(element).siblings(".option-text").html(`
-        <div>
-            <img class="d-inline mr-3" src="/assets/hublms/icons/${icon}.svg">
-            ${label}
-        </div>
-    `);
-};
-
-const add_to_local_storage = () => {
-	let current_index = $(".active-question").attr("data-qt-index");
-	let quiz_name = $("#quiz-title").data("name");
-	let quiz_stored = JSON.parse(localStorage.getItem(quiz_name));
-
-	let quiz_obj = {
-		question_index: current_index - 1,
-		answer: self.answer.join(),
-		is_correct: self.is_correct,
-	};
-
-	quiz_stored ? quiz_stored.push(quiz_obj) : (quiz_stored = [quiz_obj]);
-	localStorage.setItem(quiz_name, JSON.stringify(quiz_stored));
-
-	self.answer = [];
-	self.is_correct = [];
-};
-const show_results_modal = (e) => {
-	const target = $(e.currentTarget);
-
-	const id = target.data("name");
-	list = [];
-	frappe.call({
-		method: 'frappe.client.get',
-		args: {
-			fieldname: "result",
-			doctype: "Hublms Quiz Submission",
-			filters: {name: id}
-		},
-		callback: function(response) {
-			var parentDoc = response.message;
-			var childTableData = parentDoc.result;  // Replace with the fieldname of the child table in the parent DocType
-			console.log(childTableData);
-			
-			html = `<div class="form-grid">
-				<div class="grid-heading-row">
-					<div class="grid-row">
-						<div class="data-row row">
-							<div class="col grid-static-col">Question.</div>
-							<div class="col grid-static-col">Answer</div>
-							<div class="col grid-static-col">Is Correct</div>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="grid-row">`;
-						
-
-						childTableData.forEach(function (item) {
-								html += `
-								<div class="data-row row">
-								<div class="col btn-show-results" >` + item.question + `</div>
-								<div class="col btn-show-results" >` + item.answer + `</div>
-								<div class="col btn-show-results" >` + (item.is_correct == 0 ? "Correct" : "Wrong")   + `</div>
-								</div>` ;
-						});
-
-			html += `	
-					</div>
-				</div>
-			</div>`;
-
-			
-
-			frappe.msgprint({
-				title: 'Answers',
-				message: html
-			});
-		}
+const add_files = (files) => {
+	files = Array.from(files).map((file) => {
+		let is_image = file.type.startsWith("image");
+		return {
+			file_obj: file,
+			cropper_file: file,
+			crop_box_data: null,
+			optimize: this.attach_doc_image ? true : false,
+			name: file.name,
+			doc: null,
+			progress: 0,
+			total: 0,
+			failed: false,
+			request_succeeded: false,
+			error_message: null,
+			uploading: false,
+			private: !is_image,
+		};
 	});
-	
-	
-    
-	// let course_modal = new frappe.ui.Dialog({
-	// 	title: "Quiz Result",
-	// 	fields: [
-	// 		{
-	// 			fieldname: "questions",
-	// 			fieldtype: "Table",
-	// 			in_place_edit: 1,
-	// 			label: __("Questions"),
-	// 			fields: [
-	// 				{
-	// 					fieldname: "question",
-	// 					fieldtype: "Link",
-	// 					label: __("Question"),
-	// 					options: "LMS Question",
-	// 					in_list_view: 1,
-	// 					only_select: 1,
-	// 					reqd: 1,
-	// 				},
-	// 				{
-	// 					fieldname: "marks",
-	// 					fieldtype: "Int",
-	// 					label: __("Marks"),
-	// 					in_list_view: 1,
-	// 					reqd: 1,
-	// 				},
-	// 				{
-	// 					fieldname: "question_name",
-	// 					fieldname: "Link",
-	// 					options: "LMS Quiz Question",
-	// 					label: __("Question Name"),
-	// 				},
-	// 			],
-	// 		},
-	// 		// {
-	// 		// 	fieldtype: "Link",
-	// 		// 	options: "Course Evaluator",
-	// 		// 	label: __("Course Evaluator"),
-	// 		// 	fieldname: "evaluator",
-	// 		// 	only_select: 1,
-	// 		// 	default: evaluator || "",
-	// 		// },
-	// 	],
-	// 	primary_action_label: __("Close"),
-	// 	primary_action(values) {
-	// 		course_modal.hide();
-	// 	},
-	// });
-	// course_modal.show();
-	// setTimeout(() => {
-	// 	$(".modal-body").css("min-height", "300px");
-	// }, 1000);
+	return files;
 };

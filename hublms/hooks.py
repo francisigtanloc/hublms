@@ -58,6 +58,7 @@ web_include_js = ["website.bundle.js"]
 
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
+website_generators = ["Hublms Course"]
 
 # Jinja
 # ----------
@@ -306,3 +307,7 @@ hublms_markdown_macro_renderers = {
 	"PDF": "hublms.plugins.pdf_renderer",
 	"Article": "hublms.plugins.article_renderer",
 }
+
+gradebooks = "hublms.hublms.page.gradebook.gradebook.get_gradebooks"
+leaderboards = "frappe.desk.leaderboard.get_leaderboards"
+

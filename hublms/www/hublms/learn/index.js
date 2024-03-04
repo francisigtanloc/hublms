@@ -3,7 +3,8 @@ frappe.ready(() => {
 	let self = this;
 	frappe.telemetry.capture("on_hublms_lesson_page", "hublms");
     
-	fetch_assignments();
+	// fetch_assignments();
+	fetch_attachments();
 	if ($("#current-lesson-content").length) {
 		parse_string_to_lesson("lesson");
 	}
@@ -220,7 +221,7 @@ const clear_work = (e) => {
 const fetch_assignments = () => {
 	if ($(".attach-file").length <= 0) return;
 	frappe.call({
-		method: "lms.lms.doctype.lms_assignment_submission.lms_assignment_submission.get_assignment",
+		method: "hublms.hublms.doctype.hublms_assignment_submission.hublms_assignment_submission.get_assignment",
 		args: {
 			lesson: $(".title").attr("data-lesson"),
 		},
@@ -258,7 +259,31 @@ const fetch_assignments = () => {
 		},
 	});
 };
+const fetch_attachments = () => {
+	if ($(".attach-file").length <= 0) return;
+		frappe.call({
+			method: 'hublms.hublms.doctype.hublms_assignment.hublms_assignment.get_attachments',
+			args: {
+				doctype: 'Hublms Assignment',
+				docname: 'ASG-00005'
+			},
+			callback: function (response) {
+				if (response.message && Array.isArray(response.message)) {
+					var attachments = response.message;
+					var container = document.getElementById('attachments-container');
+					console.log(attachments)
+					attachments.forEach(function (attachment) {
+						var link = '/files/' + attachment.file_name;
+						container.innerHTML += '<a style= "color:blue" href="' + link + '" target="_blank">' + attachment.file_name + '</a><br>';
+					});
+				} else {
+					console.error('Invalid response format:', response.message);
+				}
+			}
+		});
+	
 
+}
 
 
 
@@ -414,7 +439,6 @@ const parse_string_to_lesson = (type) => {
 			});
 		}
 	});
-	console.log(blocks);
 
 	// if (type == "lesson") {
 	// 	this.lesson_blocks = blocks;
