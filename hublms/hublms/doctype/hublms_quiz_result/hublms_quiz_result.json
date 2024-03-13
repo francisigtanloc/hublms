@@ -47,7 +47,7 @@
    "fieldname": "marks",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Marks",
+   "label": "Mark/s",
    "read_only": 1
   },
   {
@@ -62,7 +62,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-12-11 07:54:53.363881",
+ "modified": "2024-03-13 08:49:29.672663",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Quiz Result",
