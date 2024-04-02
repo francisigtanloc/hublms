@@ -3,6 +3,24 @@
 {{ _("New Course") }}
 {% endblock %}
 
+<style>
+   body{
+    height:2000px;
+    width: 100%;
+    margin:0;
+    padding:0;
+    }
+
+    .scroller-left{
+        position: fixed;
+        left: 0;
+        background:#CCC;
+    }
+
+    .scroller-right{
+        
+    }
+</style>
 
 {% block page_content %}
 <div class="course-home-top-container">
@@ -155,7 +173,8 @@
     <div class="course-home-page">
         <div class="container">
 
-            <div class="course-overlay-card">
+            <div class="course-overlay-card" style = "position: fixed;
+                right: 10;">
 
                 
                 <div class="course-image {% if not course.image %} default-image {% endif %}"

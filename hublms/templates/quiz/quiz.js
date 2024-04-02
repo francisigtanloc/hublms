@@ -32,13 +32,17 @@ frappe.ready(() => {
 	$("#check").click((e) => {
 		e.preventDefault();
 		check_answer(e);
+		// Scroll the entire window to the top
 	});
 
 	$("#next").click((e) => {
 		e.preventDefault();
+		
 		if (!this.show_answers) check_answer();
 
 		mark_active_question(e);
+		var objDiv = document.getElementById("quiz-form");
+		window.scrollTo(0, objDiv.getBoundingClientRect().top + window.pageYOffset); 
 	});
 
 	$("#try-again").click((e) => {
@@ -221,9 +225,17 @@ const quiz_summary = (e = undefined) => {
 					${__("out of")} ${data.message.score_out_of}
 				</div>`
 			);
-			$("#try-again").attr("data-submission", data.message.submission);
-			$("#try-again").removeClass("hide");
+			// $("#try-again").attr("data-submission", data.message.submission);
+			// $("#try-again").removeClass("hide");
+			// Compute for the overall percentage
+			const overallPercentage = (data.message.score / data.message.score_out_of) * 100;
+			if (overallPercentage < 75) {
+				$("#try-again").attr("data-submission", data.message.submission);
+				$("#try-again").removeClass("hide");
+			}
 			self.quiz_submitted = true;
+			
+			
 			if (
 				this.hasOwnProperty("marked_as_complete") &&
 				data.message.pass

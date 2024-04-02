@@ -2148,8 +2148,9 @@
       let html = shortcuts.filter((s2) => s2.condition ? s2.condition() : true).filter((s2) => !!s2.description).map((shortcut) => {
         let shortcut_label = shortcut.shortcut.split("+").map(frappe.utils.to_title_case).join("+");
         if (frappe.utils.is_mac()) {
-          shortcut_label = shortcut_label.replace("Ctrl", "\u2318");
+          shortcut_label = shortcut_label.replace("Ctrl", "\u2318").replace("Alt", "\u2325");
         }
+        shortcut_label = shortcut_label.replace("Shift", "\u21E7");
         return `<tr>
 					<td width="40%"><kbd>${shortcut_label}</kbd></td>
 					<td width="60%">${shortcut.description || ""}</td>
@@ -2250,7 +2251,7 @@
     shortcut: "alt+s",
     action: function(e2) {
       e2.preventDefault();
-      $(".dropdown-navbar-user a").eq(0).click();
+      $(".dropdown-navbar-user button").eq(0).click();
     },
     description: __("Open Settings")
   });
@@ -2265,7 +2266,7 @@
     shortcut: "alt+h",
     action: function(e2) {
       e2.preventDefault();
-      $(".dropdown-help a").eq(0).click();
+      $(".dropdown-help button").eq(0).click();
     },
     description: __("Open Help")
   });
@@ -2281,16 +2282,24 @@
     }
   });
   frappe.ui.keys.on("ctrl+down", function(e2) {
-    var grid_row = frappe.ui.form.get_open_grid_form();
-    grid_row && grid_row.toggle_view(false, function() {
-      grid_row.open_next();
-    });
+    const grid_row = frappe.ui.form.get_open_grid_form();
+    if (grid_row == null ? void 0 : grid_row.has_next()) {
+      grid_row.toggle_view(false, function() {
+        grid_row.open_next();
+      });
+    } else {
+      e2.preventDefault();
+    }
   });
   frappe.ui.keys.on("ctrl+up", function(e2) {
-    var grid_row = frappe.ui.form.get_open_grid_form();
-    grid_row && grid_row.toggle_view(false, function() {
-      grid_row.open_prev();
-    });
+    const grid_row = frappe.ui.form.get_open_grid_form();
+    if (grid_row == null ? void 0 : grid_row.has_prev()) {
+      grid_row.toggle_view(false, function() {
+        grid_row.open_prev();
+      });
+    } else {
+      e2.preventDefault();
+    }
   });
   frappe.ui.keys.add_shortcut({
     shortcut: "shift+ctrl+r",
@@ -2382,4 +2391,4 @@
     return object;
   };
 })();
-//# sourceMappingURL=website.bundle.77YFTMN3.js.map
+//# sourceMappingURL=website.bundle.4KYRRX76.js.map

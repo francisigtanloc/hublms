@@ -40,9 +40,26 @@
 			</div>
 
 			{% if not quiz.max_attempts or no_of_attempts < quiz.max_attempts %}
-			<button class="btn btn-secondary btn-sm btn-start-hublms-quiz mt-4">
-				{{ _("Start") }}
-			</button>
+			{% set vars = {'try_again': true} %}
+			{% if quiz.show_submission_history and all_submissions | length %}
+				{% for submission in all_submissions %}
+					{% if ((submission.score / (quiz.questions | length) * 100) >  quiz.passing_percentage) %}
+						{% if vars.update({'try_again': false}) %} {% endif %}
+					{% endif %}
+					
+				{% endfor %}
+				{% if vars.try_again %}
+					<button class="btn btn-secondary btn-sm btn-start-hublms-quiz mt-4">
+						{{ _("Start") }}
+					</button>
+				{% else %}
+				<div>
+					{{ _("Quiz Passed. Congratulations!") }}
+				</div>
+				{% endif %}
+
+			{% endif %}
+			
 			{% else %}
 			<div>
 				{{ _("You have already exceeded the maximum number of attempts allowed for this quiz.") }}

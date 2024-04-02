@@ -141,6 +141,7 @@
             {{ frappe.utils.format_date(creation, "medium") }}
         </div>
     </div>
+    {{ pagination(prev_url, next_url) }}
 
     <!-- Lesson Content -->
     <div class="markdown-source lesson-content-card">
@@ -160,7 +161,6 @@
         {% endif %}
     </div>
 
-    {{ pagination(prev_url, next_url) }}
 
 </div>
 {% endmacro %}
