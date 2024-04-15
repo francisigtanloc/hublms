@@ -1,4 +1,13 @@
 frappe.ready(() => {
+	document.getElementById('addFileInput').addEventListener('click', function() {
+		var fileInputsContainer = document.getElementById('fileInputsContainer');
+		var newInput = document.createElement('input');
+		newInput.type = 'file';
+		newInput.name = 'files[]';
+		newInput.className = 'my-3 btn btn-default btn-sm border attach-file';
+		newInput.multiple = true;
+		fileInputsContainer.appendChild(newInput);
+	  });
 	this.marked_as_complete = true;
 	let self = this;
 	frappe.telemetry.capture("on_hublms_lesson_page", "hublms");
@@ -265,7 +274,7 @@ const fetch_attachments = () => {
 			method: 'hublms.hublms.doctype.hublms_assignment.hublms_assignment.get_attachments',
 			args: {
 				doctype: 'Hublms Assignment',
-				docname: 'ASG-00005'
+				docname: 'ASG-00004'
 			},
 			callback: function (response) {
 				if (response.message && Array.isArray(response.message)) {

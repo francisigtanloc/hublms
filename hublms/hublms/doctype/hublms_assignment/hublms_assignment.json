@@ -14,7 +14,8 @@
   "column_break_hmwv",
   "type",
   "show_answer",
-  "answer"
+  "answer",
+  "amended_from"
  ],
  "fields": [
   {
@@ -60,11 +61,21 @@
    "fieldname": "answer",
    "fieldtype": "Text Editor",
    "label": "Answer"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hublms Assignment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-09 10:30:53.891362",
+ "modified": "2024-04-11 07:36:10.303849",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Assignment",
@@ -112,5 +123,8 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "title"
+ "title_field": "title",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
 }

@@ -26,7 +26,10 @@
   "comments",
   "section_break_cwaw",
   "course",
-  "column_break_ygdu"
+  "column_break_ygdu",
+  "amended_from",
+  "section_break_lwcm",
+  "files"
  ],
  "fields": [
   {
@@ -105,11 +108,11 @@
    "fieldtype": "Section Break"
   },
   {
-   "default": "Not Graded",
+   "default": "Not Yet Competent",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Pass\nFail\nNot Graded\nNot Applicable"
+   "options": "Competent\nNot Yet Competent"
   },
   {
    "fetch_from": "course.evaluator",
@@ -145,12 +148,33 @@
   {
    "fieldname": "column_break_ygdu",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hublms Assignment Submission",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_lwcm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "files",
+   "fieldtype": "Table",
+   "label": "Files",
+   "options": "Hulms Assignment Submission Files"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-12-09 10:45:41.035494",
+ "modified": "2024-04-11 09:51:14.945864",
  "modified_by": "Administrator",
  "module": "Hublms",
  "name": "Hublms Assignment Submission",

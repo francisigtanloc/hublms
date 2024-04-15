@@ -493,7 +493,7 @@
                                 data-enrollment="0" data-creation="2023-11-23 10:34:09.980434">
                                 <!-- Loop Items Here -->
                                 <div class="course-image {% if not course.image %} default-image {% endif %}"
-                                {% if course.image %} style="background-image: url( {{ course.image | urlencode }} );" {% endif %}>
+                                {% if course.image %} style="background-image: url( {{ course.image | urlencode }} ); background-repeat: no-repeat; background-attachment: stretch; background-size: 100% 100%;" {% endif %}>
                                     <div class="course-tags">
                                     {% for tag in get_tags(course.name) %}
                                         <div class="course-card-pills">{{ tag }}</div>

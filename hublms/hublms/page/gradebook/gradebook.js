@@ -4,7 +4,7 @@ frappe.pages['gradebook'].on_page_load = function(wrapper) {
 
 PageContent = Class.extend({
 	init: function(wrapper){
-		this.page = frappe.ui.make_app_page({
+		page = frappe.ui.make_app_page({
 			parent: wrapper,
 			title: 'Gradebook',
 			single_column: true
@@ -348,6 +348,23 @@ PageContent = Class.extend({
 					</div>
 				</div></div>
 		`;
-		$(frappe.render_template(htmlContent,this)).appendTo(this.page.main);
+		// $(frappe.render_template(htmlContent,this)).appendTo(this.page.main);
+		
+		// $(frappe.render_template("gradebook", {})).appendTo(this.page.main);
+		var data = {};
+		frappe.call({
+			method: "frappe.client.get_user_data",
+			callback: function(response) {
+				// Check if the request was successful
+				if (!response.message) {
+					console.error("Failed to fetch user data");
+					return;
+				}
+				data = { users: response.message };
+				$(frappe.render_template("gradebook", data)).appendTo(page.main);
+				// Render the template with the fetched user data and append it to the main element of the page
+			}
+		});
+
 	}
 })
