@@ -10,10 +10,11 @@ class HublmsUserEnrollment(Document):
 
 
 @frappe.whitelist()
-def test(course,progress):
+def test(course,progress,member):
     return frappe.render_template("templates/course_outline.html", {
 			"course" : course,
 			"progress" : progress,
+			"member" : member,
 		})
 @frappe.whitelist()
 # def get_instructors(course):

@@ -84,9 +84,10 @@
                 <div class="float-left">
                     {{ content.content }}
                 </div>
-                <div class="float-right">
+                <div class="float-right {{ get_progress(course, content.content, member) != 'Complete' and 'hide' }}" >
                     <img src="/assets/hublms/icons/check.svg" alt="Chevron Icon" class="chevron-icon">
                 </div>
+                
             </div>
 
             

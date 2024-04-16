@@ -10,6 +10,7 @@ frappe.ui.form.on("Hublms User Enrollment", {
             args: {
                 course: frm.doc.course,
                 progress: frm.doc.progress,
+                member: frm.doc.member
             },
             callback: function(response) {
                 if (response.message) {
@@ -21,8 +22,8 @@ frappe.ui.form.on("Hublms User Enrollment", {
     },
     
 	refresh(frm) {
-
-	},
+        
+    },
     preview: function(frm) {
 
     },

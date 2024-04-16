@@ -265,7 +265,7 @@ def get_progress(course, content, member=None):
 
 	return frappe.db.get_value(
 		"Hublms Course Progress",
-		{"course": course, "owner": member, "content": content},
+		{"course": course, "member":member,"content": content},
 		["status"],
 	)
 
